@@ -362,9 +362,9 @@ top: 82px;}
                                                     <select wire:model="user_type" class="form-control"
                                                         data-search="on">
                                                         <option>Select Position</option>
-                                                        @foreach($positions as $position)
-                                                        <option value="{{$position}}">{{$position}}</option>
-                                                        @endforeach
+                                                        <option value="admin">Admin</option>
+                                                        <option value="employee">Employee</option>
+                                                        <option value="manager">Manager</option>
                                                     </select>
                                                 </div>
                                                 @error('user_type')
