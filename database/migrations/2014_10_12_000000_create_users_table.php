@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('user_type', ['admin','manager','employee']);
+            $table->string('user_type');
             $table->datetime('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
             $table->boolean('isDark')->default(false)->nullable();
