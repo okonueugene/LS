@@ -82,8 +82,7 @@ class Employees extends Component
         $title="Employee Details";
         $invoices = Employee::paginate(10);
         $departments = Department::orderBy('id','ASC')->get();
-        $positions = ['employee','admin','manager'];
-        return view('livewire.admin.employee',compact('invoices','departments','positions'))
+        return view('livewire.admin.employee',compact('invoices','departments' ))
         ->extends('layouts.admin',['title'=> $title])
         ->section('content');
     }
