@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Livewire\Admin\Leaves;
 use App\Http\Livewire\Admin\Holidays;
 use Illuminate\Support\Facades\Route;

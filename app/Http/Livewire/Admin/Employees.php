@@ -62,11 +62,9 @@ class Employees extends Component
             'available_days' => 0,
         ]);
         
-        $id=User::orderBy('id','DESC')->pluck('id');
-            // 'company_id' => $emp->company_id,
-            // 'user_id' => $emp->id,
+
      
-            Employee::where('employee_id', $this->employee_id)->update(['company_id' => $emp->company_id,'user_id' => $emp->id ]);
+        Employee::where('employee_id', $this->employee_id)->update(['company_id' => $emp->company_id,'user_id' => $emp->id ]);
 
         $this->dispatchBrowserEvent('success', [
             'message' => 'Employee Added successfully',
@@ -80,9 +78,9 @@ class Employees extends Component
     public function render()
     {
         $title="Employee Details";
-        $invoices = Employee::paginate(10);
+        $employees = Employee::orderBy('id','DESC')->paginate(10);
         $departments = Department::orderBy('id','ASC')->get();
-        return view('livewire.admin.employee',compact('invoices','departments' ))
+        return view('livewire.admin.employee',compact('employees','departments' ))
         ->extends('layouts.admin',['title'=> $title])
         ->section('content');
     }
