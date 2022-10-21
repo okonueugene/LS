@@ -22,7 +22,7 @@ return new class extends Migration
             $table->smallInteger('department');
             $table->double('leave_taken', 5, 4);
             $table->double('carry_over', 5, 4);
-            $table->double('available_days', 5, 4);
+            $table->double('available_days', 13, 4);
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');

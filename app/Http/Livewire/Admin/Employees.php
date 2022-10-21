@@ -51,7 +51,7 @@ class Employees extends Component
 
         ]);
 
-        $emp=User::orderBy('id','DESC')->first();
+        $emp=User::orderBy('id', 'DESC')->first();
 
         $employee = Employee::create([
             'employee_id' => $this->employee_id,
@@ -72,9 +72,8 @@ class Employees extends Component
 
         $this->clearInput();
         $this->emit('userStore');
-
     }
-   
+
     public function render()
     {
         $title="Employee Details";
