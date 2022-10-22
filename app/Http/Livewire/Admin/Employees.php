@@ -8,9 +8,14 @@ use App\Models\Employee;
 use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Livewire\WithPagination;
 
 class Employees extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
+
     public $name;
     public $email;
     public $password;
@@ -18,6 +23,7 @@ class Employees extends Component
     public $employee_id;
     public $gender;
     public $department;
+    public $search = '';
 
 
 
@@ -77,8 +83,18 @@ class Employees extends Component
     public function render()
     {
         $title="Employee Details";
-        $employees = Employee::orderBy('id','DESC')->paginate(10);
+        // $employees = Employee::orderBy('id','DESC')->paginate(10);
         $departments = Department::orderBy('id','ASC')->get();
+        $searchString=$this->search;
+        $employees = Employee::whereHas('user', function ($query) use ($searchString){
+            $query->where('name', 'like', '%'.$searchString.'%');
+        })
+        ->with(['user' => function($query) use ($searchString){
+            $query->where('name', 'like', '%'.$searchString.'%');
+        }])->paginate(10);
+        // $ar=;
+        // dd(array_search(1,$ar));
+        // dd($departments->firstWhere('name','Human Resource')->pluck('name','id')->toArray());
         return view('livewire.admin.employee',compact('employees','departments' ))
         ->extends('layouts.admin',['title'=> $title])
         ->section('content');

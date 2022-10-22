@@ -6,9 +6,13 @@ use App\Models\User;
 use Livewire\Component;
 use App\Models\Employee;
 use App\Models\Department;
+use Livewire\WithPagination;
 
 class Departments extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $name;
     public $description;
 
@@ -48,7 +52,7 @@ class Departments extends Component
     {
         $title="Department";
         
-        $departments=Department::orderBy('id', 'ASC')->paginate(5);
+        $departments=Department::orderBy('id', 'ASC')->paginate(6);
         return view('livewire.admin.department', compact('departments'))
         ->extends('layouts.admin', ['title'=> $title])
         ->section('content')

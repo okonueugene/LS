@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->unsignedInteger('company_id')->nullable();
             $table->unsignedInteger('user_id')->nullable();
             $table->string('employee_id');
             $table->string('gender');
-            $table->smallInteger('department');
+            $table->unsignedInteger('department');
             $table->double('leave_taken', 5, 4);
             $table->double('carry_over', 5, 4);
             $table->double('available_days', 13, 4);
@@ -27,6 +27,7 @@ return new class extends Migration
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('department')->references('id')->on('departments')->onDelete('cascade');
             
         });
     }

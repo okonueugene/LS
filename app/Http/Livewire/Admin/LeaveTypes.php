@@ -4,9 +4,14 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\LeaveType;
+use Livewire\WithPagination;
 
 class LeaveTypes extends Component
 {
+
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $name;
     public $description;
     public $duration;
@@ -49,7 +54,7 @@ class LeaveTypes extends Component
     public function render()
     {
         $title = "Leave Types";
-        $leavetypes = Leavetype::orderBy('id' , 'ASC')->paginate(5);
+        $leavetypes = Leavetype::orderBy('id' , 'ASC')->paginate(6);
         return view('livewire.admin.leave-type', compact('leavetypes'))
         ->extends('layouts.admin',['title'=> $title])
         ->section('content');

@@ -4,9 +4,14 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Holiday;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Holidays extends Component
 {
+
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $name;
     public $date;
 
@@ -46,7 +51,7 @@ class Holidays extends Component
     public function render()
     {
         $title="Holidays";
-        $holidays=Holiday::orderBy('id','ASC')->paginate(5);
+        $holidays=Holiday::orderBy('id','ASC')->paginate(6);
         return view('livewire.admin.holiday',compact('holidays'))
         ->extends('layouts.admin',['title'=> $title])
         ->section('content');

@@ -117,20 +117,19 @@
                                         </div><!-- .nk-tb-item -->
                                         @endforeach
                                     </div><!-- .nk-tb-list -->
-                                    <div class="card">
-                                        <div class="card-inner">
-                                            <div class="nk-block-between-md g-3">
-                                                <div class="g">
-                                                    <ul>
-                                                        {{ $departments->links() }}
-
-                                                    </ul><!-- .pagination -->
-                                                </div>
-                                            </div><!-- .nk-block-between -->
-                                        </div>
-                                    </div>
                                 </div><!-- .nk-block -->
+                                <div class="card">
+                                    <div class="card-inner">
+                                        <div class="nk-block-between-md g-3">
+                                            <div class="g">
+                                                <ul>
+                                                    {{ $departments->links() }}
 
+                                                </ul><!-- .pagination -->
+                                            </div>
+                                        </div><!-- .nk-block-between -->
+                                    </div>
+                                </div>
                             </div>
                         </div><!-- .card-aside-wrap -->
                     </div><!-- .card -->
