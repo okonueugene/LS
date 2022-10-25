@@ -29,7 +29,7 @@
                         <h6 class="overline-title text-primary-alt">Management Area</h6>
                     </li><!-- .nk-menu-heading -->
                     <li class="nk-menu-item">
-                        <a href="#" class="nk-menu-link">
+                        <a href="{{ route('admin.admin-profile') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-user"></em></span>
                             <span class="nk-menu-text">Profile</span>
                         </a>

@@ -1,5 +1,6 @@
 <?php
 use App\Http\Livewire\Admin\Leaves;
+use App\Http\Livewire\Admin\Profile;
 use App\Http\Livewire\Admin\Holidays;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Companies;
@@ -44,6 +45,7 @@ Route::group(['middleware'=> 'auth'], function () {
         Route::get('/depatments', Departments::class)->name('admin-departments');
         Route::get('/leave-types', LeaveTypes::class)->name('admin-leavetypes');
         Route::get('/employees', Employees::class)->name('admin-employees');
+        Route::get('/profile', Profile::class)->name('admin-profile');
         
         }
     );

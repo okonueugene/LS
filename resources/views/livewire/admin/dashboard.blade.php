@@ -12,7 +12,7 @@
                         <div class="nk-block-head-content">
                             <div class="toggle-wrap nk-block-tools-toggle"><span
                                     class="badge rounded-pill bg-warning text-dark">{{ date_format(date_create(), 'F') }}</span> <span
-                                    class="badge rounded-pill bg-warning text-dark">{{ date('L') == 1 ? 366 - date('z') + 1 : 365 - date('z') + 1 }}
+                                    class="badge rounded-pill bg-warning text-dark">{{ date('L') == 1 ? 366 - (date('z') + 1) : 365 - (date('z') + 1) }}
                                     Days Left </span>
                             </div>
                         </div>
