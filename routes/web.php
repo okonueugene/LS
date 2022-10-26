@@ -2,6 +2,7 @@
 use App\Http\Livewire\Admin\Leaves;
 use App\Http\Livewire\Admin\Profile;
 use App\Http\Livewire\Admin\Holidays;
+use App\Http\Livewire\Gm\GmDashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Companies;
 use App\Http\Livewire\Admin\Dashboard;
@@ -69,6 +70,17 @@ Route::group(['middleware'=> 'auth'], function () {
     ],
         function () {
         Route::get('/dashboard', ManagerDashboard::class)->name('manager-dashboard');
+        
+        }
+    ); Route::group(
+        [
+        'prefix'=>'general_manager',
+        'middleware'=>'general manager',
+        'as'=>'gm.'
+
+    ],
+        function () {
+        Route::get('/dashboard', GmDashboard::class)->name('gm-dashboard');
         
         }
     );

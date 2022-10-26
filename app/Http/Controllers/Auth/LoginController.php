@@ -29,18 +29,18 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
-    public function redirectTo(){
+    public function redirectTo()
+    {
         $role = Auth()->user()->user_type;
-        if($role == 'admin'){
+        if ($role == 'admin') {
             return 'admin/dashboard';
-        }
-        elseif($role == 'manager'){
+        } elseif ($role == 'manager') {
             return 'manager/dashboard';
-        }
-        elseif($role == 'employee'){
+        } elseif ($role == 'general_manager') {
+            return 'general_manager/dashboard';
+        } elseif ($role == 'employee') {
             return 'employee/dashboard';
-        }
-        else{
+        } else {
             return back();
         }
     }
@@ -57,7 +57,8 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    function authenticated(Request $request, $user){
+    public function authenticated(Request $request, $user)
+    {
         $user->update([
             'last_login_at' => Carbon::now()->toDateTimeString(),
             'last_login_ip' => $request->getClientIp()
