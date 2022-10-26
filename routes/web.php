@@ -1,14 +1,20 @@
 <?php
 use App\Http\Livewire\Admin\Leaves;
 use App\Http\Livewire\Admin\Profile;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\Admin\Holidays;
 use App\Http\Livewire\Gm\GmDashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Companies;
 use App\Http\Livewire\Admin\Dashboard;
 use App\Http\Livewire\Admin\Employees;
+use App\Http\Livewire\Admin\ApplyLeave;
 use App\Http\Livewire\Admin\LeaveTypes;
+use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Admin\Departments;
+use App\Http\Livewire\Admin\ManageLeave;
+use App\Http\Livewire\Admin\ApprovedLeave;
+use App\Http\Livewire\Admin\RejectedLeave;
 use App\Http\Livewire\Manager\ManagerDashboard;
 use App\Http\Livewire\Employee\EmployeeDashboard;
 
@@ -47,6 +53,10 @@ Route::group(['middleware'=> 'auth'], function () {
         Route::get('/leave-types', LeaveTypes::class)->name('admin-leavetypes');
         Route::get('/employees', Employees::class)->name('admin-employees');
         Route::get('/profile', Profile::class)->name('admin-profile');
+        Route::get('/manage-leave', ManageLeave::class)->name('admin-manage-leave');
+        Route::get('/apply-leave', ApplyLeave::class)->name('admin-apply-leave');
+        Route::get('/approved-leave', ApprovedLeave::class)->name('admin-approved-leave');
+        Route::get('/rejected-leave', RejectedLeave::class)->name('admin-rejected-leave');
         
         }
     );

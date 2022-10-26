@@ -66,19 +66,19 @@
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="{{ route('admin.admin-leave') }}" class="nk-menu-link"><span
+                                <a href="{{ route('admin.admin-apply-leave') }}" class="nk-menu-link"><span
                                         class="nk-menu-text">Apply</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="#" class="nk-menu-link"><span class="nk-menu-text">Approved</span></a>
+                                <a href="{{ route('admin.admin-approved-leave') }}" class="nk-menu-link"><span class="nk-menu-text">Approved</span></a>
                             </li> 
                            @if(Auth::user()->user_type != 'employee')
                             <li class="nk-menu-item">
-                                <a href="#" class="nk-menu-link"><span class="nk-menu-text">Manage</span></a>
+                                <a href="{{ route('admin.admin-manage-leave') }}" class="nk-menu-link"><span class="nk-menu-text">Manage</span></a>
                             </li>
                             @endif
                             <li class="nk-menu-item">
-                                <a href="#" class="nk-menu-link"><span class="nk-menu-text">Rejected</span></a>
+                                <a href="{{ route('admin.admin-rejected-leave') }}" class="nk-menu-link"><span class="nk-menu-text">Rejected</span></a>
                             </li>
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->

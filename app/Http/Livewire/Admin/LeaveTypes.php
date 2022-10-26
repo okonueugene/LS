@@ -54,7 +54,7 @@ class LeaveTypes extends Component
     public function render()
     {
         $title = "Leave Types";
-        $leavetypes = Leavetype::orderBy('id' , 'ASC')->paginate(6);
+        $leavetypes = Leavetype::orderBy('id' , 'ASC')->paginate(3);
         return view('livewire.admin.leave-type', compact('leavetypes'))
         ->extends('layouts.admin',['title'=> $title])
         ->section('content');
