@@ -12,6 +12,11 @@ class Leaves extends Component
     protected $paginationTheme = 'bootstrap';
 
 
+    public function apply()
+    {
+      
+
+    }
     public function render()
     {
         $title="Leave";

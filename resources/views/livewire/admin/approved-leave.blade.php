@@ -4,6 +4,9 @@
             <div class="nk-block-between">
                 <div class="nk-block-head-content">
                     <h3 class="nk-block-title page-title">Approved Leave Requests</h3>
+                    <div class="nk-block-des text-soft">
+                        <p>You have total of 3 Approved Requests.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -13,24 +16,6 @@
                     <div class="card-inner position-relative card-tools-toggle">
                         <div class="card-title-group">
                             <div class="card-tools">
-                                <div class="form-inline flex-nowrap gx-3">
-                                    <div class="form-wrap w-150px">
-                                        <select class="form-select" data-search="off" data-placeholder="Bulk Action">
-                                            <option value="">Bulk Action</option>
-                                            <option value="email">Send Email</option>
-                                            <option value="group">Change Group</option>
-                                            <option value="suspend">Suspend User</option>
-                                            <option value="delete">Delete User</option>
-                                        </select>
-                                    </div>
-                                    <div class="btn-wrap">
-                                        <span class="d-none d-md-block"><button
-                                                class="btn btn-dim btn-outline-light disabled">Apply</button></span>
-                                        <span class="d-md-none"><button
-                                                class="btn btn-dim btn-outline-light btn-icon disabled"><em
-                                                    class="icon ni ni-arrow-right"></em></button></span>
-                                    </div>
-                                </div><!-- .form-inline -->
                             </div><!-- .card-tools -->
                             <div class="card-tools mr-n1">
                                 <ul class="btn-toolbar gx-1">
@@ -49,98 +34,6 @@
                                                         <a href="#" class="btn btn-icon btn-trigger toggle"
                                                             data-target="cardTools"><em
                                                                 class="icon ni ni-arrow-left"></em></a>
-                                                    </li><!-- li -->
-                                                    <li>
-                                                        <div class="dropdown">
-                                                            <a href="#"
-                                                                class="btn btn-trigger btn-icon dropdown-toggle"
-                                                                data-toggle="dropdown">
-                                                                <div class="dot dot-primary"></div>
-                                                                <em class="icon ni ni-filter-alt"></em>
-                                                            </a>
-                                                            <div
-                                                                class="filter-wg dropdown-menu dropdown-menu-xl dropdown-menu-right">
-                                                                <div class="dropdown-head">
-                                                                    <span class="sub-title dropdown-title">Filter
-                                                                        Users</span>
-                                                                    <div class="dropdown">
-                                                                        <a href="#" class="btn btn-sm btn-icon">
-                                                                            <em class="icon ni ni-more-h"></em>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="dropdown-body dropdown-body-rg">
-                                                                    <div class="row gx-6 gy-3">
-                                                                        <div class="col-6">
-                                                                            <div
-                                                                                class="custom-control custom-control-sm custom-checkbox">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    id="hasBalance">
-                                                                                <label class="custom-control-label"
-                                                                                    for="hasBalance"> Have
-                                                                                    Balance</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <div
-                                                                                class="custom-control custom-control-sm custom-checkbox">
-                                                                                <input type="checkbox"
-                                                                                    class="custom-control-input"
-                                                                                    id="hasKYC">
-                                                                                <label class="custom-control-label"
-                                                                                    for="hasKYC"> KYC Verified</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <div class="form-group">
-                                                                                <label
-                                                                                    class="overline-title overline-title-alt">Role</label>
-                                                                                <select class="form-select">
-                                                                                    <option value="any">Any Role
-                                                                                    </option>
-                                                                                    <option value="investor">Investor
-                                                                                    </option>
-                                                                                    <option value="seller">Seller
-                                                                                    </option>
-                                                                                    <option value="buyer">Buyer
-                                                                                    </option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <div class="form-group">
-                                                                                <label
-                                                                                    class="overline-title overline-title-alt">Status</label>
-                                                                                <select class="form-select">
-                                                                                    <option value="any">Any Status
-                                                                                    </option>
-                                                                                    <option value="active">Active
-                                                                                    </option>
-                                                                                    <option value="pending">Pending
-                                                                                    </option>
-                                                                                    <option value="suspend">Suspend
-                                                                                    </option>
-                                                                                    <option value="deleted">Deleted
-                                                                                    </option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-12">
-                                                                            <div class="form-group">
-                                                                                <button type="button"
-                                                                                    class="btn btn-secondary">Filter</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="dropdown-foot between">
-                                                                    <a class="clickable" href="#">Reset
-                                                                        Filter</a>
-                                                                    <a href="#">Save Filter</a>
-                                                                </div>
-                                                            </div><!-- .filter-wg -->
-                                                        </div><!-- .dropdown -->
                                                     </li><!-- li -->
                                                     <li>
                                                         <div class="dropdown">
@@ -195,30 +88,27 @@
                                     </div>
                                 </div>
                                 <div class="nk-tb-col"><span class="sub-text">Name</span></div>
-                                <div class="nk-tb-col"><span class="sub-text">ID No</span></div>
-                                <div class="nk-tb-col tb-col-md"><span class="sub-text">Company</span></div>
-                                <div class="nk-tb-col tb-col-sm"><span class="sub-text">Email</span></div>
-                                <div class="nk-tb-col"><span class="sub-text">Phone</span></div>
-                                <div class="nk-tb-col tb-col-md"><span class="sub-text">Last Check-in</span></div>
-                                <div class="nk-tb-col nk-tb-col-tools text-right">
-                                    <div class="dropdown">
-                                        <a href="#"
-                                            class="btn btn-xs btn-outline-light btn-icon dropdown-toggle"
-                                            data-toggle="dropdown" data-offset="0,5"><em
-                                                class="icon ni ni-plus"></em></a>
-                                        <div class="dropdown-menu dropdown-menu-xs dropdown-menu-right">
-                                            <ul class="link-tidy sm no-bdr">
-                                                <li>
-                                                    <div class="custom-control custom-control-sm custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            checked="" id="ph">
-                                                        <label class="custom-control-label"
-                                                            for="ph">Phone</label>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                <div class="nk-tb-col"><span class="sub-text">Emp Id</span></div>
+                                <div class="nk-tb-col tb-col-md"><span class="sub-text">Date From</span></div>
+                                <div class="nk-tb-col tb-col-sm"><span class="sub-text">Date To</span></div>
+                                <div class="nk-tb-col"><span class="sub-text">Number of Days</span></div>
+                                <div class="nk-tb-col tb-col-md"><span class="sub-text">Type</span></div>
+                                <div class="nk-tb-col tb-col-md"><span class="sub-text">Date Posted</span></div>
+                                <div class="nk-tb-col nk-tb-col-tools">
+                                    <ul class="nk-tb-actions gx-1 my-n1">
+                                        <li>
+                                            <div class="drodown">
+                                                <a href="#" class="dropdown-toggle btn btn-icon btn-trigger mr-n1"
+                                                    data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <ul class="link-list-opt no-bdr">
+                                                        <li><a href="#"><em class="icon ni ni-trash"></em><span>Bulk
+                                                                    Delete</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div><!-- .nk-tb-item -->
                             <div class="nk-tb-item">
@@ -231,28 +121,31 @@
                                 <div class="nk-tb-col">
                                     <div class="user-card">
                                         <div class="user-avatar xs bg-primary">
-                                            <span></span>
+                                            <span>1</span>
                                         </div>
                                         <div class="user-name">
-                                            <span class="tb-lead"></span>
+                                            <span class="tb-lead">2</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="nk-tb-col">
-                                    <span></span>
+                                    <span>3</span>
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
-                                    <span></span>
+                                    <span>4</span>
                                 </div>
                                 <div class="nk-tb-col tb-col-sm">
-                                    <span></span>
+                                    <span>5</span>
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
-                                    <span></span>
+                                    <span>6</span>
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
-                                    <span><span class="ml-2 badge badge-success"></span>
+                                    <span>7<span class="ml-2 badge badge-success">8</span>
                                     </span>
+                                </div>
+                                <div class="nk-tb-col tb-col-md">
+                                    <span>6</span>
                                 </div>
                                 <div class="nk-tb-col nk-tb-col-tools">
                                     <ul class="nk-tb-actions gx-2">

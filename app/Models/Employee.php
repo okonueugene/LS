@@ -19,13 +19,9 @@ class Employee extends Model
         'available_days',
     ];
 
-    public function user()
+    public function details()
     {
         return $this->belongsTo(User::class);
     }
     
-    public function speciality()
-    {
-        return $this->belongsTo(Department::class);
-    }
 }

@@ -16,21 +16,28 @@
                         </div>
                         <form action="#">
                             <div class="form-group"><label class="form-label" for="cf-full-name">Full
-                                    Name</label><input type="text" class="form-control" id="cf-full-name"></div>
-                            <div class="form-group"><label class="form-label" for="cf-email-address">Email
-                                    address</label><input type="text" class="form-control" id="cf-email-address">
+                                    Name</label><input type="text" class="form-control" id="cf-full-name" value="{{$user->name}}"readonly>
                             </div>
-                            <div class="form-group"><label class="form-label" for="cf-phone-no">Phone
-                                    No</label><input type="text" class="form-control" id="cf-phone-no"></div>
-                            <div class="form-group"><label class="form-label" for="cf-subject">Subject</label><input
-                                    type="text" class="form-control" id="cf-subject"></div>
-                            <div class="form-group"><label class="form-label" for="cf-default-textarea">Message</label>
+                            <div class="form-group"><label class="form-label" for="cf-email-address">Employee Id
+                                </label><input type="text" class="form-control" id="cf-email-address" value="{{isset($user->details->employee_id)}}"readonly>
+                            </div>
+                            <div class="form-group"><label class="form-label" for="cf-phone-no">
+                                    Available Leave Days</label><input type="text" class="form-control"
+                                    id="cf-phone-no" value="{{isset($user->details->available_days)}}"readonly>
+                            </div>
+                            <div class="form-group"><label class="form-label" for="cf-subject">From</label><input
+                                    type="date" class="form-control" id="cf-subject">
+                            </div>
+                            <div class="form-group"><label class="form-label" for="cf-subject">To</label><input
+                                    type="date" class="form-control" id="cf-subject">
+                            </div>
+                            <div class="form-group"><label class="form-label" for="cf-default-textarea">Comments</label>
                                 <div class="form-control-wrap">
                                     <textarea class="form-control form-control-sm" id="cf-default-textarea" placeholder="Write your message"></textarea>
                                 </div>
                             </div>
-                            <div class="form-group"><button type="submit" class="btn btn-lg btn-primary">Save
-                                    Informations</button></div>
+                            <div class="form-group"><button type="submit" class="btn btn-lg btn-primary">Apply
+                                </button></div>
                         </form>
                     </div>
                 </div>
