@@ -132,6 +132,7 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    @foreach($leaves as $leave)
                                     <div class="nk-tb-item">
                                         <div class="nk-tb-col nk-tb-col-check">
                                             <div class="custom-control custom-control-sm custom-checkbox notext"><input
@@ -148,8 +149,8 @@
                                         </div>
                                         <div class="nk-tb-col tb-col-md"><span
                                                 class="badge bg-outline-success">Customer</span></div>
-                                        <div class="nk-tb-col tb-col-sm"><span>info@softnio.com</span></div>
-                                        <div class="nk-tb-col tb-col-xxl"><span>+811 847-4958</span></div>
+                                        <div class="nk-tb-col tb-col-sm"><span>{{$leave->date_start}}</span></div>
+                                        <div class="nk-tb-col tb-col-xxl"><span>{{$leave->date_end}}</span></div>
                                         <div class="nk-tb-col tb-col-lg"><span>Mirpur, Dhaka, Bangladesh.</span></div>
                                         <div class="nk-tb-col tb-col-lg">
                                             <ul class="list-status">
@@ -164,7 +165,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="nk-tb-col"><span class="tb-status text-success">Active</span>
+                                        <div class="nk-tb-col"><span class="tb-status text-success">{{$leave->status}}</span>
                                         </div>
                                         <div class="nk-tb-col nk-tb-col-tools">
                                             <ul class="nk-tb-actions gx-1 my-n1">
@@ -191,6 +192,8 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    @endforeach
+
                                 </div>
                             </div>
                             <div class="card-inner">

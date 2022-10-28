@@ -3,7 +3,7 @@ use App\Http\Livewire\Admin\Leaves;
 use App\Http\Livewire\Admin\Profile;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\Admin\Holidays;
-use App\Http\Livewire\Gm\GmDashboard;
+use App\Http\Livewire\GeneralManager\GmDashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Companies;
 use App\Http\Livewire\Admin\Dashboard;
@@ -84,7 +84,7 @@ Route::group(['middleware'=> 'auth'], function () {
         }
     ); Route::group(
         [
-        'prefix'=>'general_manager',
+        'prefix'=>'general',
         'middleware'=>'general manager',
         'as'=>'gm.'
 

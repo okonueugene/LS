@@ -192,7 +192,7 @@
                                         <select wire:model="user_type" class="form-control" data-search="on">
                                             <option>Select Position</option>
                                             <option value="manager">Manager</option>
-                                            <option value="general manager">General Manager</option>
+                                            <option value="general_manager">General Manager</option>
                                             <option value="admin">Administrator</option>
                                             <option value="employee">Employee</option>
                                         </select>

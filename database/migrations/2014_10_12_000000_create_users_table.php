@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('user_type');
+            $table->enum('priviledged', [1,0])->default(0);
             $table->datetime('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
             $table->boolean('isDark')->default(false)->nullable();

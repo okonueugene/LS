@@ -3,24 +3,31 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\User;
+use App\Models\Leave;
 use App\Models\Holiday;
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
+use App\Models\LeaveType;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class ApplyLeave extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $employee_id;
     public $date_start;
     public $date_end;
-    public $nodays;
     public $leave_type;
     public $reason;
-    public $status;
     public $date_posted;
+
+    public function clearInput()
+    {
+        $this->date_start = "";
+        $this->date_end = "";
+        $this->leave_type = "";
+        $this->reason = "";
+    }
 
     public function applyLeave()
     {
@@ -28,7 +35,8 @@ class ApplyLeave extends Component
         $this->validate([
             'date_start' => 'required',
             'date_end' => 'required',
-            'reason' => 'required'
+            'reason' => 'required',
+            'leave_type' => 'required'
         ]);
 
         $endDate = strtotime($this->date_end);
@@ -74,17 +82,17 @@ class ApplyLeave extends Component
             }
         }
 
+
         Leave::create([
-            'employee_id' => $this->employee_id,
+            'employee_id' => Auth::user()->id,
             'date_start' => $this->date_start,
             'date_end' => $this->date_end,
             'nodays' => $workingDays,
             'leave_type' => $this->leave_type,
             'reason' => $this->reason,
-            'status' => $this->status,
-            'date_posted' => $this->date_posted,
-            'remarks' => $this->remarks,
-            'total' => $this->total
+            'status' => 'pending',
+            'date_posted' => date('y/m/d'),
+            'total' => 0,
         ]);
 
         $this->dispatchBrowserEvent('success', [
@@ -98,12 +106,13 @@ class ApplyLeave extends Component
 
      public function render()
      {
-        DD(date('y/m/d'));
          $user=User::where('id', Auth::user()->id)->first();
+        //  DD(Auth::user()->id);
+         $leavetypes = LeaveType::all(); 
          $title="Apply For Leave";
-         return view('livewire.admin.apply-leave', compact('user'))
+         return view('livewire.admin.apply-leave', compact('user','leavetypes'))
          ->extends('layouts.admin', ['title'=> $title])
-         ->section('content')
-         ;
+         ->section('content');
+         
      }
 }

@@ -21,4 +21,10 @@ class Leave extends Model
         'date_posted',
         'total',
     ];
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
 }

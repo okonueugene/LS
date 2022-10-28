@@ -19,9 +19,14 @@ class Employee extends Model
         'available_days',
     ];
 
-    public function details()
+    public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function leaves()
+    {
+        return $this->hasMany(Employee::class);
     }
     
 }
