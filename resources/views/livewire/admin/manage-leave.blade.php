@@ -7,7 +7,7 @@
                         <div class="nk-block-head-content">
                             <h3 class="nk-block-title page-title">Manage Leave Applied</h3>
                             <div class="nk-block-des text-soft">
-                                <p>You have total 2 Leave Requests.</p>
+                                <p>You have total {{count($leaves)}} Leave Requests.</p>
                             </div>
                         </div>
                         <div class="nk-block-head-content">
@@ -103,11 +103,11 @@
                                                     class="custom-control-label" for="uid"></label></div>
                                         </div>
                                         <div class="nk-tb-col"><span class="sub-text">Name</span></div>
-                                        <div class="nk-tb-col tb-col-md"><span class="sub-text">Emp Id</span></div>
-                                        <div class="nk-tb-col tb-col-sm"><span class="sub-text">Date From</span></div>
-                                        <div class="nk-tb-col tb-col-xxl"><span class="sub-text">Date To</span></div>
-                                        <div class="nk-tb-col tb-col-lg"><span class="sub-text">Number of Days</span>
+                                        <div class="nk-tb-col tb-col-md"><span class="sub-text">Date From</span></div>
+                                        <div class="nk-tb-col tb-col-sm"><span class="sub-text">Date To</span></div>
+                                        <div class="nk-tb-col tb-col-sm"><span class="sub-text">Applied Days</span>
                                         </div>
+                                        <div class="nk-tb-col tb-col-lg"><span class="sub-text">Department</span></div>
                                         <div class="nk-tb-col tb-col-lg"><span class="sub-text">Type</span></div>
                                         <div class="nk-tb-col tb-col-lg"><span class="sub-text">Date Posted</span>
                                         </div>
@@ -142,30 +142,23 @@
                                         </div>
                                         <div class="nk-tb-col">
                                             <div class="user-card">
-                                                <div class="user-avatar xs bg-primary"><span>AB</span></div>
-                                                <div class="user-name"><span class="tb-lead">Abu Bin Ishtiyak</span>
+                                                <div class="user-avatar xs bg-primary"><span> <?php
+                                                    $name = $leave->user->name;
+                                                    preg_match_all('/\b\w/', $name, $name);
+                                                    echo strtoupper(join('', $name[0]));
+                                                    ?></span></div>
+                                                <div class="user-name"><span class="tb-lead">{{$leave->user->name}}</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="nk-tb-col tb-col-md"><span
-                                                class="badge bg-outline-success">Customer</span></div>
-                                        <div class="nk-tb-col tb-col-sm"><span>{{$leave->date_start}}</span></div>
-                                        <div class="nk-tb-col tb-col-xxl"><span>{{$leave->date_end}}</span></div>
-                                        <div class="nk-tb-col tb-col-lg"><span>Mirpur, Dhaka, Bangladesh.</span></div>
-                                        <div class="nk-tb-col tb-col-lg">
-                                            <ul class="list-status">
-                                                <li><em class="icon text-dim ni ni-check-circle"></em> <span>2</span>
-                                                </li>
-                                            </ul>
+                                        <div class="nk-tb-col tb-col-md"><span>{{$leave->date_start}}</span></div>
+                                        <div class="nk-tb-col tb-col-sm"><span>{{$leave->date_end}}</span></div>
+                                        <div class="nk-tb-col tb-col-sm"><span></span>{{$leave->nodays}}</div>
+                                        <div class="nk-tb-col tb-col-lg"><span>{{array_search($leave->employee->department , $departments->pluck('id', 'name')->toArray())}}</span></div>
+                                        <div class="nk-tb-col tb-col-lg"><span>{{array_search($leave->leave_type , $types->pluck('id', 'name')->toArray())}}</span></div>
+                                        <div class="nk-tb-col tb-col-lg"><span>{{$leave->date_posted}}</span>
                                         </div>
-                                        <div class="nk-tb-col tb-col-lg">
-                                            <ul class="list-status">
-                                                <li><em class="icon text-success ni ni-check-circle"></em>
-                                                    <span>3</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="nk-tb-col"><span class="tb-status text-success">{{$leave->status}}</span>
+                                        <div class="nk-tb-col"><span class="badge tb-status text-success">{{$leave->status}}</span>
                                         </div>
                                         <div class="nk-tb-col nk-tb-col-tools">
                                             <ul class="nk-tb-actions gx-1 my-n1">
@@ -198,14 +191,8 @@
                             </div>
                             <div class="card-inner">
                                 <ul class="pagination justify-content-center justify-content-md-start">
-                                    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><span class="page-link"><em
-                                                class="icon ni ni-more-h"></em></span></li>
-                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">7</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    {{$leaves->links()}}
+
                                 </ul>
                             </div>
                         </div>

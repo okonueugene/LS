@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('leaves', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('employee_id')->nullable();
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('employee_id');
             $table->date('date_start');
             $table->date('date_end');
             $table->smallInteger('nodays');
@@ -27,7 +28,8 @@ return new class extends Migration
             $table->smallInteger('total');
             $table->timestamps();
 
-            // $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->foreign('leave_type')->references('id')->on('leave_types')->onDelete('cascade');
 
         });

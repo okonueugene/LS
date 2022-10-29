@@ -14,4 +14,9 @@ class LeaveType extends Model
      'description',
      'duration'
     ];
+
+    public function leaves()
+    {
+        return $this->hasMany(Leave::class);
+    }
 }
