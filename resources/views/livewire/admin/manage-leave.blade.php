@@ -158,7 +158,7 @@
                                         <div class="nk-tb-col tb-col-lg"><span>{{array_search($leave->leave_type , $types->pluck('id', 'name')->toArray())}}</span></div>
                                         <div class="nk-tb-col tb-col-lg"><span>{{$leave->date_posted}}</span>
                                         </div>
-                                        <div class="nk-tb-col"><span class="badge tb-status text-success">{{$leave->status}}</span>
+                                        <div class="nk-tb-col"><span class="badge tb-status text-warning">{{$leave->status}}</span>
                                         </div>
                                         <div class="nk-tb-col nk-tb-col-tools">
                                             <ul class="nk-tb-actions gx-1 my-n1">

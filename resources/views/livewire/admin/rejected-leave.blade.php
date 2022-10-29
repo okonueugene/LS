@@ -85,104 +85,71 @@
                                     </div>
                                 </div>
                                 <div class="nk-tb-col"><span class="sub-text">Name</span></div>
-                                <div class="nk-tb-col"><span class="sub-text">Emp Id</span></div>
                                 <div class="nk-tb-col tb-col-md"><span class="sub-text">Date From</span></div>
                                 <div class="nk-tb-col tb-col-sm"><span class="sub-text">Date To</span></div>
-                                <div class="nk-tb-col"><span class="sub-text">Number of Days</span></div>
-                                <div class="nk-tb-col tb-col-md"><span class="sub-text">Type</span></div>
-                                <div class="nk-tb-col tb-col-md"><span class="sub-text">Date Posted</span></div>
-                                <div class="nk-tb-col nk-tb-col-tools">
-                                    <ul class="nk-tb-actions gx-1 my-n1">
-                                        <li>
-                                            <div class="drodown">
-                                                <a href="#" class="dropdown-toggle btn btn-icon btn-trigger mr-n1"
-                                                    data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <ul class="link-list-opt no-bdr">
-                                                        <li><a href="#"><em
-                                                                    class="icon ni ni-trash"></em><span>Bulk
-                                                                    Delete</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                <div class="nk-tb-col tb-col-sm"><span class="sub-text">Applied Days</span>
+                                </div>
+                                <div class="nk-tb-col tb-col-lg"><span class="sub-text">Department</span></div>
+                                <div class="nk-tb-col tb-col-lg"><span class="sub-text">Type</span></div>
+                                <div class="nk-tb-col tb-col-lg"><span class="sub-text">Status</span></div>
+                                <div class="nk-tb-col tb-col-lg"><span class="sub-text">Date Declined</span>
                                 </div>
                             </div><!-- .nk-tb-item -->
-                            <div class="nk-tb-item">
-                                <div class="nk-tb-col nk-tb-col-check">
-                                    <div class="custom-control custom-control-sm custom-checkbox notext">
-                                        <input type="checkbox" class="custom-control-input" id="uid1">
-                                        <label class="custom-control-label" for="uid1"></label>
-                                    </div>
-                                </div>
-                                <div class="nk-tb-col">
-                                    <div class="user-card">
-                                        <div class="user-avatar xs bg-primary">
-                                            <span>1</span>
-                                        </div>
-                                        <div class="user-name">
-                                            <span class="tb-lead">2</span>
+                            @foreach ($leaves as $leave)
+                                <div class="nk-tb-item">
+                                    <div class="nk-tb-col nk-tb-col-check">
+                                        <div class="custom-control custom-control-sm custom-checkbox notext">
+                                            <input type="checkbox" class="custom-control-input" id="uid1">
+                                            <label class="custom-control-label" for="uid1"></label>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="nk-tb-col">
-                                    <span>3</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-md">
-                                    <span>4</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-sm">
-                                    <span>5</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-md">
-                                    <span>6</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-md">
-                                    <span>7<span class="ml-2 badge badge-success">8</span>
-                                    </span>
-                                </div>
-                                <div class="nk-tb-col tb-col-md">
-                                    <span>6</span>
-                                </div>
-                                <div class="nk-tb-col nk-tb-col-tools">
-                                    <ul class="nk-tb-actions gx-2">
-                                        <li>
-                                            <div class="drodown">
-                                                <a href="#"
-                                                    class="btn btn-sm btn-icon btn-trigger dropdown-toggle"
-                                                    data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <ul class="link-list-opt no-bdr">
-                                                        <li><a href="#"><em
-                                                                    class="icon ni ni-eye"></em><span>Edit
-                                                                </span></a></li>
-                                                        <li><a href="#"><em
-                                                                    class="icon ni ni-na"></em><span>Delete
-                                                                </span></a></li>
-                                                    </ul>
-                                                </div>
+                                    <div class="nk-tb-col">
+                                        <div class="user-card">
+                                            <div class="user-avatar xs bg-primary">
+                                                <span> <?php
+                                                $name = $leave->user->name;
+                                                preg_match_all('/\b\w/', $name, $name);
+                                                echo strtoupper(join('', $name[0]));
+                                                ?></span>
                                             </div>
-                                        </li>
-                                    </ul>
+                                            <div class="user-name">
+                                                <span class="tb-lead">{{ $leave->user->name }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="nk-tb-col">
+                                        <span>{{ $leave->date_start }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span>{{ $leave->date_end }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-sm">
+                                        <span>{{ $leave->nodays }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span>{{ array_search($leave->employee->department, $departments->pluck('id', 'name')->toArray()) }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span>{{ array_search($leave->leave_type, $types->pluck('id', 'name')->toArray()) }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span class="badge tb-status text-danger">{{ $leave->status }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span>{{ date('Y/m/d') }}</span>
+                                    </div>
+
                                 </div>
-                            </div>
+                            @endforeach
                         </div><!-- .nk-tb-list -->
                     </div><!-- .card-inner -->
                     <div class="card-inner">
                         <ul class="pagination justify-content-center justify-content-md-start">
-                            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><span class="page-link"><em class="icon ni ni-more-h"></em></span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">6</a></li>
-                            <li class="page-item"><a class="page-link" href="#">7</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            {{ $leaves->links() }}
                         </ul><!-- .pagination -->
                     </div><!-- .card-inner -->
                 </div><!-- .card-inner-group -->
             </div><!-- .card -->
-        </div><!-- .nk-block -->
+        </div>
     </div>
 </div>

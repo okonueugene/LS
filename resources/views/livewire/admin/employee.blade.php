@@ -16,16 +16,17 @@
                                         <li>
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right"><em
-                                                        class="icon ni ni-search"></em></div><input wire:model='search' type="text"
-                                                    class="form-control" id="default-04" placeholder="Search by name">
+                                                        class="icon ni ni-search"></em></div><input wire:model='search'
+                                                    type="text" class="form-control" id="default-04"
+                                                    placeholder="Search by name">
                                             </div>
                                         </li>
                                         <li class="nk-block-tools-opt"><a href="#"
                                                 class="btn btn-icon btn-primary d-md-none"><em
                                                     class="icon ni ni-plus"></em></a><a href="#"
                                                 class="btn btn-primary d-none d-md-inline-flex" data-toggle="modal"
-                                                data-target="#addModal"><em
-                                                    class="icon ni ni-plus"></em><span>Add Employee</span></a></li>
+                                                data-target="#addModal"><em class="icon ni ni-plus"></em><span>Add
+                                                    Employee</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -33,98 +34,103 @@
                     </div>
                 </div>
                 <div class="nk-block">
-                    <div class="nk-tb-list is-separate mb-3">
-                        <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col nk-tb-col-check">
-                                <div class="custom-control custom-control-sm custom-checkbox notext"><input
-                                        type="checkbox" class="custom-control-input" id="uid"><label
-                                        class="custom-control-label" for="uid"></label></div>
-                            </div>
-                            <div class="nk-tb-col"><span class="sub-text">Name</span></div>
-                            <div class="nk-tb-col tb-col-md"><span class="sub-text">Sex</span></div>
-                            <div class="nk-tb-col tb-col-mb"><span class="sub-text">Department</span></div>
-                            <div class="nk-tb-col tb-col-md"><span class="sub-text">Position</span></div>
-                            <div class="nk-tb-col tb-col-lg"><span class="sub-text">Leave Taken</span></div>
-                            <div class="nk-tb-col tb-col-lg"><span class="sub-text">Remaining Days</span></div>
-                            <div class="nk-tb-col nk-tb-col-tools">
-                                <ul class="nk-tb-actions gx-1 my-n1">
-                                    <li>
-                                        <div class="drodown">
-                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger mr-n1"
-                                                data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <ul class="link-list-opt no-bdr">
-                                                    <li><a href="#"><em class="icon ni ni-trash"></em><span>Bulk
-                                                                Delete</span></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        @foreach ($employees as $employee)
-                            <div class="nk-tb-item">
+                    <div class="card card-bordered card-stretch">
+                        <div class="nk-tb-list is-separate mb-3">
+                            <div class="nk-tb-item nk-tb-head">
                                 <div class="nk-tb-col nk-tb-col-check">
                                     <div class="custom-control custom-control-sm custom-checkbox notext"><input
-                                            type="checkbox" class="custom-control-input" id="uid1"><label
-                                            class="custom-control-label" for="uid1"></label></div>
+                                            type="checkbox" class="custom-control-input" id="uid"><label
+                                            class="custom-control-label" for="uid"></label></div>
                                 </div>
-                                <div class="nk-tb-col"><a href="/demo2/ecommerce/customer-details.html">
-                                        <div class="user-card">
-                                            <div class="user-avatar bg-primary"><span>
-                                                    <?php
-                                                    $name = $employee->user->name;
-                                                    preg_match_all('/\b\w/', $name, $name);
-                                                    echo strtoupper(join('', $name[0]));
-                                                    ?>
-                                                </span>
-                                            </div>
-                                            <div class="user-info"><span class="tb-lead">{{ $employee->user->name }}
-                                                    <span
-                                                        class="dot dot-success d-md-none ms-1"></span></span><span>{{ $employee->user->email }}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </a></div>
-                                <div class="nk-tb-col tb-col-mb"><span class="tb-amount">{{ $employee->gender }}</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-md">
-                                    <span>{{ array_search($employee->department, $departments->pluck('id', 'name')->toArray()) }}</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-lg"><span>{{ ucfirst($employee->user->user_type) }}</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-md"><span
-                                        class="tb-status text-warning">{{ $employee->leave_taken }}</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-md"><span
-                                        class="tb-status text-success">{{ $employee->available_days }}</span>
-                                </div>
+                                <div class="nk-tb-col"><span class="sub-text">Name</span></div>
+                                <div class="nk-tb-col tb-col-md"><span class="sub-text">Sex</span></div>
+                                <div class="nk-tb-col tb-col-mb"><span class="sub-text">Department</span></div>
+                                <div class="nk-tb-col tb-col-md"><span class="sub-text">Position</span></div>
+                                <div class="nk-tb-col tb-col-lg"><span class="sub-text">Leave Taken</span></div>
+                                <div class="nk-tb-col tb-col-lg"><span class="sub-text">Remaining Days</span></div>
                                 <div class="nk-tb-col nk-tb-col-tools">
-                                    <ul class="nk-tb-actions gx-1">
-                                        <div class="drodown mr-n1">
-                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
-                                                data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <ul class="link-list-opt no-bdr">
-                                                    <li><a href="#deleteHoliday"
-                                                            wire:click.prevent="delete({{ $employee->id }})">Delete</a>
-                                                    </li>
-                                                </ul>
+                                    <ul class="nk-tb-actions gx-1 my-n1">
+                                        <li>
+                                            <div class="drodown">
+                                                <a href="#" class="dropdown-toggle btn btn-icon btn-trigger mr-n1"
+                                                    data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <ul class="link-list-opt no-bdr">
+                                                        <li><a href="#"><em
+                                                                    class="icon ni ni-trash"></em><span>Bulk
+                                                                    Delete</span></a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
-                    <div class="card-inner">
-                        <div class="nk-block-between-md g-3">
-                            <div class="g">
-                                <ul class="pagination justify-content-center justify-content-md-start">
-                                  {{$employees->links()}}
-                                </ul>
+                            @foreach ($employees as $employee)
+                                <div class="nk-tb-item">
+                                    <div class="nk-tb-col nk-tb-col-check">
+                                        <div class="custom-control custom-control-sm custom-checkbox notext"><input
+                                                type="checkbox" class="custom-control-input" id="uid1"><label
+                                                class="custom-control-label" for="uid1"></label></div>
+                                    </div>
+                                    <div class="nk-tb-col"><a href="/demo2/ecommerce/customer-details.html">
+                                            <div class="user-card">
+                                                <div class="user-avatar bg-primary"><span>
+                                                        <?php
+                                                        $name = $employee->user->name;
+                                                        preg_match_all('/\b\w/', $name, $name);
+                                                        echo strtoupper(join('', $name[0]));
+                                                        ?>
+                                                    </span>
+                                                </div>
+                                                <div class="user-info"><span class="tb-lead">{{ $employee->user->name }}
+                                                        <span
+                                                            class="dot dot-success d-md-none ms-1"></span></span><span>{{ $employee->user->email }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </a></div>
+                                    <div class="nk-tb-col tb-col-mb"><span
+                                            class="tb-amount">{{ $employee->gender }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span>{{ array_search($employee->department, $departments->pluck('id', 'name')->toArray()) }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-lg">
+                                        <span>{{ ucfirst($employee->user->user_type) }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md"><span
+                                            class="tb-status text-warning">{{ $employee->leave_taken }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md"><span
+                                            class="tb-status text-success">{{ $employee->available_days }}</span>
+                                    </div>
+                                    <div class="nk-tb-col nk-tb-col-tools">
+                                        <ul class="nk-tb-actions gx-1">
+                                            <div class="drodown mr-n1">
+                                                <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
+                                                    data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <ul class="link-list-opt no-bdr">
+                                                        <li><a href="#deleteHoliday"
+                                                                wire:click.prevent="delete({{ $employee->id }})">Delete</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="card-inner">
+                            <div class="nk-block-between-md g-3">
+                                <div class="g">
+                                    <ul class="pagination justify-content-center justify-content-md-start">
+                                        {{ $employees->links() }}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
