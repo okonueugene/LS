@@ -22,7 +22,7 @@
                                                                 <div class="form-icon form-icon-right">
                                                                     <em class="icon ni ni-search"></em>
                                                                 </div>
-                                                                <input type="text" class="form-control"
+                                                                <input wire:model="search" type="text" class="form-control"
                                                                     id="default-04" placeholder="Quick search by id">
                                                             </div>
                                                         </li>

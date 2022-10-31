@@ -15,6 +15,8 @@ class LeaveTypes extends Component
     public $name;
     public $description;
     public $duration;
+    public $search = '';
+
 
     public function clearInput()
     {
@@ -54,7 +56,7 @@ class LeaveTypes extends Component
     public function render()
     {
         $title = "Leave Types";
-        $leavetypes = Leavetype::orderBy('id' , 'ASC')->paginate(3);
+        $leavetypes = Leavetype::orderBy('id' , 'ASC')->where('name', 'like', '%'.$this->search.'%')->paginate(4);
         return view('livewire.admin.leave-type', compact('leavetypes'))
         ->extends('layouts.admin',['title'=> $title])
         ->section('content');

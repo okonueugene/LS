@@ -53,24 +53,24 @@
                                                                         class="icon ni ni-arrow-left"></em></a>
                                                             </li>
                                                             <li>
-                                                                <div class="dropdown"><a href="#"
+                                                                <div class="dropdown">
+                                                                    <a href="#"
                                                                         class="btn btn-trigger btn-icon dropdown-toggle"
-                                                                        data-bs-toggle="dropdown"><em
-                                                                            class="icon ni ni-setting"></em></a>
+                                                                        data-toggle="dropdown">
+                                                                        <em class="icon ni ni-setting"></em>
+                                                                    </a>
                                                                     <div
-                                                                        class="dropdown-menu dropdown-menu-xs dropdown-menu-end">
+                                                                        class="dropdown-menu dropdown-menu-xs dropdown-menu-right">
                                                                         <ul class="link-check">
                                                                             <li><span>Show</span></li>
-                                                                            <li class="active"><a href="#">10</a>
-                                                                            </li>
-                                                                            <li><a href="#">20</a></li>
-                                                                            <li><a href="#">50</a></li>
+                                                                            <li class="{{($pages==10) ? 'active' : ''}}"><a href="#" wire:click.prevent="$set('pages', 10)">10</a></li>
+                                                                            <li class="{{($pages==20) ? 'active' : ''}}"><a href="#" wire:click.prevent="$set('pages', 20)">20</a></li>
+                                                                            <li class="{{($pages==50) ? 'active' : ''}}"><a href="#"wire:click.prevent="$set('pages', 50)">50</a></li>
                                                                         </ul>
                                                                         <ul class="link-check">
                                                                             <li><span>Order</span></li>
-                                                                            <li class="active"><a
-                                                                                    href="#">DESC</a></li>
-                                                                            <li><a href="#">ASC</a></li>
+                                                                            <li class="{{($order=='DESC') ? 'active' : ''}}"><a href="#" wire:click.prevent="$set('order', 'DESC')">DESC</a></li>
+                                                                            <li class="{{($order=='ASC') ? 'active' : ''}}"><a href="#" wire:click.prevent="$set('order', 'ASC')">ASC</a></li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -86,7 +86,7 @@
                                     <div class="card-body">
                                         <div class="search-content"><a href="#"
                                                 class="search-back btn btn-icon toggle-search" data-target="search"><em
-                                                    class="icon ni ni-arrow-left"></em></a><input type="text"
+                                                    class="icon ni ni-arrow-left"></em></a><input wire:model="search" type="text"
                                                 class="form-control border-transparent form-focus-none"
                                                 placeholder="Search by user or email"><button
                                                 class="search-submit btn btn-icon"><em

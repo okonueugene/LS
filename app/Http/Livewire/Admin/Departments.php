@@ -15,6 +15,7 @@ class Departments extends Component
 
     public $name;
     public $description;
+    public $search = '';
 
     public function clearInput()
     {
@@ -52,7 +53,7 @@ class Departments extends Component
     {
         $title="Department";
         
-        $departments=Department::orderBy('id', 'ASC')->paginate(6);
+        $departments=Department::orderBy('id', 'DESC')->where('name', 'like', '%'.$this->search.'%')->paginate(6);
         return view('livewire.admin.department', compact('departments'))
         ->extends('layouts.admin', ['title'=> $title])
         ->section('content')

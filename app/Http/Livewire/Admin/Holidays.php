@@ -14,6 +14,7 @@ class Holidays extends Component
 
     public $name;
     public $date;
+    public $search = '';
 
     public function clearInput(){
         $this->name = "";
@@ -51,7 +52,7 @@ class Holidays extends Component
     public function render()
     {
         $title="Holidays";
-        $holidays=Holiday::orderBy('id','ASC')->paginate(6);
+        $holidays=Holiday::orderBy('id','ASC')->where('name', 'like', '%'.$this->search.'%')->paginate(6);
         return view('livewire.admin.holiday',compact('holidays'))
         ->extends('layouts.admin',['title'=> $title])
         ->section('content');
