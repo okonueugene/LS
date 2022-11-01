@@ -17,6 +17,61 @@ class ManageLeave extends Component
     public $order='DESC';
     public $search='';
 
+    public $user_id;
+    public $employee_id;
+    public $date_start;
+    public $date_end;
+    public $nodays;
+    public $leave_type;
+    public $reason;
+    public $status;
+    public $remarks;
+    public $date_posted;
+    public $total;
+
+
+    public function clearInput()
+    {
+      
+        $this->status = "";
+        $this->remarks = "";
+    }
+    public function updateLeave($id)
+    {
+        $leave = Leave::findOrFail($id);
+
+        $this->validate([
+           
+            'remarks' => 'required',
+            'status' => 'required'
+        ]);
+
+        $leave->update([
+            'status' => $this->status,
+            'remarks' => $this->remarks,
+            'total' => 1,
+        ]);
+        $this->dispatchBrowserEvent('success', [
+            'message' => 'Leave Updated successfully',
+        ]);
+
+        $this->clearInput();
+        $this->emit('userStore'); 
+
+    }
+    public function showLeave($id)
+    {
+        $leave = Leave::where('id', $id)->first();
+        $this->user_id = $leave->user_id;
+        $this->employee_id = $leave->employee_id;
+        $this->date_start = $leave->date_start;
+        $this->date_end = $leave->date_end;
+        $this->nodays = $leave->nodays;
+        $this->leave_type = $leave->leave_type;
+        $this->reason = $leave->reason;
+        $this->date_posted = $leave->date_posted;     
+
+    }
     public function render()
     {
         $title="Manage Leave";
