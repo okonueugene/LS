@@ -92,8 +92,9 @@
                                 <div class="nk-tb-col tb-col-lg"><span class="sub-text">Department</span></div>
                                 <div class="nk-tb-col tb-col-lg"><span class="sub-text">Type</span></div>
                                 <div class="nk-tb-col tb-col-lg"><span class="sub-text">Status</span></div>
-                                <div class="nk-tb-col tb-col-lg"><span class="sub-text">Date Declined</span>
-                                </div>
+                                <div class="nk-tb-col tb-col-lg"><span class="sub-text">Date Declined</span></div>
+                                <div style="text-align: end" class="nk-tb-col tb-col-lg"><span>Remarks</span></div>
+
                             </div><!-- .nk-tb-item -->
                             @foreach ($leaves as $leave)
                                 <div class="nk-tb-item">
@@ -133,12 +134,31 @@
                                         <span>{{ array_search($leave->leave_type, $types->pluck('id', 'name')->toArray()) }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md">
-                                        <span class="badge tb-status text-danger">{{ $leave->status }}</span>
+                                        <span class="badge tb-status text-danger">{{ ucfirst($leave->status) }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md">
                                         <span>{{ date('Y/m/d') }}</span>
                                     </div>
-
+                                    <div class="nk-tb-col nk-tb-col-tools">
+                                        <ul class="nk-tb-actions gx-1">
+                                            <div class="drodown mr-n1">
+                                                <a href="#"
+                                                    class="dropdown-toggle btn btn-icon btn-trigger"
+                                                    data-toggle="dropdown"><em
+                                                        class="icon ni ni-more-h"></em></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <ul class="link-list-opt no-bdr">
+                                                        <li><a href="#"
+                                                                wire:click="showRemarks({{ $leave->id }})"
+                                                                data-toggle="modal"
+                                                                data-target="#viewModal"><span>View
+                                                                    Remarks</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             @endforeach
                         </div><!-- .nk-tb-list -->
@@ -150,6 +170,27 @@
                     </div><!-- .card-inner -->
                 </div><!-- .card-inner-group -->
             </div><!-- .card -->
+        </div>
+    </div>
+    <div wire:ignore.self class="modal fade" id="viewModal">
+        <div class="modal-dialog modal-lg modal-dialog-top" role="document">
+            <div class="modal-content">
+                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                    <em class="icon ni ni-cross-sm"></em>
+                </a>
+                <div class="modal-body modal-body-md">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="oder-id">Remarks</label>
+                                    <div class="form-control-wrap">
+                                        <textarea class="form-control" id="oder-id" readonly>{{ $remarks }}
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                   </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -20,7 +20,7 @@ class ApprovedLeave extends Component
         $title="Approved Leaves";
         $searchString=$this->search;
 
-        $leaves =Leave::orderBy('id',$this->order)->where('status', 'pending')->whereHas('user', function ($query) use ($searchString){
+        $leaves =Leave::orderBy('id',$this->order)->where('status', 'approved')->whereHas('user', function ($query) use ($searchString){
             $query->where('name', 'like', '%'.$searchString.'%');
         })
         ->with(['user' => function($query) use ($searchString){

@@ -153,6 +153,7 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    @if(count($leaves)>0)
                                     @foreach ($leaves as $leave)
                                         <div class="nk-tb-item">
                                             <div class="nk-tb-col nk-tb-col-check">
@@ -188,7 +189,7 @@
                                             <div class="nk-tb-col tb-col-lg"><span>{{ $leave->date_posted }}</span>
                                             </div>
                                             <div class="nk-tb-col"><span
-                                                    class="badge tb-status text-warning">{{ $leave->status }}</span>
+                                                    class="badge tb-status text-warning">{{ ucfirst($leave->status) }}</span>
                                             </div>
                                             <div class="nk-tb-col nk-tb-col-tools">
                                                 <ul class="nk-tb-actions gx-1">
@@ -205,7 +206,6 @@
                                                                         data-target="#addModal"><span>View
                                                                             Details</span></a></li>
                                                                 <li><a href="#"
-                                                                        wire:click="updateLeave({{ $leave->id }})"
                                                                         data-toggle="modal"
                                                                         data-target="#updateModal"><span>Update Leave
                                                                             Details</span></a></li>
@@ -232,7 +232,9 @@
             </div>
         </div>
     </div>
+    @endif
      {{-- Add Dob Modal --}}
+     @if(count($leaves)>0)
      <div wire:ignore.self class="modal fade" id="addModal">
         <div class="modal-dialog modal-lg modal-dialog-top" role="document">
             <div class="modal-content">
@@ -240,8 +242,8 @@
                     <em class="icon ni ni-cross-sm"></em>
                 </a>
                 <div class="modal-body modal-body-md">
-                    <h5 class="modal-title">Manage Leave</h5>
-                    <form wire:submit.prevent="showLeave" class="mt-2">
+                    <h5 class="modal-title">View Leave</h5>
+                    <form class="mt-2">
                         <div class="row g-gs">
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -255,6 +257,7 @@
                                     @enderror
                                 </div>
                             </div>
+                            
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-label" for="oder-id">Start Date</label>
@@ -312,8 +315,10 @@
             </div>
         </div>
     </div>
+    @endif
     <!-- .Add Modal-Content -->
      {{-- Add Dob Modal --}}
+     @if(count($leaves)>0)
      <div wire:ignore.self class="modal fade" id="updateModal">
         <div class="modal-dialog modal-lg modal-dialog-top" role="document">
             <div class="modal-content">
@@ -322,7 +327,7 @@
                 </a>
                 <div class="modal-body modal-body-md">
                     <h5 class="modal-title">Update Leave</h5>
-                    <form wire:submit.prevent="updateLeave" class="mt-2">
+                    <form wire:submit="updateLeave({{$leave->id}})" class="mt-2">
                         <div class="row g-gs">
                             <div class="col-md-7">
                                 <div class="form-group">
@@ -356,7 +361,6 @@
                                     <div wire:loading wire:target='updateLeave'>
                                     </div>Update
                                 </button>
-
                             </div>
                         </div>
                     </form>
@@ -364,6 +368,7 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 @push('scripts')
 @endpush

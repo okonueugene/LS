@@ -137,7 +137,7 @@
                                     <span>{{array_search($leave->leave_type , $types->pluck('id', 'name')->toArray())}}</span>
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
-                                    <span class="badge tb-status text-success">{{$leave->status}}</span> 
+                                    <span class="badge tb-status text-success">{{ucfirst($leave->status)}}</span> 
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
                                     <span>{{date('Y/m/d')}}</span>

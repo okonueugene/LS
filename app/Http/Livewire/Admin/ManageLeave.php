@@ -32,7 +32,7 @@ class ManageLeave extends Component
 
     public function clearInput()
     {
-      
+    
         $this->status = "";
         $this->remarks = "";
     }
@@ -43,14 +43,18 @@ class ManageLeave extends Component
         $this->validate([
            
             'remarks' => 'required',
-            'status' => 'required'
+            'status' => 'required',
         ]);
 
         $leave->update([
             'status' => $this->status,
             'remarks' => $this->remarks,
-            'total' => 1,
         ]);
+        $old=Employee::where('user_id', $leave->user_id)->pluck('available_days')->toArray();
+        
+        if($this->status == 'approved' && $leave->leave_type==1){
+            Employee::where('user_id', $leave->user_id)->update(['leave_taken' => $leave->nodays,'available_days' =>  implode('',$old)-$leave->nodays]);
+        }
         $this->dispatchBrowserEvent('success', [
             'message' => 'Leave Updated successfully',
         ]);
