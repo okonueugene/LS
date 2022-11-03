@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\GeneralManager;
 
+use App\Models\User;
 use App\Models\Leave;
 use Livewire\Component;
 use App\Models\Employee;
 use App\Models\LeaveType;
 use App\Models\Department;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class GmManageLeave extends Component
 {
@@ -84,14 +86,18 @@ class GmManageLeave extends Component
         
         $searchString=$this->search;
 
-        $leaves =Leave::orderBy('id', $this->order)->where('status', 'pending')->whereHas('user', function ($query) use ($searchString) {
+        $managers=User::where('user_type', 'manager')->pluck('id')->toArray();
+
+        $leaves =Leave::orderBy('id', $this->order)->where('status', 'pending')->whereIn('id' ,$managers )->whereHas('user', function ($query) use ($searchString) {
             $query->where('name', 'like', '%'.$searchString.'%');
         })
         ->with(['user' => function ($query) use ($searchString) {
             $query->where('name', 'like', '%'.$searchString.'%');
         }])->paginate($this->pages);
+
         $departments = Department::orderBy('id', 'ASC')->get();
         $types=LeaveType::orderBy('id', 'ASC')->get();
+      
 
         return view('livewire.general-manager.gm-manage-leave', compact('leaves', 'departments', 'types'))
         ->extends('layouts.general', ['title'=> $title])
