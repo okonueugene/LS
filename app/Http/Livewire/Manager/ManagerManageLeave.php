@@ -94,13 +94,16 @@ class ManagerManageLeave extends Component
 
 
         $leaves =Leave::orderBy('id', $this->order)->where('status', 'pending')
-        ->whereIn('user_id', $deptemployees)->whereHas('user', function ($query) use ($searchString) {
+        ->whereIn('user_id', $deptemployees)
+        ->whereHas('user', function ($q){
+            return $q->where('user_type', 'employee');
+
+        })
+        ->whereHas('user', function ($query) use ($searchString) {
             $query->where('name', 'like', '%'.$searchString.'%');
         })
         ->with(['user' => function ($query) use ($searchString) {
             $query->where('name', 'like', '%'.$searchString.'%');
-            $query->where('user_type', 'admin');
-
         }]
         )
         ->paginate($this->pages);
