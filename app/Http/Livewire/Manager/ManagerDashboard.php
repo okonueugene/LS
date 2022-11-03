@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Manager;
 
+use App\Models\User;
 use Livewire\Component;
 
 class ManagerDashboard extends Component
@@ -9,7 +10,9 @@ class ManagerDashboard extends Component
     public function render()
     {
         $title='Dashboard';
-        return view('livewire.manager.dashboard')
+        $employees=User::where('user_type', 'manager')->orWhere('user_type' , 'employee')->get();
+
+        return view('livewire.manager.dashboard',compact('employees'))
         ->extends('layouts.manager',['title'=> $title])
         ->section('content')
         ;

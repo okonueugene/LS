@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Employee;
 
+use App\Models\User;
 use Livewire\Component;
 
 class EmployeeDashboard extends Component
@@ -9,7 +10,9 @@ class EmployeeDashboard extends Component
     public function render()
     {
         $title='Dashboard';
-        return view('livewire.employee.dashboard')
+        $employees=User::where('user_type', 'manager')->orWhere('user_type' , 'employee')->get();
+
+        return view('livewire.employee.dashboard', compact('employees'))
         ->extends('layouts.employee',['title'=> $title])
         ->section('content')
         ;

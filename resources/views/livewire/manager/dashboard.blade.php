@@ -7,19 +7,13 @@
                         <div class="nk-block-head-content">
                             <h3 class="nk-block-title page-title">Dashboard</h3>
                             <div class="nk-block-des text-soft">
-                                <p>You have total of sites.</p>
                             </div>
                         </div>
                         <div class="nk-block-head-content">
                             <div class="toggle-wrap nk-block-tools-toggle"><span
-                                    class="badge rounded-pill bg-warning text-dark"><?php $days = cal_days_in_month(CAL_GREGORIAN, idate('m'), date('Y'));
-                                    $day = date('d');
-                                    $d = $days - $day;
-                                    if ($d > 1) {
-                                        echo "$d Days Left";
-                                    } else {
-                                        echo "$d Day Left";
-                                    } ?></span>
+                                    class="badge rounded-pill bg-warning text-dark">{{ date_format(date_create(), 'F') }}</span> <span
+                                    class="badge rounded-pill bg-warning text-dark">{{ date('L') == 1 ? 366 - (date('z') + 1) : 365 - (date('z') + 1) }}
+                                    Days Left </span>
                             </div>
                         </div>
                     </div>
@@ -30,14 +24,81 @@
                             <div class="card card-bordered h-100">
                                 <div class="card-inner">
                                     <div class="project">
-                                        <div class="project-head">
-                                            <h6 class="title" style="text-size:15px;">Active Sites</h6>
+                                        <div class="card-header border-bottom text-center">
+                                            <h6 class="title">Employees</h6>
+                                        </div><br>
+                                        <div class="project-details text-center" style="text-size:15px;">
+                                            <span>{{ count($employees) }}</span>
                                         </div>
-                                        <div class="project-details">
-                                            <ul class="list-group">
-                                                <li class="list-group-item"></li>
-                                            </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-4 col-xxl-3">
+                            <div class="card card-bordered h-100">
+                                <div class="card-inner">
+                                    <div class="project">
+                                        <div class="card-header border-bottom text-center">
+                                            <h6 class="title">Leave Days Accumulated</h6>
+                                        </div><br>
+                                        <div class="project-details text-center" style="text-size:15px;">
+                                            <span>{{ round(date('L') == 1 ? (21/366)*(date('z') + 1) : (21/365)*(date('z') + 1),2) }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-4 col-xxl-3">
+                            <div class="card card-bordered h-100">
+                                <div class="card-inner">
+                                    <div class="project">
+                                        <div class="card-header border-bottom text-center">
+                                            <h6 class="title">Average Leave Taken</h6>
+                                        </div><br>
+                                        <div class="project-details text-center" style="text-size:15px;">
+                                            <span>{{ count($employees) }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="col-sm-6 col-lg-4 col-xxl-3">
+                            <div class="card card-bordered h-100">
+                                <div class="card-inner">
+                                    <div class="project">
+                                        <div class="project-head">
+                                            <h6 class="title" style="text-size:15px;">Latest Leaves Pending Approval
+                                            </h6>
+                                        </div>
+                                        <div class="project-details">
+                                            <ul class="list-group">
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Name
+                                                    <span>5</span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Name
+                                                    <span>5</span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Name
+                                                    <span>5</span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Name
+                                                    <span>5</span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Name
+                                                    <span>5</span>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -48,20 +109,36 @@
                                 <div class="card-inner">
                                     <div class="project">
                                         <div class="project-head">
-                                            <h6 class="title" style="text-size:15px;">Guards onboarded by Site</h6>
+                                            <h6 class="title" style="text-size:15px;">Employees With Most Days</h6>
                                         </div>
                                         <div class="project-details">
                                             <ul class="list-group">
                                                 <li
                                                     class="list-group-item d-flex justify-content-between align-items-center">
-                                                    <span>
-                                                    </span>
+                                                    Name
+                                                    <span>5</span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Name
+                                                    <span>5</span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Name
+                                                    <span>5</span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Name
+                                                    <span>5</span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Name
+                                                    <span>5</span>
                                                 </li>
                                             </ul>
-                                        </div>
-                                        <div class="project-meta">
-                                            <div>Total</div>
-                                            <div></div>
                                         </div>
                                     </div>
                                 </div>
@@ -72,48 +149,42 @@
                                 <div class="card-inner">
                                     <div class="project">
                                         <div class="project-head">
-                                            <h6 class="title" style="text-size:15px;">Patrols by Site</h6>
+                                            <h6 class="title" style="text-size:15px;">Employees With Least Days</h6>
                                         </div>
                                         <div class="project-details">
                                             <ul class="list-group">
                                                 <li
                                                     class="list-group-item d-flex justify-content-between align-items-center">
-                                                    <span></span>
+                                                    Name
+                                                    <span>5</span>
                                                 </li>
-                                            </ul>
-                                        </div>
-                                        <div class="project-meta">
-                                            <div>Total</div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-4 col-xxl-3">
-                            <div class="card card-bordered h-100">
-                                <div class="card-inner">
-                                    <div class="project">
-                                        <div class="project-head">
-                                            <h6 class="title" style="text-size:15px;">Attendance Per Site</h6>
-                                        </div>
-                                        <div class="project-details">
-                                            <ul class="list-group">
                                                 <li
                                                     class="list-group-item d-flex justify-content-between align-items-center">
-                                                    <span></span>
+                                                    Name
+                                                    <span>5</span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Name
+                                                    <span>5</span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Name
+                                                    <span>5</span>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Name
+                                                    <span>5</span>
                                                 </li>
                                             </ul>
-                                        </div>
-                                        <div class="project-meta">
-                                            <div>Total</div>
-                                            <div></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-4 col-xxl-3">
+                        {{-- <div class="col-sm-6 col-lg-4 col-xxl-3">
                             <div class="card card-bordered h-100">
                                 <div class="card-inner">
                                     <p>Patrol</p>
@@ -128,7 +199,7 @@
                                     <canvas id="myChart2" width="400" height="400"></canvas>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -138,8 +209,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @section('scripts')
     <script>
-
-
         // const entries = Object.entries(checked);
         // let arr = [];
         // let arr1 = [];
@@ -246,3 +315,14 @@
         //another graph
     </script>
 @endsection
+
+
+{{-- code for days in month remining --}}
+{{-- $days = cal_days_in_month(CAL_GREGORIAN, idate('m'), date('Y'));
+$day = date('d');
+$d = $days - $day;
+if ($d > 1) {
+    echo "$d Days Left";
+} else {
+    echo "$d Day Left";
+} --}}

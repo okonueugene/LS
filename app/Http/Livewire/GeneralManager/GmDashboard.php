@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\GeneralManager;
 
+use App\Models\User;
 use Livewire\Component;
 
 class GmDashboard extends Component
@@ -9,7 +10,10 @@ class GmDashboard extends Component
     public function render()
     {
         $title = 'Dashboard';
-        return view('livewire.general_manager.gm-dashboard')->extends('layouts.general', ['title'=> $title])
+        $employees=User::where('user_type', 'manager')->orWhere('user_type' , 'employee')->get();
+
+        return view('livewire.general-manager.gm-dashboard', compact('employees'))
+        ->extends('layouts.general', ['title'=> $title])
         ->section('content')
         ;
     }

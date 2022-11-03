@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Manager;
 
 use App\Models\User;
 use Livewire\Component;
 use App\Models\Employee;
 use App\Models\Department;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Hash;
 
-class Employees extends Component
+class ManagerEmployees extends Component
 {
+
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
@@ -80,9 +80,10 @@ class Employees extends Component
         $this->emit('userStore');
     }
 
+
     public function render()
     {
-        $title="Employee Details";
+        $title="Employees";
         $departments = Department::orderBy('id','ASC')->get();
         $searchString=$this->search;
         $employees = Employee::whereHas('user', function ($query) use ($searchString){
@@ -91,8 +92,9 @@ class Employees extends Component
         ->with(['user' => function($query) use ($searchString){
             $query->where('name', 'like', '%'.$searchString.'%');
         }])->paginate(10);
-        return view('livewire.admin.employee',compact('employees','departments' ))
-        ->extends('layouts.admin',['title'=> $title])
-        ->section('content');
+        return view('livewire.manager.manager-employees',compact('employees','departments' ))
+        ->extends('layouts.manager', ['title'=> $title])
+        ->section('content')
+        ;
     }
 }

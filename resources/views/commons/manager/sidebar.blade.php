@@ -7,7 +7,7 @@
                 data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
         </div>
         <div class="nk-sidebar-brand">
-            <a href="#" class="logo-link nk-sidebar-logo">
+            <a href="{{ route('manager.manager-dashboard') }}" class="logo-link nk-sidebar-logo">
                 <img class="logo-light logo-img" src="{{ asset('theme/images/logo.png') }}"
                     srcset="{{ asset('theme/images/logo.png') }} 2x" alt="logo">
                 <img class="logo-dark logo-img" src="{{ asset('theme/images/logo.png') }}"
@@ -20,7 +20,7 @@
             <div class="nk-sidebar-menu" data-simplebar>
                 <ul class="nk-menu">
                     <li class="nk-menu-item">
-                        <a href="{{ route('admin.admin-dashboard') }}" class="nk-menu-link">
+                        <a href="{{ route('manager.manager-dashboard') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-home"></em></span>
                             <span class="nk-menu-text">Dashboard</span>
                         </a>
@@ -29,33 +29,33 @@
                         <h6 class="overline-title text-primary-alt">Management Area</h6>
                     </li><!-- .nk-menu-heading -->
                     <li class="nk-menu-item">
-                        <a href="{{ route('admin.admin-profile') }}" class="nk-menu-link">
+                        <a href="{{ route('manager.manager-profile') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-user"></em></span>
                             <span class="nk-menu-text">Profile</span>
                         </a>
                     </li><!-- .nk-menu-item -->
                     @if(Auth::user()->user_type != 'employee')
                     <li class="nk-menu-item">
-                        <a href="{{ route('admin.admin-departments') }}" class="nk-menu-link">
+                        <a href="{{ route('manager.manager-departments') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-building"></em></span>
                             <span class="nk-menu-text">Department</span>
                         </a>
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item">
-                        <a href="{{ route('admin.admin-leavetypes') }}" class="nk-menu-link">
+                        <a href="{{ route('manager.manager-leave-types') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-todo-fill"></em></span>
                             <span class="nk-menu-text">Leave Type</span>
                         </a>
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item"></li><!-- .nk-menu-item -->
                     <li class="nk-menu-item">
-                        <a href="{{ route('admin.admin-holidays') }}" class="nk-menu-link">
+                        <a href="{{ route('manager.manager-holidays') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-calendar"></em></span>
                             <span class="nk-menu-text">Holidays</span>
                         </a>
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item">
-                        <a href="{{ route('admin.admin-employees') }}" class="nk-menu-link">
+                        <a href="{{ route('manager.manager-employees') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-list"></em></span>
                             <span class="nk-menu-text">Employees List</span>
                         </a></li>@endif
@@ -66,19 +66,19 @@
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="{{ route('admin.admin-leave') }}" class="nk-menu-link"><span
+                                <a href="{{ route('manager.manager-apply-leave') }}" class="nk-menu-link"><span
                                         class="nk-menu-text">Apply</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="#" class="nk-menu-link"><span class="nk-menu-text">Approved</span></a>
+                                <a href="{{ route('manager.manager-approved-leave') }}" class="nk-menu-link"><span class="nk-menu-text">Approved</span></a>
                             </li> 
                            @if(Auth::user()->user_type != 'employee')
                             <li class="nk-menu-item">
-                                <a href="#" class="nk-menu-link"><span class="nk-menu-text">Manage</span></a>
+                                <a href="{{ route('manager.manager-manage-leave') }}" class="nk-menu-link"><span class="nk-menu-text">Manage</span></a>
                             </li>
                             @endif
                             <li class="nk-menu-item">
-                                <a href="#" class="nk-menu-link"><span class="nk-menu-text">Rejected</span></a>
+                                <a href="{{ route('manager.manager-rejected-leave') }}" class="nk-menu-link"><span class="nk-menu-text">Rejected</span></a>
                             </li>
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->
