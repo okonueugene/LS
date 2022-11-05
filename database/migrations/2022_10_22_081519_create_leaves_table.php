@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('status');
             $table->longText('remarks')->nullable();
             $table->date('date_posted');
-            $table->date('action_date');
+            $table->date('action_date')->nullable();
             $table->smallInteger('total');
             $table->timestamps();
 

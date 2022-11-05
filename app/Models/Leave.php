@@ -18,6 +18,7 @@ class Leave extends Model
         'leave_type',
         'reason',
         'status',
+        'action_date',
         'remarks',
         'date_posted',
         'total',

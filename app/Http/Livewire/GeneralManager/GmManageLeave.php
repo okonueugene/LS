@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\GeneralManager;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Leave;
 use Livewire\Component;
@@ -52,6 +53,8 @@ class GmManageLeave extends Component
         $leave->update([
             'status' => $this->status,
             'remarks' => $this->remarks,
+            'action_date' => Carbon::now()->format('Y/m/d'),
+
         ]);
         $old=Employee::where('user_id', $leave->user_id)->pluck('available_days')->toArray();
         

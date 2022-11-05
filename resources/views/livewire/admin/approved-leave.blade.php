@@ -140,7 +140,7 @@
                                     <span class="badge tb-status text-success">{{ucfirst($leave->status)}}</span> 
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
-                                    <span>{{date('Y/m/d')}}</span>
+                                    <span>{{ $leave->action_date}}</span>
                                 </div>
                                 
                             </div>

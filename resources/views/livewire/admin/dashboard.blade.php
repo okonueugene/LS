@@ -11,7 +11,8 @@
                         </div>
                         <div class="nk-block-head-content">
                             <div class="toggle-wrap nk-block-tools-toggle"><span
-                                    class="badge rounded-pill bg-warning text-dark">{{ date_format(date_create(), 'F') }}</span> <span
+                                    class="badge rounded-pill bg-warning text-dark">{{ date_format(date_create(), 'F') }}</span>
+                                <span
                                     class="badge rounded-pill bg-warning text-dark">{{ date('L') == 1 ? 366 - (date('z') + 1) : 365 - (date('z') + 1) }}
                                     Days Left </span>
                             </div>
@@ -42,7 +43,7 @@
                                             <h6 class="title">Leave Days Accumulated</h6>
                                         </div><br>
                                         <div class="project-details text-center" style="text-size:15px;">
-                                            <span>{{ round(date('L') == 1 ? (21/366)*(date('z') + 1) : (21/365)*(date('z') + 1),2) }}</span>
+                                            <span>{{ round(date('L') == 1 ? (21 / 366) * (date('z') + 1) : (21 / 365) * (date('z') + 1), 2) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -68,36 +69,40 @@
                                 <div class="card-inner">
                                     <div class="project">
                                         <div class="project-head">
-                                            <h6 class="title" style="text-size:15px;">Latest Leaves Pending Approval
-                                            </h6>
+                                            <h6 class="title" style="text-size:15px;">Members on Leave</h6>
                                         </div>
                                         <div class="project-details">
                                             <ul class="list-group">
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
+                                                @if (count($onleave) > 0)
+                                                    @foreach ($onleave as $member)
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            {{ $member->user->name }}
+                                                            <span>{{ $member->nodays }}</span>
+                                                        </li>
+                                                    @endforeach
+                                                @else
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                        No Members on Leave
+                                                    </li>
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                        No Members on Leave
+                                                    </li>
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                        No Members on Leave
+                                                    </li>
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                        No Members on Leave
+                                                    </li>
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                        No Members on Leave
+                                                    </li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </div>
@@ -113,31 +118,36 @@
                                         </div>
                                         <div class="project-details">
                                             <ul class="list-group">
+                                                @if (count($mostdays) > 0)
+                                                @foreach($mostdays as $member)
                                                 <li
                                                     class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
+                                                    {{$member->user->name}}
+                                                    <span>{{$member->available_days}}</span>
                                                 </li>
+                                                @endforeach
+                                                @else
                                                 <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
+                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                No Members on Leave
+                                            </li>
+                                            <li
+                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                No Members on Leave
+                                            </li>
+                                            <li
+                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                No Members on Leave
+                                            </li>
+                                            <li
+                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                No Members on Leave
+                                            </li>
+                                            <li
+                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                No Members on Leave
+                                            </li>
+                                            @endif    
                                             </ul>
                                         </div>
                                     </div>
@@ -153,31 +163,37 @@
                                         </div>
                                         <div class="project-details">
                                             <ul class="list-group">
-                                                <li
+                                                <ul class="list-group">
+                                                    @if (count($leastdays) > 0)
+                                                    @foreach($leastdays as $member)
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                        {{$member->user->name}}
+                                                        <span>{{$member->available_days}}</span>
+                                                    </li>
+                                                    @endforeach
+                                                    @else
+                                                    <li
                                                     class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
+                                                    No Members on Leave
                                                 </li>
                                                 <li
                                                     class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
+                                                    No Members on Leave
                                                 </li>
                                                 <li
                                                     class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
+                                                    No Members on Leave
                                                 </li>
                                                 <li
                                                     class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
+                                                    No Members on Leave
                                                 </li>
                                                 <li
                                                     class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
+                                                    No Members on Leave
                                                 </li>
+                                                @endif    
                                             </ul>
                                         </div>
                                     </div>

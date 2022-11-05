@@ -152,7 +152,7 @@
                                         <span class="badge tb-status text-danger">{{ ucfirst($leave->status) }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md">
-                                        <span>{{ date('Y/m/d') }}</span>
+                                        <span>{{ $leave->action_date }}</span>
                                     </div>
                                     <div class="nk-tb-col nk-tb-col-tools">
                                         <ul class="nk-tb-actions gx-1">
