@@ -19,7 +19,7 @@ class EmployeeApplyLeave extends Component
 
     public $date_start;
     public $date_end;
-    public $leave_type;
+    public $leave_type_id;
     public $reason;
     public $date_posted;
 
@@ -27,7 +27,7 @@ class EmployeeApplyLeave extends Component
     {
         $this->date_start = "";
         $this->date_end = "";
-        $this->leave_type = "";
+        $this->leave_type_id = "";
         $this->reason = "";
     }
 
@@ -38,7 +38,7 @@ class EmployeeApplyLeave extends Component
             'date_start' => 'required',
             'date_end' => 'required',
             'reason' => 'required',
-            'leave_type' => 'required'
+            'leave_type_id' => 'required'
         ]);
 
         $endDate = strtotime($this->date_end);
@@ -91,7 +91,7 @@ class EmployeeApplyLeave extends Component
             'date_start' => $this->date_start,
             'date_end' => $this->date_end,
             'nodays' => $workingDays,
-            'leave_type' => $this->leave_type,
+            'leave_type_id' => $this->leave_type_id,
             'reason' => $this->reason,
             'status' => 'pending',
             'date_posted' => date('y/m/d'),

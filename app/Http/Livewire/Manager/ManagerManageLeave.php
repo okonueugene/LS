@@ -25,7 +25,7 @@ class ManagerManageLeave extends Component
     public $date_start;
     public $date_end;
     public $nodays;
-    public $leave_type;
+    public $leave_type_id;
     public $reason;
     public $status;
     public $remarks;
@@ -56,7 +56,7 @@ class ManagerManageLeave extends Component
         ]);
         $old=Employee::where('user_id', $leave->user_id)->pluck('available_days')->toArray();
 
-        if ($this->status == 'approved' && $leave->leave_type==1) {
+        if ($this->status == 'approved' && $leave->leave_type_id==1) {
             Employee::where('user_id', $leave->user_id)->update(['leave_taken' => $leave->nodays,'available_days' =>  implode('', $old)-$leave->nodays]);
         }
         $this->dispatchBrowserEvent('success', [
@@ -75,7 +75,7 @@ class ManagerManageLeave extends Component
         $this->date_start = $leave->date_start;
         $this->date_end = $leave->date_end;
         $this->nodays = $leave->nodays;
-        $this->leave_type = $leave->leave_type;
+        $this->leave_type_id = $leave->leave_type_id;
         $this->reason = $leave->reason;
         $this->date_posted = $leave->date_posted;
     }

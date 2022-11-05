@@ -31,14 +31,14 @@
                             <div class="form-group">
                                 <label class="form-label" for="cf-full-name">Leave Type
                                 </label>
-                                <select wire:model="leave_type" class="form-control" data-search="on">
+                                <select wire:model="leave_type_id" class="form-control" data-search="on">
                                     <option>Select Leave Type</option>
                                     @foreach ($leavetypes as $leavetype)
                                         <option value="{{ $leavetype->id }}">{{ $leavetype->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                @error('leave_type')
+                                @error('leave_type_id')
                                     <div class="form-note text-danger mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -91,14 +91,14 @@
                             <div class="form-group">
                                 <label class="form-label" for="cf-full-name">Leave Type
                                 </label>
-                                <select wire:model="leave_type" class="form-control" data-search="on">
+                                <select wire:model="leave_type_id" class="form-control" data-search="on">
                                     <option>Select Leave Type</option>
                                     @foreach ($leavetypes as $leavetype)
                                         <option value="{{ $leavetype->id }}">{{ $leavetype->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                @error('leave_type')
+                                @error('leave_type_id')
                                     <div class="form-note text-danger mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -128,7 +128,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-secondary">
+                                <button type="submit" class="btn btn-secondary" onclick="window.location.href='{{url()->previous()}}'">
                                     <div wire:loading wire:target='applyLeave'>
                                     </div>Apply
                                 </button>

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('date_start');
             $table->date('date_end');
             $table->smallInteger('nodays');
-            $table->unsignedInteger('leave_type');
+            $table->unsignedInteger('leave_type_id');
             $table->longText('reason')->nullable();
             $table->string('status');
             $table->longText('remarks')->nullable();
@@ -31,7 +31,7 @@ return new class extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
-            $table->foreign('leave_type')->references('id')->on('leave_types')->onDelete('cascade');
+            $table->foreign('leave_type_id')->references('id')->on('leave_types')->onDelete('cascade');
 
         });
     }
