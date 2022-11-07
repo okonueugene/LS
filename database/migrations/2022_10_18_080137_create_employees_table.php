@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('employee_id');
             $table->string('gender');
             $table->unsignedInteger('department');
-            $table->double('leave_taken', 5, 4);
-            $table->double('carry_over', 5, 4);
+            $table->double('leave_taken', 7, 4);
+            $table->double('carry_over', 7, 4);
             $table->double('available_days', 13, 4);
             $table->timestamps();
 

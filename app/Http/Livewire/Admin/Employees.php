@@ -65,7 +65,9 @@ class Employees extends Component
             'department'=> $this->department,
             'leave_taken'=> 0,
             'carry_over' => 0,
-            'available_days' => round(date('L') == 1 ? (21/366)*(date('z') + 1) : (21/365)*(date('z') + 1),2),
+            'available_days' => 0,
+            'days' => 0,
+
         ]);
         
 
@@ -83,6 +85,8 @@ class Employees extends Component
     public function render()
     {
         $title="Employee Details";
+        Employee::query()->update(['days' => round(date('L') == 1 ? (21/366)*(date('z') + 1) : (21/365)*(date('z') + 1),2)]);
+
         $departments = Department::orderBy('id','ASC')->get();
         $searchString=$this->search;
         $employees = Employee::whereHas('user', function ($query) use ($searchString){
@@ -90,7 +94,7 @@ class Employees extends Component
         })
         ->with(['user' => function($query) use ($searchString){
             $query->where('name', 'like', '%'.$searchString.'%');
-        }])->paginate(10);
+        }])->paginate(5);
         return view('livewire.admin.employee',compact('employees','departments' ))
         ->extends('layouts.admin',['title'=> $title])
         ->section('content');

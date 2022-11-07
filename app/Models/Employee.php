@@ -17,6 +17,8 @@ class Employee extends Model
         'leave_taken',
         'carry_over',
         'available_days',
+        'days',
+
     ];
 
     public function user()

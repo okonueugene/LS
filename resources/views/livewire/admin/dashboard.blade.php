@@ -295,7 +295,7 @@
             ],
             datasets: [{
                 label: 'My First Dataset',
-                data: [days,(21-days)],
+            data: [Math.round(days*100/21),Math.round((21-days)*100/21)],
                 backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',

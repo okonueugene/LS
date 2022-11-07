@@ -65,7 +65,9 @@ class GmEmployees extends Component
             'department'=> $this->department,
             'leave_taken'=> 0,
             'carry_over' => 0,
-            'available_days' => round(date('L') == 1 ? (21/366)*(date('z') + 1) : (21/365)*(date('z') + 1),2),
+            'available_days' => 0,
+            'days' => 0,
+
         ]);
         
 
@@ -85,6 +87,8 @@ class GmEmployees extends Component
     {
         $title="Employees";
         $departments = Department::orderBy('id','ASC')->get();
+        Employee::query()->update(['days' => round(date('L') == 1 ? (21/366)*(date('z') + 1) : (21/365)*(date('z') + 1),2)]);
+
         $searchString=$this->search;
         $employees = Employee::whereHas('user', function ($query) use ($searchString){
             $query->where('name', 'like', '%'.$searchString.'%');

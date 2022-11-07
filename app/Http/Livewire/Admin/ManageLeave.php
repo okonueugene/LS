@@ -52,7 +52,7 @@ class ManageLeave extends Component
             'remarks' => $this->remarks,
             'action_date' => Carbon::now()->format('Y/m/d'),
         ]);
-        $old=Employee::where('user_id', $leave->user_id)->pluck('available_days')->toArray();
+        $old=Employee::where('user_id', $leave->user_id)->pluck('days')->toArray();
         
         if($this->status == 'approved' && $leave->leave_type_id==1){
             Employee::where('user_id', $leave->user_id)->update(['leave_taken' => $leave->nodays,'available_days' =>  implode('',$old)-$leave->nodays]);

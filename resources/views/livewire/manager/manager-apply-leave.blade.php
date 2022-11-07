@@ -26,7 +26,7 @@
                             </div>
                             <div class="form-group"><label class="form-label" for="cf-phone-no">
                                     Available Leave Days</label><input type="text" class="form-control"
-                                    id="cf-phone-no" value="{{ $user->employee->available_days }}"readonly>
+                                    id="cf-phone-no" value="{{ $user->employee->days-$user->employee->leave_taken }}"readonly>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="cf-full-name">Leave Type
@@ -129,7 +129,7 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-secondary" onclick="window.location.href='{{url()->previous()}}'">
-                                    <div wire:loading wire:target='applyLeave'>
+                                    <div wire:loading wire:target='applyLeave' >
                                     </div>Apply
                                 </button>
                             </div>
