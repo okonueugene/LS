@@ -13,6 +13,10 @@
                                         class="icon ni ni-more-v"></em></a>
                                 <div class="toggle-expand-content" data-content="more-options">
                                     <ul class="nk-block-tools g-3">
+                                        <li><a href="#" wire:click.prevent="export" wire:loading.attr="disabled"
+                                                class="btn btn-white btn-outline-light"><em
+                                                    class="icon ni ni-download-cloud"></em><span>Export</span></a>
+                                        </li>
                                         <li>
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right"><em
@@ -26,7 +30,44 @@
                                                     class="icon ni ni-plus"></em></a><a href="#"
                                                 class="btn btn-primary d-none d-md-inline-flex" data-toggle="modal"
                                                 data-target="#addModal"><em class="icon ni ni-plus"></em><span>Add
-                                                    Employee</span></a></li>
+                                                    Employee</span></a>
+                                        </li>
+                                        <li>
+                                            <div class="dropdown">
+                                                <a href="#" class="btn btn-trigger btn-icon dropdown-toggle"
+                                                    data-toggle="dropdown">
+                                                    <em class="icon ni ni-setting"></em>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-xs dropdown-menu-right">
+                                                    <ul class="link-check">
+                                                        <li><span>Show</span></li>
+                                                        <li class="{{ $pages == 10 ? 'active' : '' }}">
+                                                            <a href="#"
+                                                                wire:click.prevent="$set('pages', 10)">10</a>
+                                                        </li>
+                                                        <li class="{{ $pages == 20 ? 'active' : '' }}">
+                                                            <a href="#"
+                                                                wire:click.prevent="$set('pages', 20)">20</a>
+                                                        </li>
+                                                        <li class="{{ $pages == 50 ? 'active' : '' }}">
+                                                            <a
+                                                                href="#"wire:click.prevent="$set('pages', 50)">50</a>
+                                                        </li>
+                                                    </ul>
+                                                    <ul class="link-check">
+                                                        <li><span>Order</span></li>
+                                                        <li class="{{ $order == 'DESC' ? 'active' : '' }}">
+                                                            <a href="#"
+                                                                wire:click.prevent="$set('order', 'DESC')">DESC</a>
+                                                        </li>
+                                                        <li class="{{ $order == 'ASC' ? 'active' : '' }}">
+                                                            <a href="#"
+                                                                wire:click.prevent="$set('order', 'ASC')">ASC</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -38,9 +79,11 @@
                         <div class="nk-tb-list is-separate mb-3">
                             <div class="nk-tb-item nk-tb-head">
                                 <div class="nk-tb-col nk-tb-col-check">
+
                                     <div class="custom-control custom-control-sm custom-checkbox notext"><input
-                                            type="checkbox" class="custom-control-input" id="uid"><label
-                                            class="custom-control-label" for="uid"></label></div>
+                                            type="checkbox" class="custom-control-input" id="uid">
+                                        <label class="custom-control-label" for="uid"></label>
+                                    </div>
                                 </div>
                                 <div class="nk-tb-col"><span class="sub-text">Name</span></div>
                                 <div class="nk-tb-col tb-col-md"><span class="sub-text">Sex</span></div>
@@ -83,7 +126,8 @@
                                                         ?>
                                                     </span>
                                                 </div>
-                                                <div class="user-info"><span class="tb-lead">{{ $employee->user->name }}
+                                                <div class="user-info"><span
+                                                        class="tb-lead">{{ $employee->user->name }}
                                                         <span
                                                             class="dot dot-success d-md-none ms-1"></span></span><span>{{ $employee->user->email }}
                                                     </span>
@@ -97,13 +141,13 @@
                                         <span>{{ array_search($employee->department, $departments->pluck('id', 'name')->toArray()) }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-lg">
-                                        <span>{{ ucfirst($employee->user->user_type) }}</span>
+                                        <span>{{ ucwords(str_replace('_',' ',$employee->user->user_type)) }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md"><span
                                             class="tb-status text-warning">{{ $employee->leave_taken }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md"><span
-                                            class="tb-status text-success">{{ $employee->available_days==0 && $employee->leave_taken==0 ? $employee->days: $employee->available_days  }}</span>
+                                            class="tb-status text-success">{{ $employee->available_days == 0 && $employee->leave_taken == 0 ? $employee->days : $employee->available_days }}</span>
                                     </div>
                                     <div class="nk-tb-col nk-tb-col-tools">
                                         <ul class="nk-tb-actions gx-1">

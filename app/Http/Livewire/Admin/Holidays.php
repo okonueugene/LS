@@ -13,6 +13,8 @@ class Holidays extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $name;
+    public $pages;
+    public $order;
     public $date;
     public $search = '';
 
@@ -52,7 +54,7 @@ class Holidays extends Component
     public function render()
     {
         $title="Holidays";
-        $holidays=Holiday::orderBy('id','ASC')->where('name', 'like', '%'.$this->search.'%')->paginate(6);
+        $holidays=Holiday::orderBy('id','ASC')->where('name', 'like', '%'.$this->search.'%')->paginate($this->pages);
         return view('livewire.admin.holiday',compact('holidays'))
         ->extends('layouts.admin',['title'=> $title])
         ->section('content');

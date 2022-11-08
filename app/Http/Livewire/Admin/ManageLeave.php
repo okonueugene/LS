@@ -9,11 +9,14 @@ use App\Models\Employee;
 use App\Models\LeaveType;
 use App\Models\Department;
 use Livewire\WithPagination;
+use App\Exports\ManageLeavesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ManageLeave extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+
     public $pages=10;
     public $order='DESC';
     public $search='';
@@ -30,71 +33,71 @@ class ManageLeave extends Component
     public $date_posted;
     public $total;
 
-
-    public function clearInput()
+    public function export()
     {
-    
-        $this->status = "";
-        $this->remarks = "";
+        return Excel::download(new ManageLeavesExport(), 'users.xlsx');
     }
-    public function updateLeave($id)
-    {
-        $leave = Leave::findOrFail($id);
+       public function clearInput()
+       {
+           $this->status = "";
+           $this->remarks = "";
+       }
+       public function updateLeave($id)
+       {
+           $leave = Leave::findOrFail($id);
 
-        $this->validate([
-           
-            'remarks' => 'required',
-            'status' => 'required',
-        ]);
+           $this->validate([
 
-        $leave->update([
-            'status' => $this->status,
-            'remarks' => $this->remarks,
-            'action_date' => Carbon::now()->format('Y/m/d'),
-        ]);
-        $old=Employee::where('user_id', $leave->user_id)->pluck('days')->toArray();
-        
-        if($this->status == 'approved' && $leave->leave_type_id==1){
-            Employee::where('user_id', $leave->user_id)->update(['leave_taken' => $leave->nodays,'available_days' =>  implode('',$old)-$leave->nodays]);
-        }
-        $this->dispatchBrowserEvent('success', [
-            'message' => 'Leave Updated successfully',
-        ]);
+               'remarks' => 'required',
+               'status' => 'required',
+           ]);
 
-        $this->clearInput();
-        $this->emit('userStore'); 
+           $leave->update([
+               'status' => $this->status,
+               'remarks' => $this->remarks,
+               'action_date' => Carbon::now()->format('Y/m/d'),
+           ]);
+           $old=Employee::where('user_id', $leave->user_id)->pluck('days')->toArray();
 
-    }
-    public function showLeave($id)
-    {
-        $leave = Leave::where('id', $id)->first();
-        $this->user_id = $leave->user_id;
-        $this->employee_id = $leave->employee_id;
-        $this->date_start = $leave->date_start;
-        $this->date_end = $leave->date_end;
-        $this->nodays = $leave->nodays;
-        $this->leave_type_id = $leave->leave_type_id;
-        $this->reason = $leave->reason;
-        $this->date_posted = $leave->date_posted;     
+           if ($this->status == 'approved' && $leave->leave_type_id==1) {
+               Employee::where('user_id', $leave->user_id)->update(['leave_taken' => $leave->nodays,'available_days' =>  implode('', $old)-$leave->nodays]);
+           }
+           $this->dispatchBrowserEvent('success', [
+               'message' => 'Leave Updated successfully',
+           ]);
 
-    }
-    public function render()
-    {
-        $title="Manage Leave";
+           $this->clearInput();
+           $this->emit('userStore');
+       }
+       public function showLeave($id)
+       {
+           $leave = Leave::where('id', $id)->first();
+           $this->user_id = $leave->user_id;
+           $this->employee_id = $leave->employee_id;
+           $this->date_start = $leave->date_start;
+           $this->date_end = $leave->date_end;
+           $this->nodays = $leave->nodays;
+           $this->leave_type_id = $leave->leave_type_id;
+           $this->reason = $leave->reason;
+           $this->date_posted = $leave->date_posted;
+       }
+       public function render()
+       {
+           $title="Manage Leave";
 
-        $searchString=$this->search;
+           $searchString=$this->search;
 
-        $leaves =Leave::orderBy('id', $this->order)->where('status', 'pending')->whereHas('user', function ($query) use ($searchString) {
-            $query->where('name', 'like', '%'.$searchString.'%');
-        })
-        ->with(['user' => function ($query) use ($searchString) {
-            $query->where('name', 'like', '%'.$searchString.'%');
-        }])->paginate($this->pages);
-        $departments = Department::orderBy('id', 'ASC')->get();
-        $types=LeaveType::orderBy('id', 'ASC')->get();
-        return view('livewire.admin.manage-leave', compact('leaves', 'departments', 'types'))
-         ->extends('layouts.admin', ['title'=> $title])
-         ->section('content')
-        ;
-    }
+           $leaves =Leave::orderBy('id', $this->order)->where('status', 'pending')->whereHas('user', function ($query) use ($searchString) {
+               $query->where('name', 'like', '%'.$searchString.'%');
+           })
+           ->with(['user' => function ($query) use ($searchString) {
+               $query->where('name', 'like', '%'.$searchString.'%');
+           }])->paginate($this->pages);
+           $departments = Department::orderBy('id', 'ASC')->get();
+           $types=LeaveType::orderBy('id', 'ASC')->get();
+           return view('livewire.admin.manage-leave', compact('leaves', 'departments', 'types'))
+            ->extends('layouts.admin', ['title'=> $title])
+            ->section('content')
+           ;
+       }
 }

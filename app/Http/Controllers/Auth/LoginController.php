@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Carbon\Carbon;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -59,6 +60,8 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
+        Employee::query()->update(['days' => round(date('L') == 1 ? (21/366)*(date('z') + 1) : (21/365)*(date('z') + 1),2)]);
+
         $user->update([
             'last_login_at' => Carbon::now()->toDateTimeString(),
             'last_login_ip' => $request->getClientIp()

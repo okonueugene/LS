@@ -103,7 +103,7 @@
                                             class="tb-status text-warning">{{ $employee->leave_taken }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md"><span
-                                            class="tb-status text-success">{{ $employee->available_days }}</span>
+                                            class="tb-status text-success">{{ $employee->available_days == 0 && $employee->leave_taken == 0 ? $employee->days : $employee->available_days }}</span>
                                     </div>
                                     <div class="nk-tb-col nk-tb-col-tools">
                                         <ul class="nk-tb-actions gx-1">

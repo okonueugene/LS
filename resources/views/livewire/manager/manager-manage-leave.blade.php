@@ -153,71 +153,77 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    @if(count($leaves)>0)
-                                    @foreach ($leaves as $leave)
-                                        <div class="nk-tb-item">
-                                            <div class="nk-tb-col nk-tb-col-check">
-                                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="uid1"><label class="custom-control-label"
-                                                        for="uid1"></label>
-                                                </div>
-                                            </div>
-                                            <div class="nk-tb-col">
-                                                <div class="user-card">
-                                                    <div class="user-avatar xs bg-primary"><span>
-                                                            <?php
-                                                            $name = $leave->user->name;
-                                                            preg_match_all('/\b\w/', $name, $name);
-                                                            echo strtoupper(join('', $name[0]));
-                                                            ?></span></div>
-                                                    <div class="user-name"><span
-                                                            class="tb-lead">{{ $leave->user->name }}</span>
+                                    @if (count($leaves) > 0)
+                                        @foreach ($leaves as $leave)
+                                            <div class="nk-tb-item">
+                                                <div class="nk-tb-col nk-tb-col-check">
+                                                    <div
+                                                        class="custom-control custom-control-sm custom-checkbox notext">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="uid1"><label class="custom-control-label"
+                                                            for="uid1"></label>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="nk-tb-col tb-col-md"><span>{{ $leave->date_start }}</span>
-                                            </div>
-                                            <div class="nk-tb-col tb-col-sm"><span>{{ $leave->date_end }}</span></div>
-                                            <div class="nk-tb-col tb-col-sm"><span></span>{{ $leave->nodays }}</div>
-                                            <div class="nk-tb-col tb-col-lg">
-                                                <span>{{ array_search($leave->employee->department, $departments->pluck('id', 'name')->toArray()) }}</span>
-                                            </div>
-                                            <div class="nk-tb-col tb-col-lg">
-                                                <span>{{ array_search($leave->leave_type_id, $types->pluck('id', 'name')->toArray()) }}</span>
-                                            </div>
-                                            <div class="nk-tb-col tb-col-lg"><span>{{ $leave->date_posted }}</span>
-                                            </div>
-                                            <div class="nk-tb-col"><span
-                                                    class="badge tb-status text-warning">{{ ucfirst($leave->status) }}</span>
-                                            </div>
-                                            <div class="nk-tb-col nk-tb-col-tools">
-                                                <ul class="nk-tb-actions gx-1">
-                                                    <div class="drodown mr-n1">
-                                                        <a href="#"
-                                                            class="dropdown-toggle btn btn-icon btn-trigger"
-                                                            data-toggle="dropdown"><em
-                                                                class="icon ni ni-more-h"></em></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <ul class="link-list-opt no-bdr">
-                                                                <li><a href="#"
-                                                                        wire:click="showLeave({{ $leave->id }})"
-                                                                        data-toggle="modal"
-                                                                        data-target="#addModal"><span>View
-                                                                            Details</span></a></li>
-                                                                <li><a href="#"
-                                                                        data-toggle="modal"
-                                                                        data-target="#updateModal"><span>Update Leave
-                                                                            Details</span></a></li>
-                                                                <li><a href="#deleteDob">Delete Leave</a></li>
-                                                            </ul>
+                                                <div class="nk-tb-col">
+                                                    <div class="user-card">
+                                                        <div class="user-avatar xs bg-primary"><span>
+                                                                <?php
+                                                                $name = $leave->user->name;
+                                                                preg_match_all('/\b\w/', $name, $name);
+                                                                echo strtoupper(join('', $name[0]));
+                                                                ?></span></div>
+                                                        <div class="user-name"><span
+                                                                class="tb-lead">{{ $leave->user->name }}</span>
                                                         </div>
                                                     </div>
-                                                    </li>
-                                                </ul>
+                                                </div>
+                                                <div class="nk-tb-col tb-col-md"><span>{{ $leave->date_start }}</span>
+                                                </div>
+                                                <div class="nk-tb-col tb-col-sm"><span>{{ $leave->date_end }}</span>
+                                                </div>
+                                                <div class="nk-tb-col tb-col-sm"><span></span>{{ $leave->nodays }}
+                                                </div>
+                                                <div class="nk-tb-col tb-col-lg">
+                                                    <span>{{ array_search($leave->employee->department, $departments->pluck('id', 'name')->toArray()) }}</span>
+                                                </div>
+                                                <div class="nk-tb-col tb-col-lg">
+                                                    <span>{{ array_search($leave->leave_type_id, $types->pluck('id', 'name')->toArray()) }}</span>
+                                                </div>
+                                                <div class="nk-tb-col tb-col-lg">
+                                                    <span>{{ $leave->date_posted }}</span>
+                                                </div>
+                                                <div class="nk-tb-col"><span
+                                                        class="badge tb-status text-warning">{{ ucfirst($leave->status) }}</span>
+                                                </div>
+                                                <div class="nk-tb-col nk-tb-col-tools">
+                                                    <ul class="nk-tb-actions gx-1">
+                                                        <div class="drodown mr-n1">
+                                                            <a href="#"
+                                                                class="dropdown-toggle btn btn-icon btn-trigger"
+                                                                data-toggle="dropdown"><em
+                                                                    class="icon ni ni-more-h"></em></a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <ul class="link-list-opt no-bdr">
+                                                                    <li><a href="#"
+                                                                            wire:click="showLeave({{ $leave->id }})"
+                                                                            data-toggle="modal"
+                                                                            data-target="#addModal"><span>View
+                                                                                Details</span></a></li>
+                                                                    <li><a href="#" data-toggle="modal"
+                                                                            data-target="#updateModal"><span>Update
+                                                                                Leave
+                                                                                Details</span></a></li>
+                                                                    <li><a href="#deleteDob">Delete Leave</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    @endif
+
 
                                 </div>
                             </div>
@@ -232,143 +238,144 @@
             </div>
         </div>
     </div>
-    @endif
-     {{-- Add Dob Modal --}}
-     @if(count($leaves)>0)
-     <div wire:ignore.self class="modal fade" id="addModal">
-        <div class="modal-dialog modal-lg modal-dialog-top" role="document">
-            <div class="modal-content">
-                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
-                    <em class="icon ni ni-cross-sm"></em>
-                </a>
-                <div class="modal-body modal-body-md">
-                    <h5 class="modal-title">View Leave</h5>
-                    <form class="mt-2">
-                        <div class="row g-gs">
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <label class="form-label" for="oder-id">Employee Name</label>
-                                    <div class="form-control-wrap">
-                                        <input type="text" class="form-control" id="oder-id"
-                                            value="{{ $leave->user->name }}"readonly>
-                                    </div>
-                                    @error('name')
-                                        <div class="form-note text-danger mt-1">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label" for="oder-id">Start Date</label>
-                                    <div class="form-control-wrap">
-                                        <input type="text" class="form-control" id="oder-id"
-                                            value="{{ $date_start }}"readonly>
-                                    </div>
-                                    @error('name')
-                                        <div class="form-note text-danger mt-1">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label" for="oder-id">End Date</label>
-                                    <div class="form-control-wrap">
-                                        <input type="text" class="form-control" id="oder-id"
-                                            value="{{ $date_end }}"readonly>
-                                    </div>
-                                    @error('name')
-                                        <div class="form-note text-danger mt-1">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label" for="oder-id">Working Days</label>
-                                    <div class="form-control-wrap">
-                                        <input type="text" class="form-control" id="oder-id"
-                                            value="{{ $nodays }}"readonly>
+    {{-- Add Dob Modal --}}
+    @if (count($leaves) > 0)
+        <div wire:ignore.self class="modal fade" id="addModal">
+            <div class="modal-dialog modal-lg modal-dialog-top" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                        <em class="icon ni ni-cross-sm"></em>
+                    </a>
+                    <div class="modal-body modal-body-md">
+                        <h5 class="modal-title">View Leave</h5>
+                        <form class="mt-2">
+                            <div class="row g-gs">
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label class="form-label" for="oder-id">Employee Name</label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control" id="oder-id"
+                                                value="{{ $leave->user->name }}"readonly>
+                                        </div>
+                                        @error('name')
+                                            <div class="form-note text-danger mt-1">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label" for="oder-id">Leave Type</label>
-                                    <div class="form-control-wrap">
-                                        <input type="text" class="form-control" id="oder-id"
-                                            value="{{ array_search($leave->leave_type_id, $types->pluck('id', 'name')->toArray()) }}"readonly>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="oder-id">Start Date</label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control" id="oder-id"
+                                                value="{{ $date_start }}"readonly>
+                                        </div>
+                                        @error('name')
+                                            <div class="form-note text-danger mt-1">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-label" for="oder-id">Reason</label>
-                                    <div class="form-control-wrap">
-                                        <textarea class="form-control" id="oder-id" readonly>{{ $reason }}
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="oder-id">End Date</label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control" id="oder-id"
+                                                value="{{ $date_end }}"readonly>
+                                        </div>
+                                        @error('name')
+                                            <div class="form-note text-danger mt-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="oder-id">Working Days</label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control" id="oder-id"
+                                                value="{{ $nodays }}"readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="oder-id">Leave Type</label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" class="form-control" id="oder-id"
+                                                value="{{ array_search($leave->leave_type_id, $types->pluck('id', 'name')->toArray()) }}"readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="oder-id">Reason</label>
+                                        <div class="form-control-wrap">
+                                            <textarea class="form-control" id="oder-id" readonly>{{ $reason }}
                                         </textarea>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     @endif
+
     <!-- .Add Modal-Content -->
-     {{-- Add Dob Modal --}}
-     @if(count($leaves)>0)
-     <div wire:ignore.self class="modal fade" id="updateModal">
-        <div class="modal-dialog modal-lg modal-dialog-top" role="document">
-            <div class="modal-content">
-                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
-                    <em class="icon ni ni-cross-sm"></em>
-                </a>
-                <div class="modal-body modal-body-md">
-                    <h5 class="modal-title">Update Leave</h5>
-                    <form wire:submit="updateLeave({{$leave->id}})" class="mt-2">
-                        <div class="row g-gs">
-                            <div class="col-md-7">
-                                <div class="form-group">
-                                    <label class="form-label" for="cf-full-name">Manage Status
-                                    </label>
-                                    <select wire:model="status" class="form-control" data-search="on">
-                                        <option>Select Action</option>
-                                        <option value="approved">Approve</option>
-                                        <option value="declined">Decline</option>
-                                    </select>
-                                    @error('status')
-                                        <div class="form-note text-danger mt-1">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-label" for="cf-default-textarea">Remarks</label>
-                                    <div class="form-control-wrap">
-                                        <textarea wire:model="remarks" class="form-control form-control-sm" id="cf-default-textarea"
-                                            placeholder="Write your message">
-                                    </textarea>
+    {{-- Add Dob Modal --}}
+    @if (count($leaves) > 0)
+        <div wire:ignore.self class="modal fade" id="updateModal">
+            <div class="modal-dialog modal-lg modal-dialog-top" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">
+                        <em class="icon ni ni-cross-sm"></em>
+                    </a>
+                    <div class="modal-body modal-body-md">
+                        <h5 class="modal-title">Update Leave</h5>
+                        <form wire:submit="updateLeave({{ $leave->id }})" class="mt-2">
+                            <div class="row g-gs">
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                        <label class="form-label" for="cf-full-name">Manage Status
+                                        </label>
+                                        <select wire:model="status" class="form-control" data-search="on">
+                                            <option>Select Action</option>
+                                            <option value="approved">Approve</option>
+                                            <option value="declined">Decline</option>
+                                        </select>
+                                        @error('status')
+                                            <div class="form-note text-danger mt-1">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                    @error('remarks')
-                                        <div class="form-note text-danger mt-1">{{ $message }}</div>
-                                    @enderror
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="cf-default-textarea">Remarks</label>
+                                        <div class="form-control-wrap">
+                                            <textarea wire:model="remarks" class="form-control form-control-sm" id="cf-default-textarea"
+                                                placeholder="Write your message">
+                                    </textarea>
+                                        </div>
+                                        @error('remarks')
+                                            <div class="form-note text-danger mt-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-secondary">
+                                        <div wire:loading wire:target='updateLeave'>
+                                        </div>Update
+                                    </button>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-secondary">
-                                    <div wire:loading wire:target='updateLeave'>
-                                    </div>Update
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     @endif
+
 </div>
 @push('scripts')
 @endpush

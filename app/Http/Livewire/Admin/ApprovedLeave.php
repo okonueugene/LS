@@ -6,10 +6,14 @@ use App\Models\Leave;
 use Livewire\Component;
 use App\Models\LeaveType;
 use App\Models\Department;
+use Livewire\WithPagination;
 
 class ApprovedLeave extends Component
 {
 
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+    
     public $pages=10;
     public $order='DESC';
     public $search = '';

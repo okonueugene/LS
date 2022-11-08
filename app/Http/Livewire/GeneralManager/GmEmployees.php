@@ -87,7 +87,7 @@ class GmEmployees extends Component
     {
         $title="Employees";
         $departments = Department::orderBy('id','ASC')->get();
-        Employee::query()->update(['days' => round(date('L') == 1 ? (21/366)*(date('z') + 1) : (21/365)*(date('z') + 1),2)]);
+        
 
         $searchString=$this->search;
         $employees = Employee::whereHas('user', function ($query) use ($searchString){

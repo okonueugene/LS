@@ -156,4 +156,3 @@
         </div><!-- .card -->
     </div><!-- .nk-block -->
 </div>
-</div>

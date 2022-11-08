@@ -9,12 +9,17 @@ use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\WithPagination;
+use App\Exports\EmployeesExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class Employees extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
+    public $pages=10;
+    public $order='DESC';
 
     public $name;
     public $email;
@@ -26,6 +31,11 @@ class Employees extends Component
     public $search = '';
 
 
+
+    public function export()
+    {
+        return Excel::download(new EmployeesExport(), 'users.xlsx');
+    }
 
     public function clearInput()
     {
@@ -85,16 +95,15 @@ class Employees extends Component
     public function render()
     {
         $title="Employee Details";
-        Employee::query()->update(['days' => round(date('L') == 1 ? (21/366)*(date('z') + 1) : (21/365)*(date('z') + 1),2)]);
 
         $departments = Department::orderBy('id','ASC')->get();
         $searchString=$this->search;
-        $employees = Employee::whereHas('user', function ($query) use ($searchString){
+        $employees = Employee::orderBy('id', $this->order)->whereHas('user', function ($query) use ($searchString){
             $query->where('name', 'like', '%'.$searchString.'%');
         })
         ->with(['user' => function($query) use ($searchString){
             $query->where('name', 'like', '%'.$searchString.'%');
-        }])->paginate(5);
+        }])->paginate($this->pages);
         return view('livewire.admin.employee',compact('employees','departments' ))
         ->extends('layouts.admin',['title'=> $title])
         ->section('content');
