@@ -13,10 +13,6 @@
                                         class="icon ni ni-more-v"></em></a>
                                 <div class="toggle-expand-content" data-content="more-options">
                                     <ul class="nk-block-tools g-3">
-                                        <li><a href="#" wire:click.prevent="export" wire:loading.attr="disabled"
-                                                class="btn btn-white btn-outline-light"><em
-                                                    class="icon ni ni-download-cloud"></em><span>Export</span></a>
-                                        </li>
                                         <li>
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right"><em
@@ -31,6 +27,10 @@
                                                 class="btn btn-primary d-none d-md-inline-flex" data-toggle="modal"
                                                 data-target="#addModal"><em class="icon ni ni-plus"></em><span>Add
                                                     Employee</span></a>
+                                        </li>
+                                        <li><a href="#" wire:click.prevent="export" wire:loading.attr="disabled"
+                                                class="btn btn-white btn-outline-light"><em
+                                                    class="icon ni ni-download-cloud"></em><span>Export</span></a>
                                         </li>
                                         <li>
                                             <div class="dropdown">
@@ -141,7 +141,7 @@
                                         <span>{{ array_search($employee->department, $departments->pluck('id', 'name')->toArray()) }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-lg">
-                                        <span>{{ ucwords(str_replace('_',' ',$employee->user->user_type)) }}</span>
+                                        <span>{{ ucwords(str_replace('_', ' ', $employee->user->user_type)) }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md"><span
                                             class="tb-status text-warning">{{ $employee->leave_taken }}</span>

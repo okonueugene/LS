@@ -10,10 +10,11 @@ use App\Models\Employee;
 use App\Models\LeaveType;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
+use Mail;
+use App\Mail\ApplyMail;
 
 class GmApplyLeave extends Component
 {
-
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
@@ -31,9 +32,13 @@ class GmApplyLeave extends Component
         $this->reason = "";
     }
 
+    public function mail()
+    {
+        Mail::to('versionaskari19@gmail.com')->send(new ApplyMail());
+    }
+
     public function applyLeave()
     {
-
         $this->validate([
             'date_start' => 'required',
             'date_end' => 'required',
@@ -103,6 +108,7 @@ class GmApplyLeave extends Component
         ]);
 
         $this->clearInput();
+        $this->mail();
         $this->emit('userStore');
     }
 
@@ -110,8 +116,8 @@ class GmApplyLeave extends Component
     {
         $title="Apply Leave";
         $user=User::where('id', Auth::user()->id)->first();
-         $leavetypes = LeaveType::all(); 
-        return view('livewire.general-manager.gm-apply-leave',compact('user','leavetypes'))
+        $leavetypes = LeaveType::all();
+        return view('livewire.general-manager.gm-apply-leave', compact('user', 'leavetypes'))
         ->extends('layouts.general', ['title'=> $title])
         ->section('content')
         ;

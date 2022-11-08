@@ -16,8 +16,11 @@
                                         class="icon ni ni-menu-alt-r"></em></a>
                                 <div class="toggle-expand-content" data-content="pageMenu">
                                     <ul class="nk-block-tools g-3">
-                                        <li><a href="#" wire:click.prevent="export" wire:loading.attr="disabled" class="btn btn-white btn-outline-light"><em
-                                                    class="icon ni ni-download-cloud"></em><span>Export</span></a></li>
+                                        <li>
+                                            <a href="#" wire:click.prevent="export" wire:loading.attr="disabled"
+                                                class="btn btn-white btn-outline-light"><em
+                                                    class="icon ni ni-download-cloud"></em><span>Export</span></a>
+                                        </li>
                                         <li class="nk-block-tools-opt">
 
                                         </li>

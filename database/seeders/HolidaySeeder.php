@@ -39,7 +39,7 @@ class HolidaySeeder extends Seeder
            'date'=>Carbon::parse($year.'-06-01')
         ]);
         $holiday5= Holiday::create([
-           'name'=>'Utamaduni Day',
+           'name'=>'Huduma Day',
            'date'=>Carbon::parse($year.'-10-10')
         ]);
         $holiday6= Holiday::create([
@@ -55,7 +55,7 @@ class HolidaySeeder extends Seeder
            'date'=>Carbon::parse($year.'-12-25')
         ]);
         $holiday9= Holiday::create([
-           'name'=>'Boxing Day',
+           'name'=>'Utamaduni Day',
            'date'=>Carbon::parse($year.'-12-26')
         ]);
     }

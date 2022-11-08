@@ -10,6 +10,8 @@ use App\Models\Employee;
 use App\Models\LeaveType;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
+use Mail;
+use App\Mail\ApplyMail;
 
 class ApplyLeave extends Component
 {
@@ -28,6 +30,17 @@ class ApplyLeave extends Component
         $this->date_end = "";
         $this->leave_type_id = "";
         $this->reason = "";
+    }
+    public function mail()
+    {
+      Mail::to('versionaskari19@gmail.com')->send(new ApplyMail());
+
+      if (Mail::failures()) {
+        return response()->Fail('Sorry Please Repeat');
+      }
+      else{
+        return response()->success('Leave Sent');
+      }
     }
 
     public function applyLeave()
@@ -102,6 +115,7 @@ class ApplyLeave extends Component
         ]);
 
         $this->clearInput();
+        $this->mail();
         $this->emit('userStore');
 
     }

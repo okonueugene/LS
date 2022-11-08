@@ -8,6 +8,14 @@
                         <p>You have total of {{count($leaves)}} Approved Requests.</p>
                     </div>
                 </div>
+                <ul>
+                    <li>
+                        <a href="#" wire:click.prevent="export" wire:loading.attr="disabled"
+                            class="btn btn-white btn-outline-light"><em
+                                class="icon ni ni-download-cloud"></em><span>Export</span></a>
+                    </li>
+                </ul>
+               
             </div>
         </div>
         <div class="nk-block">
