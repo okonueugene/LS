@@ -5,18 +5,19 @@ namespace App\Mail;
 use App\Models\Leave;
 use App\Models\LeaveType;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\SerializesModels;
 
-class ApplyMail extends Mailable
+class DeclinedMail extends Mailable
 {
-    use Queueable;
-    use SerializesModels;
+    use Queueable, SerializesModels;
 
     public $leave;
+
+
     /**
      * Create a new message instance.
      *
@@ -35,7 +36,7 @@ class ApplyMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Leave Application',
+            subject: 'Leave Request Declined',
         );
     }
 
@@ -49,7 +50,7 @@ class ApplyMail extends Mailable
         $types=LeaveType::orderBy('id', 'ASC')->get();
 
         return new Content(
-            view: 'emails.applyMail',
+            view: 'emails.declinedmail',
             with: ['types' => $types,
 
             ],

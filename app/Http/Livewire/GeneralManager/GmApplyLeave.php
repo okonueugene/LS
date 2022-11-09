@@ -2,16 +2,17 @@
 
 namespace App\Http\Livewire\GeneralManager;
 
+use Mail;
 use App\Models\User;
 use App\Models\Leave;
+use App\Mail\ApplyMail;
 use App\Models\Holiday;
 use Livewire\Component;
 use App\Models\Employee;
 use App\Models\LeaveType;
+use Illuminate\Http\Request;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
-use Mail;
-use App\Mail\ApplyMail;
 
 class GmApplyLeave extends Component
 {
@@ -34,7 +35,9 @@ class GmApplyLeave extends Component
 
     public function mail()
     {
-        Mail::to('versionaskari19@gmail.com')->send(new ApplyMail());
+        $leave=Leave::orderBy('id' ,'DESC')->where('user_id',Auth::user()->id)->first();
+
+        Mail::to('versionaskari19@gmail.com')->send(new ApplyMail($leave));
     }
 
     public function applyLeave()
@@ -106,7 +109,7 @@ class GmApplyLeave extends Component
         $this->dispatchBrowserEvent('success', [
             'message' => 'Leave Applied successfully',
         ]);
-
+       
         $this->clearInput();
         $this->mail();
         $this->emit('userStore');
