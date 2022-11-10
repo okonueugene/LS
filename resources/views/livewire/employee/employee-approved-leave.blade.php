@@ -131,10 +131,10 @@
                                     <span>{{$leave->nodays}}</span>
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
-                                    <span>{{array_search($leave->employee->department , $departments->pluck('id', 'name')->toArray())}}</span>
+                                    <span>{{ $leave->dept->name }}</span>
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
-                                    <span>{{array_search($leave->leave_type_id , $types->pluck('id', 'name')->toArray())}}</span>
+                                    <span>{{ $leave->type->name }}</span>
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
                                     <span class="badge tb-status text-success">{{ucfirst($leave->status)}}</span> 

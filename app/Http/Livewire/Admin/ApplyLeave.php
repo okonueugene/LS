@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Admin;
 
+use Mail;
+use App\Mail\ApplyMail;
 use App\Models\User;
 use App\Models\Leave;
 use App\Models\Holiday;
@@ -10,8 +12,6 @@ use App\Models\Employee;
 use App\Models\LeaveType;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
-use Mail;
-use App\Mail\ApplyMail;
 
 class ApplyLeave extends Component
 {
@@ -31,16 +31,10 @@ class ApplyLeave extends Component
         $this->leave_type_id = "";
         $this->reason = "";
     }
+
     public function mail()
     {
-      Mail::to('versionaskari19@gmail.com')->send(new ApplyMail());
-
-      if (Mail::failures()) {
-        return response()->Fail('Sorry Please Repeat');
-      }
-      else{
-        return response()->success('Leave Sent');
-      }
+      
     }
 
     public function applyLeave()
@@ -95,18 +89,19 @@ class ApplyLeave extends Component
                 $workingDays--;
             }
         }
-        $id=Employee::where('user_id', Auth::user()->id)->pluck('id')->first();
+        $employee=Employee::where('user_id', Auth::user()->id)->first();
 
         Leave::create([
             'user_id' => Auth::user()->id,
-            'employee_id' => $id ,
+            'employee_id' => $employee->id ,
+            'department_id' => $employee->department,
             'date_start' => $this->date_start,
             'date_end' => $this->date_end,
             'nodays' => $workingDays,
             'leave_type_id' => $this->leave_type_id,
             'reason' => $this->reason,
             'status' => 'pending',
-            'date_posted' => date('y/m/d'),
+            'date_posted' => date('Y/m/d'),
             'total' => 0,
         ]);
 

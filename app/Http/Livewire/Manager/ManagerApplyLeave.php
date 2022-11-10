@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Manager;
 
+use Mail;
+use App\Mail\ApplyMail;
 use App\Models\User;
 use App\Models\Leave;
 use App\Models\Holiday;
@@ -13,7 +15,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ManagerApplyLeave extends Component
 {
-
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
@@ -31,9 +32,15 @@ class ManagerApplyLeave extends Component
         $this->reason = "";
     }
 
+    public function mail()
+    {
+        $leave=Leave::orderBy('id', 'DESC')->where('user_id', Auth::user()->id)->first();
+
+        Mail::to('versionaskari19@gmail.com')->send(new ApplyMail($leave));
+    }
+
     public function applyLeave()
     {
-
         $this->validate([
             'date_start' => 'required',
             'date_end' => 'required',
@@ -83,11 +90,12 @@ class ManagerApplyLeave extends Component
                 $workingDays--;
             }
         }
-        $id=Employee::where('user_id', Auth::user()->id)->pluck('id')->first();
+        $employee=Employee::where('user_id', Auth::user()->id)->first();
 
         Leave::create([
             'user_id' => Auth::user()->id,
-            'employee_id' => $id ,
+            'employee_id' => $employee->id ,
+            'department_id' => $employee->department,
             'date_start' => $this->date_start,
             'date_end' => $this->date_end,
             'nodays' => $workingDays,
@@ -103,6 +111,7 @@ class ManagerApplyLeave extends Component
         ]);
 
         $this->clearInput();
+        $this->mail();
         $this->emit('userStore');
         return redirect()->back();
     }
@@ -112,8 +121,8 @@ class ManagerApplyLeave extends Component
     {
         $title="Apply Leave";
         $user=User::where('id', Auth::user()->id)->first();
-        $leavetypes = LeaveType::all(); 
-        return view('livewire.manager.manager-apply-leave',compact('user','leavetypes'))
+        $leavetypes = LeaveType::all();
+        return view('livewire.manager.manager-apply-leave', compact('user', 'leavetypes'))
         ->extends('layouts.manager', ['title'=> $title])
         ->section('content')
         ;

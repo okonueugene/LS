@@ -138,7 +138,7 @@
                                             class="tb-amount">{{ $employee->gender }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md">
-                                        <span>{{ array_search($employee->department, $departments->pluck('id', 'name')->toArray()) }}</span>
+                                        <span>{{ $employee->dept->name }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-lg">
                                         <span>{{ ucwords(str_replace('_', ' ', $employee->user->user_type)) }}</span>

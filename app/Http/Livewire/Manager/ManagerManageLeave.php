@@ -2,6 +2,10 @@
 
 namespace App\Http\Livewire\Manager;
 
+use Mail;
+use App\Mail\ApprovedMail;
+use App\Mail\DeclinedMail;
+
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Leave;
@@ -33,6 +37,22 @@ class ManagerManageLeave extends Component
     public $total;
 
 
+    public function approved()
+    {
+        $id=Employee::where('user_id', Auth::user()->id)->pluck('department');
+        $leave=Leave::orderBy('id', 'DESC')->where('status', 'approved')->where('department_id', implode('', $id))->first();
+
+        Mail::to('versionaskari19@gmail.com')->queue(new ApprovedMail($leave));
+    }
+
+    public function declined()
+    {
+        $id=Employee::where('user_id', Auth::user()->id)->pluck('department');
+        $leave=Leave::orderBy('id', 'DESC')->where('status', 'declined')->where('department_id', implode('', $id))->first();
+
+        Mail::to('versionaskari19@gmail.com')->queue(new DeclinedMail($leave));
+    }
+
     public function clearInput()
     {
         $this->status = "";
@@ -59,6 +79,14 @@ class ManagerManageLeave extends Component
         if ($this->status == 'approved' && $leave->leave_type_id==1) {
             Employee::where('user_id', $leave->user_id)->update(['leave_taken' => $leave->nodays,'available_days' =>  implode('', $old)-$leave->nodays]);
         }
+
+        if ($this->status == 'approved') {
+            $this->approved();
+        }
+         else {
+            $this->declined();
+        }
+
         $this->dispatchBrowserEvent('success', [
             'message' => 'Leave Updated successfully',
         ]);
@@ -98,19 +126,19 @@ class ManagerManageLeave extends Component
 
         $leaves =Leave::orderBy('id', $this->order)->where('status', 'pending')
         ->whereIn('user_id', $deptemployees)
-        ->whereHas('user', function ($q){
+        ->whereHas('user', function ($q) {
             return $q->where('user_type', 'employee');
-
         })
         ->whereHas('user', function ($query) use ($searchString) {
             $query->where('name', 'like', '%'.$searchString.'%');
         })
-        ->with(['user' => function ($query) use ($searchString) {
-            $query->where('name', 'like', '%'.$searchString.'%');
-        }]
+        ->with(
+            ['user' => function ($query) use ($searchString) {
+                $query->where('name', 'like', '%'.$searchString.'%');
+            }]
         )
         ->paginate($this->pages);
-        
+
         $departments = Department::orderBy('id', 'ASC')->get();
         $types=LeaveType::orderBy('id', 'ASC')->get();
         return view('livewire.manager.manager-manage-leave', compact('leaves', 'departments', 'types'))

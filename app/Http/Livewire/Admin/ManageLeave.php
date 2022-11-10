@@ -2,6 +2,10 @@
 
 namespace App\Http\Livewire\Admin;
 
+use Mail;
+use App\Mail\ApprovedMail;
+use App\Mail\DeclinedMail;
+
 use Carbon\Carbon;
 use App\Models\Leave;
 use Livewire\Component;
@@ -10,6 +14,7 @@ use App\Models\LeaveType;
 use App\Models\Department;
 use Livewire\WithPagination;
 use App\Exports\ManageLeavesExport;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ManageLeave extends Component
@@ -32,6 +37,21 @@ class ManageLeave extends Component
     public $remarks;
     public $date_posted;
     public $total;
+
+
+    public function approved()
+    {
+        $leave=Leave::orderBy('id', 'DESC')->where('status', 'approved')->first();
+
+        Mail::to('versionaskari19@gmail.com')->queue(new ApprovedMail($leave));
+    }
+
+    public function declined()
+    {
+        $leave=Leave::orderBy('id', 'DESC')->where('status', 'declined')->first();
+
+        Mail::to('versionaskari19@gmail.com')->queue(new DeclinedMail($leave));
+    }
 
     public function export()
     {
@@ -61,6 +81,11 @@ class ManageLeave extends Component
 
            if ($this->status == 'approved' && $leave->leave_type_id==1) {
                Employee::where('user_id', $leave->user_id)->update(['leave_taken' => $leave->nodays,'available_days' =>  implode('', $old)-$leave->nodays]);
+           }
+           if ($this->status == 'approved') {
+               $this->approved();
+           } else {
+               $this->declined();
            }
            $this->dispatchBrowserEvent('success', [
                'message' => 'Leave Updated successfully',
@@ -93,9 +118,8 @@ class ManageLeave extends Component
            ->with(['user' => function ($query) use ($searchString) {
                $query->where('name', 'like', '%'.$searchString.'%');
            }])->paginate($this->pages);
-           $departments = Department::orderBy('id', 'ASC')->get();
-           $types=LeaveType::orderBy('id', 'ASC')->get();
-           return view('livewire.admin.manage-leave', compact('leaves', 'departments', 'types'))
+
+           return view('livewire.admin.manage-leave', compact('leaves'))
             ->extends('layouts.admin', ['title'=> $title])
             ->section('content')
            ;

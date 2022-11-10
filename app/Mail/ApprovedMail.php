@@ -5,11 +5,12 @@ namespace App\Mail;
 use App\Models\Leave;
 use App\Models\LeaveType;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ApprovedMail extends Mailable
 {
@@ -47,13 +48,15 @@ class ApprovedMail extends Mailable
      */
     public function content()
     {
-        $types=LeaveType::orderBy('id', 'ASC')->get();
 
         return new Content(
             view: 'emails.approvedmail',
-            with: ['types' => $types,
-
-            ],
+            with: [
+                'name' =>   Auth::user()->name,
+                
+                'position' => ucwords(str_replace('_', ' ', Auth::user()->user_type)),          
+              ],
+            
         );
     }
 

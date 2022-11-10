@@ -37,7 +37,7 @@ class GmApplyLeave extends Component
     {
         $leave=Leave::orderBy('id' ,'DESC')->where('user_id',Auth::user()->id)->first();
 
-        Mail::to('versionaskari19@gmail.com')->send(new ApplyMail($leave));
+        Mail::to('versionaskari19@gmail.com')->queue(new ApplyMail($leave));
     }
 
     public function applyLeave()
@@ -91,11 +91,12 @@ class GmApplyLeave extends Component
                 $workingDays--;
             }
         }
-        $id=Employee::where('user_id', Auth::user()->id)->pluck('id')->first();
+        $employee=Employee::where('user_id', Auth::user()->id)->first();
 
         Leave::create([
             'user_id' => Auth::user()->id,
-            'employee_id' => $id ,
+            'employee_id' => $employee->id ,
+            'department_id' => $employee->department,
             'date_start' => $this->date_start,
             'date_end' => $this->date_end,
             'nodays' => $workingDays,

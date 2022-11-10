@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use App\Models\Leave;
-use App\Models\LeaveType;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -46,13 +45,10 @@ class ApplyMail extends Mailable
      */
     public function content()
     {
-        $types=LeaveType::orderBy('id', 'ASC')->get();
 
         return new Content(
             view: 'emails.applyMail',
-            with: ['types' => $types,
-
-            ],
+           
         );
     }
 

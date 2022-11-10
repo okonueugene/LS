@@ -38,7 +38,7 @@ class EmployeesExport implements FromCollection, WithMapping, WithHeadings
         [
          $employee->user->name,
          $employee->gender,
-         array_search($employee->department, $departments->pluck('id', 'name')->toArray()),
+         $leave->dept->name,
          ucwords(str_replace('_',' ',$employee->user->user_type)),
          $employee->leave_taken,
          $employee->available_days,

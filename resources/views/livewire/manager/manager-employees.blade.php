@@ -94,10 +94,10 @@
                                             class="tb-amount">{{ $employee->gender }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md">
-                                        <span>{{ array_search($employee->department, $departments->pluck('id', 'name')->toArray()) }}</span>
+                                        <span>{{ $employee->dept->name }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-lg">
-                                        <span>{{ ucfirst($employee->user->user_type) }}</span>
+                                        <span>{{ ucwords(str_replace('_', ' ', $employee->user->user_type)) }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md"><span
                                             class="tb-status text-warning">{{ $employee->leave_taken }}</span>
@@ -197,9 +197,10 @@
                                     <div class="form-control-wrap">
                                         <select wire:model="user_type" class="form-control" data-search="on">
                                             <option>Select Position</option>
-                                            <option value="manager">Manager</option>
+                                            @if(Auth::user()->user_type == 'admin' || 'general_manager')                                            <option value="manager">Manager</option>
                                             <option value="general_manager">General Manager</option>
                                             <option value="admin">Administrator</option>
+                                            @endif
                                             <option value="employee">Employee</option>
                                         </select>
                                     </div>

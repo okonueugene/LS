@@ -187,10 +187,10 @@
                                                 <div class="nk-tb-col tb-col-sm"><span></span>{{ $leave->nodays }}
                                                 </div>
                                                 <div class="nk-tb-col tb-col-lg">
-                                                    <span>{{ array_search($leave->employee->department, $departments->pluck('id', 'name')->toArray()) }}</span>
+                                                    <span>{{ $leave->dept->name }}</span>
                                                 </div>
                                                 <div class="nk-tb-col tb-col-lg">
-                                                    <span>{{ array_search($leave->leave_type_id, $types->pluck('id', 'name')->toArray()) }}</span>
+                                                    <span>{{ $leave->type->name }}</span>
                                                 </div>
                                                 <div class="nk-tb-col tb-col-lg">
                                                     <span>{{ $leave->date_posted }}</span>
@@ -304,7 +304,7 @@
                                         <label class="form-label" for="oder-id">Leave Type</label>
                                         <div class="form-control-wrap">
                                             <input type="text" class="form-control" id="oder-id"
-                                                value="{{ array_search($leave->leave_type_id, $types->pluck('id', 'name')->toArray()) }}"readonly>
+                                                value="{{ $leave->type->name }}"readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -336,7 +336,7 @@
                     </a>
                     <div class="modal-body modal-body-md">
                         <h5 class="modal-title">Update Leave</h5>
-                        <form wire:submit="updateLeave({{ $leave->id }})" class="mt-2">
+                        <form wire:submit.prevent="updateLeave({{ $leave->id }})" class="mt-2">
                             <div class="row g-gs">
                                 <div class="col-md-7">
                                     <div class="form-group">

@@ -187,7 +187,7 @@
                                                     <span>{{ array_search($leave->employee->department, $departments->pluck('id', 'name')->toArray()) }}</span>
                                                 </div>
                                                 <div class="nk-tb-col tb-col-lg">
-                                                    <span>{{ array_search($leave->leave_type_id, $types->pluck('id', 'name')->toArray()) }}</span>
+                                                    <span>{{ $leave->type->name }}</span>
                                                 </div>
                                                 <div class="nk-tb-col tb-col-lg">
                                                     <span>{{ $leave->date_posted }}</span>
@@ -301,7 +301,7 @@
                                         <label class="form-label" for="oder-id">Leave Type</label>
                                         <div class="form-control-wrap">
                                             <input type="text" class="form-control" id="oder-id"
-                                                value="{{ array_search($leave->leave_type_id, $types->pluck('id', 'name')->toArray()) }}"readonly>
+                                                value="{{ $leave->type->name }}"readonly>
                                         </div>
                                     </div>
                                 </div>
