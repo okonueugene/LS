@@ -8,6 +8,14 @@
                         <p>You have total of {{count($leaves)}} Approved Requests.</p>
                     </div>
                 </div>
+                <ul>
+                    <li>
+                        <a href="#" wire:click.prevent="export" wire:loading.attr="disabled"
+                            class="btn btn-white btn-outline-light"><em
+                                class="icon ni ni-download-cloud"></em><span>Export</span></a>
+                    </li>
+                </ul>
+               
             </div>
         </div>
         <div class="nk-block">
@@ -134,14 +142,15 @@
                                     <span>{{ $leave->dept->name }}</span>
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
-                                    <span>{{$leave->type->name}}</span>
+                                    <span>{{ $leave->type->name}}</span>
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
                                     <span class="badge tb-status text-success">{{ucfirst($leave->status)}}</span> 
                                 </div>
                                 <div class="nk-tb-col tb-col-md">
-                                    <span>{{$leave->action_date}}</span>
+                                    <span>{{ $leave->action_date}}</span>
                                 </div>
+                                
                             </div>
                             @endforeach
                     </div><!-- .nk-tb-list -->
@@ -154,4 +163,5 @@
             </div><!-- .card-inner-group -->
         </div><!-- .card -->
     </div><!-- .nk-block -->
+</div>
 </div>

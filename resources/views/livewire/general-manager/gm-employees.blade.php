@@ -94,7 +94,7 @@
                                             class="tb-amount">{{ $employee->gender }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md">
-                                        <span>{{ $leave->dept->name }}</span>
+                                        <span>{{ $employee->dept->name }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-lg">
                                         <span>{{ ucwords(str_replace('_', ' ', $employee->user->user_type)) }}</span>

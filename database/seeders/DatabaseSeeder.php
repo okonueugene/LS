@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             LeaveTypeSeeder::class,
             HolidaySeeder::class,
+            EmployeeSeeder::class,
         ]);
     }
 }

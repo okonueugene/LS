@@ -11,7 +11,8 @@
                         </div>
                         <div class="nk-block-head-content">
                             <div class="toggle-wrap nk-block-tools-toggle"><span
-                                    class="badge rounded-pill bg-warning text-dark">{{ date_format(date_create(), 'F') }}</span> <span
+                                    class="badge rounded-pill bg-warning text-dark">{{ date_format(date_create(), 'F') }}</span>
+                                <span
                                     class="badge rounded-pill bg-warning text-dark">{{ date('L') == 1 ? 366 - (date('z') + 1) : 365 - (date('z') + 1) }}
                                     Days Left </span>
                             </div>
@@ -20,8 +21,8 @@
                 </div>
                 <div class="nk-block">
                     <div class="row g-gs">
-                        <div class="col-sm-6 col-lg-4 col-xxl-3">
-                            <div class="card card-bordered h-100">
+                        <div class="col-sm-4 col-lg-4 col-xxl-3">
+                            <div class="card card-bordered h-60">
                                 <div class="card-inner">
                                     <div class="project">
                                         <div class="card-header border-bottom text-center">
@@ -35,28 +36,28 @@
                             </div>
                         </div>
                         <div class="col-sm-6 col-lg-4 col-xxl-3">
-                            <div class="card card-bordered h-100">
+                            <div class="card card-bordered h-60 text-center">
                                 <div class="card-inner">
                                     <div class="project">
                                         <div class="card-header border-bottom text-center">
                                             <h6 class="title">Leave Days Accumulated</h6>
                                         </div><br>
                                         <div class="project-details text-center" style="text-size:15px;">
-                                            <span>{{ round(date('L') == 1 ? (21/366)*(date('z') + 1) : (21/365)*(date('z') + 1),2) }}</span>
+                                            <span>{{ round(date('L') == 1 ? (21 / 366) * (date('z') + 1) : (21 / 365) * (date('z') + 1), 2) }}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-lg-4 col-xxl-3">
-                            <div class="card card-bordered h-100">
+                            <div class="card card-bordered h-60">
                                 <div class="card-inner">
                                     <div class="project">
                                         <div class="card-header border-bottom text-center">
                                             <h6 class="title">Average Leave Taken</h6>
                                         </div><br>
                                         <div class="project-details text-center" style="text-size:15px;">
-                                            <span>{{ count($employees) }}</span>
+                                            <span>{{ array_sum($taken)/count($employees) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -65,41 +66,10 @@
 
                         <div class="col-sm-6 col-lg-4 col-xxl-3">
                             <div class="card card-bordered h-100">
-                                <div class="card-inner">
-                                    <div class="project">
-                                        <div class="project-head">
-                                            <h6 class="title" style="text-size:15px;">Latest Leaves Pending Approval
-                                            </h6>
-                                        </div>
-                                        <div class="project-details">
-                                            <ul class="list-group">
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                <div class="card card-bordered h-100">
+                                    <div class="card-inner" style="text-size:15px;">
+                                        <h6 class="title">Percentage Leave Taken</h6>
+                                        <canvas id="myChart" width="400" height="400"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -113,31 +83,36 @@
                                         </div>
                                         <div class="project-details">
                                             <ul class="list-group">
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
+                                                @if (count($mostdays) > 0)
+                                                    @foreach ($mostdays as $member)
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            {{ $member->user->name }}
+                                                            <span>{{ $member->available_days }}</span>
+                                                        </li>
+                                                    @endforeach
+                                                @else
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                        No Members on Leave
+                                                    </li>
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                        No Members on Leave
+                                                    </li>
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                        No Members on Leave
+                                                    </li>
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                        No Members on Leave
+                                                    </li>
+                                                    <li
+                                                        class="list-group-item d-flex justify-content-between align-items-center">
+                                                        No Members on Leave
+                                                    </li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </div>
@@ -153,32 +128,131 @@
                                         </div>
                                         <div class="project-details">
                                             <ul class="list-group">
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Name
-                                                    <span>5</span>
-                                                </li>
-                                            </ul>
+                                                <ul class="list-group">
+                                                    @if (count($leastdays) > 0)
+                                                        @foreach ($leastdays as $member)
+                                                            <li
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                {{ $member->user->name }}
+                                                                <span>{{ $member->available_days }}</span>
+                                                            </li>
+                                                        @endforeach
+                                                    @else
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                    @endif
+                                                </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-4 col-xxl-3">
+                            <div class="card card-bordered h-100">
+                                <div class="card-inner">
+                                    <div class="project">
+                                        <div class="project-head">
+                                            <h6 class="title" style="text-size:15px;">Members on Leave
+                                            </h6>
+                                        </div>
+                                        <div class="project-details">
+                                            <ul class="list-group">
+                                                <ul class="list-group">
+                                                    @if (count($leastdays) > 0)
+                                                        @foreach ($leastdays as $member)
+                                                            <li
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                {{ $member->user->name }}
+                                                                <span>{{ $member->available_days }}</span>
+                                                            </li>
+                                                        @endforeach
+                                                    @else
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                    @endif
+                                                </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-4 col-xxl-3">
+                            <div class="card card-bordered h-100">
+                                <div class="card-inner">
+                                    <div class="project">
+                                        <div class="project-head">
+                                            <h6 class="title" style="text-size:15px;">Upcoming Holidays</h6>
+                                        </div>
+                                        <div class="project-details">
+                                            <ul class="list-group">
+                                                <ul class="list-group">
+                                                    @if (count($upcoming) > 0)
+                                                        @foreach ($upcoming as $member)
+                                                            <li
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                {{ $member->name }}
+                                                                <span>{{ $member->date }}</span>
+                                                            </li>
+                                                        @endforeach
+                                                    @else
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            No Members on Leave
+                                                        </li>
+                                                    @endif
+                                                </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -209,6 +283,35 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @section('scripts')
     <script>
+        var totalleavedays = <?= json_encode($taken) ?>;
+        var employees = <?= json_encode(count($employees)) ?>;
+        var days=totalleavedays.reduce((a, b) => a + b, 0)/employees;
+
+        const data = {
+            labels: [
+                'Taken',
+                'Remaining',
+                
+            ],
+            datasets: [{
+                label: 'My First Dataset',
+            data: [Math.round(days*100/21),Math.round((21-days)*100/21)],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                ],
+                hoverOffset: 4
+            }]
+        };
+        const config = {
+            type: 'doughnut',
+            data: data,
+            options: {}
+        };
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
         // const entries = Object.entries(checked);
         // let arr = [];
         // let arr1 = [];
@@ -261,13 +364,13 @@
 
         // };
 
-        // //patrols
+        // patrols
         // const myChart = new Chart(
         //     document.getElementById('myChart').getContext('2d'),
         //     config
         // );
 
-        // //
+        // 
 
         // var stuff = [];
 
@@ -315,14 +418,3 @@
         //another graph
     </script>
 @endsection
-
-
-{{-- code for days in month remining --}}
-{{-- $days = cal_days_in_month(CAL_GREGORIAN, idate('m'), date('Y'));
-$day = date('d');
-$d = $days - $day;
-if ($d > 1) {
-    echo "$d Days Left";
-} else {
-    echo "$d Day Left";
-} --}}

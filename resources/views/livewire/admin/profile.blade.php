@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
                                     <div class="data-col"><span class="data-label">Department</span><span
-                                            class="data-value">{{ $leave->dept->name }}</span>
+                                            class="data-value">{{ $user->dept->name }}</span>
                                     </div>
                                     <div class="data-col data-col-end"><span class="data-more"><em
                                                 class="icon ni ni-forward-ios"></em></span></div>

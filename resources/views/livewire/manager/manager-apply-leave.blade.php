@@ -85,9 +85,9 @@
                                     value="1"readonly>
                             </div>
                             <div class="form-group"><label class="form-label" for="cf-phone-no">
-                                Available Leave Days</label><input type="text" class="form-control"
-                                id="cf-phone-no" value="{{ $user->employee->days-$user->employee->leave_taken }}"readonly>
-                        </div>
+                                    Available Leave Days</label><input type="text" class="form-control"
+                                    id="cf-phone-no" value="21"readonly>
+                            </div>
                             <div class="form-group">
                                 <label class="form-label" for="cf-full-name">Leave Type
                                 </label>

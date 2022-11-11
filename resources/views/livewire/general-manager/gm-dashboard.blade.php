@@ -420,12 +420,3 @@
 @endsection
 
 
-// {{-- code for days in month remining --}}
-// {{-- $days = cal_days_in_month(CAL_GREGORIAN, idate('m'), date('Y'));
-// $day = date('d');
-// $d = $days - $day;
-// if ($d > 1) {
-//     echo "$d Days Left";
-// } else {
-//     echo "$d Day Left";
-// } --}}
