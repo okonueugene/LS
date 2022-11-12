@@ -164,7 +164,7 @@
                 <div class="nk-footer">
                     <div class="container-fluid">
                         <div class="nk-footer-wrap">
-                            <div class="nk-footer-copyright"> &copy; <?php echo date("Y"); ?> Askari Technologies.
+                            <div class="nk-footer-copyright"> &copy; <?php echo date("Y"); ?> {{implode('',$company)}}
                             </div>
                             <div class="nk-footer-links">
                                 <ul class="nav nav-sm">
