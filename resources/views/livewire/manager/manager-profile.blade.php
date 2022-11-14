@@ -67,7 +67,7 @@
                                 <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit"
                                     data-tab-target="#address">
                                     <div class="data-col"><span class="data-label">Leave Days Remaining</span><span
-                                            class="data-value">{{ $user->available_days }}
+                                            class="data-value">{{$user->available_days == 0 && $user->leave_taken == 0 ? $user->days : $user->available_days  }}
                                         </span></div>
                                     <div class="data-col data-col-end"><span class="data-more"><em
                                                 class="icon ni ni-forward-ios"></em></span></div>

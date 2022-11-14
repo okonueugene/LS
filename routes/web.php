@@ -60,7 +60,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('/activity', function () {
+    return view('livewire.admin.loginactivity', with(['title'=> 'Login Activity']));
+})->name('activity');
+Route::get('/activities', function () {
+    return view('livewire.general-manager.loginactivity', with(['title'=> 'Login Activity']));
+})->name('activities');
 Route::group(['middleware'=> 'auth'], function () {
     Route::group(
         [

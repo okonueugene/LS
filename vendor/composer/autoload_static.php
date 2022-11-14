@@ -36,7 +36,9 @@ class ComposerStaticInit49c5b7aa133cbab2f631158b40ce6cd9
         '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
         '9f394da3192a168c4633675768d80428' => __DIR__ . '/..' . '/nwidart/laravel-modules/src/helpers.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
+        '72b1e3f4a2af9b30b3f137b3ec2057fc' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/helpers.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
+        '1e298922c3e2134d42dcdb03e6d5f55a' => __DIR__ . '/..' . '/torann/geoip/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -55,6 +57,7 @@ class ComposerStaticInit49c5b7aa133cbab2f631158b40ce6cd9
         ),
         'T' => 
         array (
+            'Torann\\GeoIP\\' => 13,
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Tests\\' => 6,
             'Termwind\\' => 9,
@@ -88,13 +91,17 @@ class ComposerStaticInit49c5b7aa133cbab2f631158b40ce6cd9
             'Symfony\\Component\\ErrorHandler\\' => 31,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Spatie\\LaravelPackageTools\\' => 27,
             'Spatie\\LaravelIgnition\\' => 23,
             'Spatie\\Ignition\\' => 16,
             'Spatie\\FlareClient\\' => 19,
             'Spatie\\Backtrace\\' => 17,
+            'Spatie\\Activitylog\\' => 19,
         ),
         'R' => 
         array (
+            'Rappasoft\\LaravelAuthenticationLog\\Database\\Factories\\' => 54,
+            'Rappasoft\\LaravelAuthenticationLog\\' => 35,
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
@@ -201,6 +208,10 @@ class ComposerStaticInit49c5b7aa133cbab2f631158b40ce6cd9
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Torann\\GeoIP\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/torann/geoip/src',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -322,6 +333,10 @@ class ComposerStaticInit49c5b7aa133cbab2f631158b40ce6cd9
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
+        'Spatie\\LaravelPackageTools\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-package-tools/src',
+        ),
         'Spatie\\LaravelIgnition\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
@@ -337,6 +352,18 @@ class ComposerStaticInit49c5b7aa133cbab2f631158b40ce6cd9
         'Spatie\\Backtrace\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/backtrace/src',
+        ),
+        'Spatie\\Activitylog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-activitylog/src',
+        ),
+        'Rappasoft\\LaravelAuthenticationLog\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/database/factories',
+        ),
+        'Rappasoft\\LaravelAuthenticationLog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -590,10 +617,10 @@ class ComposerStaticInit49c5b7aa133cbab2f631158b40ce6cd9
         'App\\Http\\Livewire\\Admin\\Employees' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Employees.php',
         'App\\Http\\Livewire\\Admin\\Holidays' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Holidays.php',
         'App\\Http\\Livewire\\Admin\\LeaveTypes' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/LeaveTypes.php',
-        'App\\Http\\Livewire\\Admin\\Leaves' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Leaves.php',
         'App\\Http\\Livewire\\Admin\\ManageLeave' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/ManageLeave.php',
         'App\\Http\\Livewire\\Admin\\Profile' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Profile.php',
         'App\\Http\\Livewire\\Admin\\RejectedLeave' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/RejectedLeave.php',
+        'App\\Http\\Livewire\\Admin\\Settings' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Settings.php',
         'App\\Http\\Livewire\\Employee\\EmployeeApplyLeave' => __DIR__ . '/../..' . '/app/Http/Livewire/Employee/EmployeeApplyLeave.php',
         'App\\Http\\Livewire\\Employee\\EmployeeApprovedLeave' => __DIR__ . '/../..' . '/app/Http/Livewire/Employee/EmployeeApprovedLeave.php',
         'App\\Http\\Livewire\\Employee\\EmployeeDashboard' => __DIR__ . '/../..' . '/app/Http/Livewire/Employee/EmployeeDashboard.php',
@@ -649,6 +676,7 @@ class ComposerStaticInit49c5b7aa133cbab2f631158b40ce6cd9
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
+        'App\\Providers\\ComposerServiceProvider' => __DIR__ . '/../..' . '/app/Providers/ComposerServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
@@ -765,6 +793,7 @@ class ComposerStaticInit49c5b7aa133cbab2f631158b40ce6cd9
         'Database\\Seeders\\CompanySeeder' => __DIR__ . '/../..' . '/database/seeders/CompanySeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\DepartmentSeeder' => __DIR__ . '/../..' . '/database/seeders/DepartmentSeeder.php',
+        'Database\\Seeders\\EmployeeSeeder' => __DIR__ . '/../..' . '/database/seeders/EmployeeSeeder.php',
         'Database\\Seeders\\HolidaySeeder' => __DIR__ . '/../..' . '/database/seeders/HolidaySeeder.php',
         'Database\\Seeders\\LeaveTypeSeeder' => __DIR__ . '/../..' . '/database/seeders/LeaveTypeSeeder.php',
         'Database\\Seeders\\UserSeeder' => __DIR__ . '/../..' . '/database/seeders/UserSeeder.php',
@@ -5592,6 +5621,17 @@ class ComposerStaticInit49c5b7aa133cbab2f631158b40ce6cd9
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
         'Ramsey\\Uuid\\Validator\\GenericValidator' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/GenericValidator.php',
         'Ramsey\\Uuid\\Validator\\ValidatorInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/ValidatorInterface.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Commands\\PurgeAuthenticationLogCommand' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Commands/PurgeAuthenticationLogCommand.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Database\\Factories\\AuthenticationLogFactory' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/database/factories/AuthenticationLogFactory.php',
+        'Rappasoft\\LaravelAuthenticationLog\\LaravelAuthenticationLogServiceProvider' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/LaravelAuthenticationLogServiceProvider.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Listeners\\FailedLoginListener' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Listeners/FailedLoginListener.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Listeners\\LoginListener' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Listeners/LoginListener.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Listeners\\LogoutListener' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Listeners/LogoutListener.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Listeners\\OtherDeviceLogoutListener' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Listeners/OtherDeviceLogoutListener.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Models\\AuthenticationLog' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Models/AuthenticationLog.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Notifications\\FailedLogin' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Notifications/FailedLogin.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Notifications\\NewDevice' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Notifications/NewDevice.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Traits\\AuthenticationLoggable' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Traits/AuthenticationLoggable.php',
         'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
         'SebastianBergmann\\CliParser\\AmbiguousOptionException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',
         'SebastianBergmann\\CliParser\\Exception' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/Exception.php',
@@ -5793,6 +5833,25 @@ class ComposerStaticInit49c5b7aa133cbab2f631158b40ce6cd9
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/type/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/type/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'Spatie\\Activitylog\\Actions\\ResolveForPropertyValueAction' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/Actions/ResolveForPropertyValueAction.php',
+        'Spatie\\Activitylog\\ActivityLogStatus' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/ActivityLogStatus.php',
+        'Spatie\\Activitylog\\ActivityLogger' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/ActivityLogger.php',
+        'Spatie\\Activitylog\\ActivitylogServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/ActivitylogServiceProvider.php',
+        'Spatie\\Activitylog\\CauserResolver' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/CauserResolver.php',
+        'Spatie\\Activitylog\\CleanActivitylogCommand' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/CleanActivitylogCommand.php',
+        'Spatie\\Activitylog\\Contracts\\Activity' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/Contracts/Activity.php',
+        'Spatie\\Activitylog\\Contracts\\LoggablePipe' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/Contracts/LoggablePipe.php',
+        'Spatie\\Activitylog\\EventLogBag' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/EventLogBag.php',
+        'Spatie\\Activitylog\\Exceptions\\CouldNotLogActivity' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/Exceptions/CouldNotLogActivity.php',
+        'Spatie\\Activitylog\\Exceptions\\CouldNotLogChanges' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/Exceptions/CouldNotLogChanges.php',
+        'Spatie\\Activitylog\\Exceptions\\InvalidConfiguration' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/Exceptions/InvalidConfiguration.php',
+        'Spatie\\Activitylog\\Facades\\CauserResolver' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/Facades/CauserResolver.php',
+        'Spatie\\Activitylog\\Facades\\LogBatch' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/Facades/LogBatch.php',
+        'Spatie\\Activitylog\\LogBatch' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/LogBatch.php',
+        'Spatie\\Activitylog\\LogOptions' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/LogOptions.php',
+        'Spatie\\Activitylog\\Models\\Activity' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/Models/Activity.php',
+        'Spatie\\Activitylog\\Traits\\CausesActivity' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/Traits/CausesActivity.php',
+        'Spatie\\Activitylog\\Traits\\LogsActivity' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/Traits/LogsActivity.php',
         'Spatie\\Backtrace\\Backtrace' => __DIR__ . '/..' . '/spatie/backtrace/src/Backtrace.php',
         'Spatie\\Backtrace\\CodeSnippet' => __DIR__ . '/..' . '/spatie/backtrace/src/CodeSnippet.php',
         'Spatie\\Backtrace\\File' => __DIR__ . '/..' . '/spatie/backtrace/src/File.php',
@@ -5939,6 +5998,10 @@ class ComposerStaticInit49c5b7aa133cbab2f631158b40ce6cd9
         'Spatie\\LaravelIgnition\\Support\\StringComparator' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Support/StringComparator.php',
         'Spatie\\LaravelIgnition\\Views\\BladeSourceMapCompiler' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Views/BladeSourceMapCompiler.php',
         'Spatie\\LaravelIgnition\\Views\\ViewExceptionMapper' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Views/ViewExceptionMapper.php',
+        'Spatie\\LaravelPackageTools\\Commands\\InstallCommand' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Commands/InstallCommand.php',
+        'Spatie\\LaravelPackageTools\\Exceptions\\InvalidPackage' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Exceptions/InvalidPackage.php',
+        'Spatie\\LaravelPackageTools\\Package' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Package.php',
+        'Spatie\\LaravelPackageTools\\PackageServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/PackageServiceProvider.php',
         'Stringable' => __DIR__ . '/..' . '/myclabs/php-enum/stubs/Stringable.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Attribute\\AsCommand' => __DIR__ . '/..' . '/symfony/console/Attribute/AsCommand.php',
@@ -6853,6 +6916,22 @@ class ComposerStaticInit49c5b7aa133cbab2f631158b40ce6cd9
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Property' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Property.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
+        'Torann\\GeoIP\\Cache' => __DIR__ . '/..' . '/torann/geoip/src/Cache.php',
+        'Torann\\GeoIP\\Console\\Clear' => __DIR__ . '/..' . '/torann/geoip/src/Console/Clear.php',
+        'Torann\\GeoIP\\Console\\Update' => __DIR__ . '/..' . '/torann/geoip/src/Console/Update.php',
+        'Torann\\GeoIP\\Contracts\\ServiceInterface' => __DIR__ . '/..' . '/torann/geoip/src/Contracts/ServiceInterface.php',
+        'Torann\\GeoIP\\Facades\\GeoIP' => __DIR__ . '/..' . '/torann/geoip/src/Facades/GeoIP.php',
+        'Torann\\GeoIP\\GeoIP' => __DIR__ . '/..' . '/torann/geoip/src/GeoIP.php',
+        'Torann\\GeoIP\\GeoIPServiceProvider' => __DIR__ . '/..' . '/torann/geoip/src/GeoIPServiceProvider.php',
+        'Torann\\GeoIP\\Location' => __DIR__ . '/..' . '/torann/geoip/src/Location.php',
+        'Torann\\GeoIP\\Services\\AbstractService' => __DIR__ . '/..' . '/torann/geoip/src/Services/AbstractService.php',
+        'Torann\\GeoIP\\Services\\IPApi' => __DIR__ . '/..' . '/torann/geoip/src/Services/IPApi.php',
+        'Torann\\GeoIP\\Services\\IPData' => __DIR__ . '/..' . '/torann/geoip/src/Services/IPData.php',
+        'Torann\\GeoIP\\Services\\IPFinder' => __DIR__ . '/..' . '/torann/geoip/src/Services/IPFinder.php',
+        'Torann\\GeoIP\\Services\\IPGeoLocation' => __DIR__ . '/..' . '/torann/geoip/src/Services/IPGeoLocation.php',
+        'Torann\\GeoIP\\Services\\MaxMindDatabase' => __DIR__ . '/..' . '/torann/geoip/src/Services/MaxMindDatabase.php',
+        'Torann\\GeoIP\\Services\\MaxMindWebService' => __DIR__ . '/..' . '/torann/geoip/src/Services/MaxMindWebService.php',
+        'Torann\\GeoIP\\Support\\HttpClient' => __DIR__ . '/..' . '/torann/geoip/src/Support/HttpClient.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',

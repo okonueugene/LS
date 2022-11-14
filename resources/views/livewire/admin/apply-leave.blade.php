@@ -15,7 +15,7 @@
                             <h5 class="card-title">Leave Application Form</h5>
                         </div>
                         @if($user->employee != NULL)
-                        <form wire:submit.prevent="applyLeave" class="mt-2">
+                        <form wire:submit="applyLeave" class="mt-2">
                             <div class="form-group"><label class="form-label" for="cf-full-name">Full
                                     Name</label><input type="text" class="form-control" id="cf-full-name"
                                     value="{{ $user->name }}"readonly>

@@ -57,7 +57,7 @@
                                             <h6 class="title">Average Leave Taken</h6>
                                         </div><br>
                                         <div class="project-details text-center" style="text-size:15px;">
-                                            <span>{{ array_sum($taken)/count($employees) }}</span>
+                                            <span>{{ round(array_sum($taken)/count($employees),2) }}</span>
                                         </div>
                                     </div>
                                 </div>

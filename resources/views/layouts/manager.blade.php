@@ -120,17 +120,11 @@
                                             </div>
                                             <div class="dropdown-inner">
                                                 <ul class="link-list">
-                                                    <li><a href="html/user-profile-regular.html"><em
-                                                                class="icon ni ni-user-alt"></em><span>View
-                                                                Profile</span></a></li>
-                                                    <li><a href="html/user-profile-setting.html"><em
-                                                                class="icon ni ni-setting-alt"></em><span>Account
-                                                                Setting</span></a></li>
-                                                    <li><a href="html/user-profile-activity.html"><em
-                                                                class="icon ni ni-activity-alt"></em><span>Login
-                                                                Activity</span></a></li>
                                                     <li>
-                                                       
+                                                        @livewire('toggle-dark-mode', [
+                                                            'model' => Auth::user(),
+                                                            'field' => 'isDark'
+                                                        ])
                                                     </li>
                                                 </ul>
                                             </div>
@@ -160,7 +154,8 @@
                 <div class="nk-footer">
                     <div class="container-fluid">
                         <div class="nk-footer-wrap">
-                            <div class="nk-footer-copyright"> &copy; <?php echo date("Y"); ?> Company Name.
+                            <div class="nk-footer-copyright"> &copy; <?php echo date('Y'); ?>
+                                {{ implode('', $company_name) }}
                             </div>
                             <div class="nk-footer-links">
                                 <ul class="nav nav-sm">

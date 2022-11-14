@@ -12,8 +12,7 @@ class Profile extends Component
     {
         $title="Profile";
         $user=Employee::where('user_id', Auth::user()->id)->first();
-        $departments = Department::orderBy('id','ASC')->get();
-        return view('livewire.admin.profile' ,compact('user','departments'))
+        return view('livewire.admin.profile' ,compact('user'))
         ->extends('layouts.admin',['title'=> $title])
         ->section('content');
     }

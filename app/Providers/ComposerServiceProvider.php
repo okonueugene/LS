@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Providers;
+use App\Models\User;
 use App\Models\Company;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Spatie\Activitylog\Models\Activity;
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -27,7 +28,14 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('*',function($view){
-            $view->with('company', Company::pluck('id','company_name')->toArray());
+            $view->with('company_name', Company::pluck('company_name')->toArray());
         });
+        View::composer('livewire.general-manager.loginactivity',function($new){
+            $new->with('activities', User::find(Auth::user()->id)->authentications);
+        });
+        View::composer('livewire.admin.loginactivity',function($new){
+            $new->with('activities', User::find(Auth::user()->id)->authentications);
+        });
+        
     }
 }

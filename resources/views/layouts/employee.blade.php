@@ -21,7 +21,7 @@
 
     <!-- Livewire Styles -->
     @livewireStyles
-    @stack('styles') 
+    @stack('styles')
 
     <style>
         .pac-container {
@@ -49,21 +49,20 @@
                             </div>
                             <div class="nk-header-brand d-xl-none">
                                 <a href="#" class="logo-link">
-                                    <img class="logo-light logo-img"
-                                        src="{{ asset('theme/images/logo.png') }}"
+                                    <img class="logo-light logo-img" src="{{ asset('theme/images/logo.png') }}"
                                         srcset="{{ asset('theme/images/logo.png') }} 2x" alt="logo">
-                                    <img class="logo-dark logo-img"
-                                        src="{{ asset('theme/images/logo.png') }}"
+                                    <img class="logo-dark logo-img" src="{{ asset('theme/images/logo.png') }}"
                                         srcset="{{ asset('theme/images/logo.png') }} 2x" alt="logo-dark">
                                 </a>
                             </div><!-- .nk-header-brand -->
                             <div class="nk-header-news d-none d-xl-block">
-                              
+
                             </div><!-- .nk-header-news -->
                             <div class="nk-header-tools">
                                 <ul class="nk-quick-nav">
                                     <li class="dropdown notification-dropdown mr-n1">
-                                        <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-toggle="dropdown">
+                                        <a href="#" class="dropdown-toggle nk-quick-nav-icon"
+                                            data-toggle="dropdown">
                                             <div class="icon-status icon-status-info"><em class="icon ni ni-bell"></em>
                                             </div>
                                         </a>
@@ -100,10 +99,10 @@
                                                 </div>
                                                 <div class="user-info d-none d-md-block">
                                                     <div class="user-status">
-                                                    <div class="user-name dropdown-indicator">
-                                                        {{ Auth::user()->name }}</div>
+                                                        <div class="user-name dropdown-indicator">
+                                                            {{ Auth::user()->name }}</div>
+                                                    </div>
                                                 </div>
-                                            </div>
                                         </a>
                                         <div
                                             class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
@@ -120,17 +119,11 @@
                                             </div>
                                             <div class="dropdown-inner">
                                                 <ul class="link-list">
-                                                    <li><a href="html/user-profile-regular.html"><em
-                                                                class="icon ni ni-user-alt"></em><span>View
-                                                                Profile</span></a></li>
-                                                    <li><a href="html/user-profile-setting.html"><em
-                                                                class="icon ni ni-setting-alt"></em><span>Account
-                                                                Setting</span></a></li>
-                                                    <li><a href="html/user-profile-activity.html"><em
-                                                                class="icon ni ni-activity-alt"></em><span>Login
-                                                                Activity</span></a></li>
                                                     <li>
-                                                       
+                                                        @livewire('toggle-dark-mode', [
+                                                            'model' => Auth::user(),
+                                                            'field' => 'isDark'
+                                                        ])
                                                     </li>
                                                 </ul>
                                             </div>
@@ -139,8 +132,9 @@
                                                     <li>
                                                         <form method="POST" action="{{ route('logout') }}">
                                                             @csrf
-                                                            <button class="btn btn-white"><em class="icon ni ni-signout"></em><span>Sign
-                                                                out</span></button>
+                                                            <button class="btn btn-white"><em
+                                                                    class="icon ni ni-signout"></em><span>Sign
+                                                                    out</span></button>
                                                         </form>
                                                     </li>
                                                 </ul>
@@ -160,7 +154,8 @@
                 <div class="nk-footer">
                     <div class="container-fluid">
                         <div class="nk-footer-wrap">
-                            <div class="nk-footer-copyright"> &copy; <?php echo date("Y"); ?> Company Name.
+                            <div class="nk-footer-copyright"> &copy; <?php echo date('Y'); ?>
+                                {{ implode('', $company_name) }}
                             </div>
                             <div class="nk-footer-links">
                                 <ul class="nav nav-sm">
@@ -183,16 +178,16 @@
     <script src="{{ asset('theme/assets/js/bundle.js?ver=2.9.0') }}"></script>
     <script src="{{ asset('theme/assets/js/scripts.js?ver=2.9.0') }}"></script>
     {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVASYM1HKkCHxWUaaeKbq6BEX5lgGBZLE"></script> --}}
-    
+
     <script
         src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize"
         async defer></script>
 
     @if (request()->routeIs(['org.site-overview', 'org.dashboard']))
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVASYM1HKkCHxWUaaeKbq6BEX5lgGBZLE"></script> 
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVASYM1HKkCHxWUaaeKbq6BEX5lgGBZLE"></script>
     @endif
 
-    
+
 
     <!-- Livewire Scripts -->
     @livewireScripts
@@ -239,33 +234,41 @@
                 icon: event.detail.type,
                 showCancelButton: true,
                 confirmButtonText: event.detail.confirmButtonText
-            }).then(function (result) {
+            }).then(function(result) {
                 if (result.value) {
                     window.livewire.emit('delete', event.detail.id);
-            }
-        });
-        e.preventDefault();
+                }
+            });
+            e.preventDefault();
         });
     </script>
 
     {{-- Normal alerts --}}
     <script>
         @if (Session::has('success'))
-            NioApp.Toast('<h5>Successful!</h5>{!! session('success') !!}', 'success', {position: 'top-right'})
+            NioApp.Toast('<h5>Successful!</h5>{!! session('success') !!}', 'success', {
+                position: 'top-right'
+            })
         @endif
 
         @if (Session::has('warning'))
-            NioApp.Toast('<h5>Warning!</h5>{!! session('warning') !!}', 'warning', {position: 'top-right'})
+            NioApp.Toast('<h5>Warning!</h5>{!! session('warning') !!}', 'warning', {
+                position: 'top-right'
+            })
         @endif
 
         @if (Session::has('error'))
-            NioApp.Toast('<h5>Error!</h5>{!! session('error') !!}', 'error', {position: 'top-right'})
+            NioApp.Toast('<h5>Error!</h5>{!! session('error') !!}', 'error', {
+                position: 'top-right'
+            })
         @endif
     </script>
     <script>
         @if ($errors->any())
             @foreach ($errors->all() as $error)
-                NioApp.Toast('{{ $error }}', 'error', {position: 'top-right'})
+                NioApp.Toast('{{ $error }}', 'error', {
+                    position: 'top-right'
+                })
             @endforeach
         @endif
     </script>
