@@ -35,7 +35,6 @@ return array(
     '40275907c8566c390185147049ef6e5d' => $vendorDir . '/livewire/livewire/src/helpers.php',
     '9f394da3192a168c4633675768d80428' => $vendorDir . '/nwidart/laravel-modules/src/helpers.php',
     'ec07570ca5a812141189b1fa81503674' => $vendorDir . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
-    '72b1e3f4a2af9b30b3f137b3ec2057fc' => $vendorDir . '/spatie/laravel-activitylog/src/helpers.php',
     '320163ac6b93aebe3dc25b60a0533d56' => $vendorDir . '/spatie/laravel-ignition/src/helpers.php',
     '1e298922c3e2134d42dcdb03e6d5f55a' => $vendorDir . '/torann/geoip/src/helpers.php',
 );

@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '9aa5ec3ff555fb5befc4391899ee106cb3520368',
+        'reference' => '307e67d5cd71efed9d90e79e3a4ee1787a3eaf69',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -376,7 +376,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '9aa5ec3ff555fb5befc4391899ee106cb3520368',
+            'reference' => '307e67d5cd71efed9d90e79e3a4ee1787a3eaf69',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1039,15 +1039,6 @@
             'install_path' => __DIR__ . '/../spatie/ignition',
             'aliases' => array(),
             'dev_requirement' => true,
-        ),
-        'spatie/laravel-activitylog' => array(
-            'pretty_version' => '4.7.1',
-            'version' => '4.7.1.0',
-            'reference' => '3619d823069333018dd94aa36ef900b88497210d',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../spatie/laravel-activitylog',
-            'aliases' => array(),
-            'dev_requirement' => false,
         ),
         'spatie/laravel-ignition' => array(
             'pretty_version' => '1.5.2',
