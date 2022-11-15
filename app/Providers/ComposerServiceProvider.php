@@ -27,7 +27,16 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('*',function($view){
+        View::composer('layouts.admin',function($view){
+            $view->with('company_name', Company::pluck('company_name')->toArray());
+        });
+        View::composer('layouts.general',function($view){
+            $view->with('company_name', Company::pluck('company_name')->toArray());
+        });
+        View::composer('layouts.employee',function($view){
+            $view->with('company_name', Company::pluck('company_name')->toArray());
+        });
+        View::composer('layouts.manager',function($view){
             $view->with('company_name', Company::pluck('company_name')->toArray());
         });
         View::composer('livewire.general-manager.loginactivity',function($new){
