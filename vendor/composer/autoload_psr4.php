@@ -46,7 +46,6 @@ return array(
     'Spatie\\Ignition\\' => array($vendorDir . '/spatie/ignition/src'),
     'Spatie\\FlareClient\\' => array($vendorDir . '/spatie/flare-client-php/src'),
     'Spatie\\Backtrace\\' => array($vendorDir . '/spatie/backtrace/src'),
-    'Spatie\\Activitylog\\' => array($vendorDir . '/spatie/laravel-activitylog/src'),
     'Rappasoft\\LaravelAuthenticationLog\\Database\\Factories\\' => array($vendorDir . '/rappasoft/laravel-authentication-log/database/factories'),
     'Rappasoft\\LaravelAuthenticationLog\\' => array($vendorDir . '/rappasoft/laravel-authentication-log/src'),
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
