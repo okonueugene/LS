@@ -4,7 +4,7 @@
 <head>
     <base href="../">
     <meta charset="utf-8">
-    <meta name="author" content="Askari">
+    <meta name="author" content="LS">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="Workforce Management Platform">
@@ -13,7 +13,7 @@
     <!-- CSRF LARAVEL -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Page Title  -->
-    <title>{{ $title }} | Askari </title>
+    <title>{{ $title }} | LS </title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('theme/assets/css/dashlite.css?ver=2.9.0') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('theme/assets/css/skins/theme-red.css?ver=2.9.0') }}">
@@ -56,7 +56,17 @@
                                 </a>
                             </div><!-- .nk-header-brand -->
                             <div class="nk-header-news d-none d-xl-block">
-
+                                <div class="nk-news-list">
+                                    <a class="nk-news-item" href="#">
+                                        <div class="nk-news-icon">
+                                            <em class="icon ni ni-card-view"></em>
+                                        </div>
+                                        {{-- <div class="nk-news-text">
+                                            <p>Need support? Access knowledgebase area <span>Support</span></p>
+                                            <em class="icon ni ni-external"></em>
+                                        </div> --}}
+                                    </a>
+                                </div>
                             </div><!-- .nk-header-news -->
                             <div class="nk-header-tools">
                                 <ul class="nk-quick-nav">
@@ -119,11 +129,11 @@
                                             </div>
                                             <div class="dropdown-inner">
                                                 <ul class="link-list">
-                                                    <li><a href="{{ route('activities') }}">
-                                                        <em class="icon ni ni-activity-alt">
-                                                        </em><span>Login
-                                                            Activity</span></a>
-                                                </li>
+                                                    <li><a href="{{ route('activity') }}">
+                                                            <em class="icon ni ni-activity-alt">
+                                                            </em><span>Login
+                                                                Activity</span></a>
+                                                    </li>
                                                     <li>
                                                         @livewire('toggle-dark-mode', [
                                                             'model' => Auth::user(),
