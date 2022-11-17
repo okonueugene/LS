@@ -22,6 +22,7 @@ use App\Http\Livewire\Employee\EmployeeProfile;
 use App\Http\Livewire\GeneralManager\GmProfile;
 use App\Http\Livewire\Manager\ManagerDashboard;
 use App\Http\Livewire\Manager\ManagerEmployees;
+use App\Http\Controllers\FullCalenderController;
 use App\Http\Livewire\GeneralManager\GmHolidays;
 use App\Http\Livewire\Manager\ManagerApplyLeave;
 use App\Http\Livewire\Manager\ManagerLeaveTypes;
@@ -56,6 +57,9 @@ use App\Http\Livewire\GeneralManager\GmRejectedLeave;
 Route::get('/', function () {
     return redirect()->route('login');
 });
+
+
+
 
 Auth::routes();
 
@@ -144,4 +148,11 @@ Route::group(['middleware'=> 'auth'], function () {
             Route::get('/profile', GmProfile::class)->name('gm-profile');
         }
     );
+});
+
+
+Route::controller(FullCalenderController::class)->group(function () {
+    Route::get('/scheduler', [FullCalenderController::class, 'index'])->name('fullcalender');
+
+    Route::post('/fullcalenderAjax', 'ajax');
 });

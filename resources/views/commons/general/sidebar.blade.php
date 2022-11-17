@@ -55,6 +55,12 @@
                         </a>
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item">
+                        <a href="{{ route('fullcalender') }}" class="nk-menu-link">
+                            <span class="nk-menu-icon"><em class="icon ni ni-calendar"></em></span>
+                            <span class="nk-menu-text">Planner</span>
+                        </a>
+                    </li><!-- .nk-menu-item -->
+                    <li class="nk-menu-item">
                         <a href="{{ route('gm.gm-employees') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-list"></em></span>
                             <span class="nk-menu-text">Employees List</span>
