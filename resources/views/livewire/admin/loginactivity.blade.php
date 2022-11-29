@@ -35,7 +35,34 @@
                             @foreach ($activities as $activity)
                                 <tr>
                                     <td class="tb-col-os">{{ $activity->user_agent }}</td>
-                                    <td class="tb-col-ip">{{ $activity->ip_address }}
+                                    <td class="tb-col-ip"><?php
+                                    $curl = curl_init();
+                                    
+                                    curl_setopt_array($curl, [
+                                        CURLOPT_URL => 'https://spott.p.rapidapi.com/places/ip/' . $activity->ip_address,
+                                        CURLOPT_RETURNTRANSFER => true,
+                                        CURLOPT_FOLLOWLOCATION => true,
+                                        CURLOPT_ENCODING => '',
+                                        CURLOPT_MAXREDIRS => 10,
+                                        CURLOPT_TIMEOUT => 30,
+                                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                        CURLOPT_CUSTOMREQUEST => 'GET',
+                                        CURLOPT_HTTPHEADER => ['X-RapidAPI-Host: spott.p.rapidapi.com', 'X-RapidAPI-Key: c755dded1fmsh02ea59ef06f4bb5p18757ajsn6dc14b75bd01'],
+                                    ]);
+                                    
+                                    $response = curl_exec($curl);
+                                    $err = curl_error($curl);
+                                    
+                                    curl_close($curl);
+                                    
+                                    if ($err) {
+                                        echo 'cURL Error #:' . $err;
+                                    } else {
+                                        $y = explode(',', $response);
+                                        $country = explode(':', $y[3])[1];
+                                        $title = str_replace(['\'', '"', ',', ';', '<', '>'], ' ', $country);
+                                        echo $title;
+                                    } ?>
                                     </td>
                                     <td class="tb-col-time"><span class="sub-text"><?php $t = new DateTime($activity->login_at, new DateTimeZone('UTC'));
                                     echo $t->setTimeZone(new DateTimeZone('Africa/Nairobi'))->format('Y-m-d H:i:s'); ?></span></td>
@@ -47,7 +74,7 @@
                             @endif
                             </td>
                             <td class="tb-col-time"><span class="sub-text"><?php $t = new DateTime($activity->logout_at, new DateTimeZone('UTC'));
-                                echo $t->setTimeZone(new DateTimeZone('Africa/Nairobi'))->format('Y-m-d H:i:s'); ?></span></td>
+                            echo $t->setTimeZone(new DateTimeZone('Africa/Nairobi'))->format('Y-m-d H:i:s'); ?></span></td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -18,7 +18,6 @@ class ApprovedLeavesExport implements FromCollection, WithMapping, WithHeadings
     }
 
     public function headings(): array
-    
     {
         return [
             'Name',
@@ -34,8 +33,9 @@ class ApprovedLeavesExport implements FromCollection, WithMapping, WithHeadings
 
     public function map($leave): array
     {
-
-        return[ $leave->user->name,
+        return[
+            
+         $leave->user->name,
          $leave->date_start,
          $leave->date_end,
          $leave->nodays,
