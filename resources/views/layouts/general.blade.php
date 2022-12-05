@@ -146,7 +146,7 @@
                                                 <ul class="link-list">
                                                     <li>
                                                         <form method="POST" action="{{ route('logout') }}">
-                                                            @csrf
+                                                            @csrf <!-- {{ csrf_field() }} -->
                                                             <button class="btn btn-white"><em
                                                                     class="icon ni ni-signout"></em><span>Sign
                                                                     out</span></button>

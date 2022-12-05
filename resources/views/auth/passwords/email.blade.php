@@ -177,7 +177,7 @@
     <h2>Reset Password</h2>
     <div class="form">
         <form method="POST" action="{{ route('password.email') }}">
-            @csrf
+            @csrf <!-- {{ csrf_field() }} -->
 
             <div class="row mb-3">
                 <div class="col-md-6">

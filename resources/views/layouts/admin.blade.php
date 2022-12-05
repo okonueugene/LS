@@ -9,12 +9,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="Workforce Management Platform">
     <!-- Fav Icon  -->
-    <link rel="shortcut icon" href="{{ asset('theme/images/IMG-20220401-WA0010.jpg') }}">
+    <link rel="shortcut icon" href="{{ asset('theme/images/fav.png') }}">
     <!-- CSRF LARAVEL -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Page Title  -->
     <title>{{ $title }} | LS </title>
     <!-- StyleSheets  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
     <link rel="stylesheet" href="{{ asset('theme/assets/css/dashlite.css?ver=2.9.0') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('theme/assets/css/skins/theme-red.css?ver=2.9.0') }}">
     @yield('header')
@@ -28,6 +29,15 @@
             z-index: 1051 !important;
         }
     </style>
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('31e3b02ae0fa6d5f5a00', {
+            cluster: 'us2'
+        });
+    </script>
 </head>
 
 <body class="nk-body bg-lighter npc-general has-sidebar {{ Auth::user()->isDark ? 'dark-mode' : '' }}">
@@ -146,7 +156,7 @@
                                                 <ul class="link-list">
                                                     <li>
                                                         <form method="POST" action="{{ route('logout') }}">
-                                                            @csrf
+                                                            @csrf <!-- {{ csrf_field() }} -->
                                                             <button class="btn btn-white"><em
                                                                     class="icon ni ni-signout"></em><span>Sign
                                                                     out</span></button>
@@ -192,15 +202,20 @@
     <!-- JavaScript -->
     <script src="{{ asset('theme/assets/js/bundle.js?ver=2.9.0') }}"></script>
     <script src="{{ asset('theme/assets/js/scripts.js?ver=2.9.0') }}"></script>
-    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVASYM1HKkCHxWUaaeKbq6BEX5lgGBZLE"></script> --}}
 
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize"
-        async defer></script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
 
-    @if (request()->routeIs(['org.site-overview', 'org.dashboard']))
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVASYM1HKkCHxWUaaeKbq6BEX5lgGBZLE"></script>
-    @endif
+        var pusher = new Pusher('82c8b769dcdfd6b0f95f', {
+            cluster: 'ap2'
+        });
+
+        var channel = pusher.subscribe('calendar');
+        channel.bind('update', function(data) {
+            alert(JSON.stringify(data));
+        });
+    </script>
 
 
 
@@ -289,6 +304,66 @@
     </script>
 
 
+
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        // Pusher.logToConsole = true;
+        var pusher = new Pusher('31e3b02ae0fa6d5f5a00', {
+            cluster: 'us2'
+        });
+        var hours = new Date().getHours();
+        var username = <?= json_encode(Auth::user()->name) ?>;
+
+        console.log(hours)
+        if (hours < 12) {
+            var channel = pusher.subscribe('apply');
+            channel.bind('leave', (data) => {
+                iziToast.show({
+                    title: ` Goodmorning ${username} ! `,
+                    message: data.message,
+                    theme: 'dark',
+                    color: 'green'
+                });
+            });
+        } else if (hours == 12) {
+            var channel = pusher.subscribe('apply');
+            var name = <?= json_encode(Auth::user()->name) ?>;
+            channel.bind('leave', (data) => {
+                iziToast.show({
+                    title: ` Howdy ${username} ! `,
+                    message: data.message,
+                    theme: 'dark',
+                    color: 'green'
+                });
+            });
+        } else if (hours > 13) {
+            var channel = pusher.subscribe('apply');
+            var name = <?= json_encode(Auth::user()->name) ?>;
+            channel.bind('leave', (data) => {
+                iziToast.show({
+                    title: ` Goodafternoon ${username} ! `,
+                    message: data.message,
+                    theme: 'dark',
+                    color: 'green'
+                });
+            });
+        } else {
+            var channel = pusher.subscribe('apply');
+            var name = <?= json_encode(Auth::user()->name) ?>;
+            channel.bind('leave', (data) => {
+                iziToast.show({
+                    title: ` Goodevening ${username} ! `,
+                    message: data.message,
+                    theme: 'dark',
+                    color: 'green'
+                });
+            });
+        }
+
+        //calendar calls
+    </script>
 
     @yield('scripts')
     @stack('scripts')

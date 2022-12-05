@@ -195,7 +195,7 @@
     <h2>Reset Password</h2>
     <div class="form">
         <form method="POST" action="{{ route('password.update') }}">
-            @csrf
+            @csrf <!-- {{ csrf_field() }} -->
 
             <input type="hidden" name="token" value="{{ $token }}">
 

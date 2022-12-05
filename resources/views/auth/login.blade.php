@@ -32,7 +32,7 @@
         <div class="container-login100" style="background-image: url('images/background.jpeg');">
             <div class="wrap-login100">
                 <form method="POST" action="{{ route('login') }}">
-                    @csrf
+                    @csrf <!-- {{ csrf_field() }} -->
 
                     <span class="login100-form-logo">
                         {{-- <i class="zmdi zmdi-landscape"></i> --}}
