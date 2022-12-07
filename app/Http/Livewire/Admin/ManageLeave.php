@@ -84,9 +84,14 @@ class ManageLeave extends Component
            }
            if ($this->status == 'approved') {
                $this->approved();
+               Apply::dispatch("{$transactionName} Has Approved Your Leave");
+
            } else {
                $this->declined();
+               Apply::dispatch("{$transactionName} Has Declined a Your Leave");
+
            }
+
            $this->dispatchBrowserEvent('success', [
                'message' => 'Leave Updated successfully',
            ]);

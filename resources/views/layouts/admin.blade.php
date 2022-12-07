@@ -156,7 +156,8 @@
                                                 <ul class="link-list">
                                                     <li>
                                                         <form method="POST" action="{{ route('logout') }}">
-                                                            @csrf <!-- {{ csrf_field() }} -->
+                                                            @csrf
+                                                            <!-- {{ csrf_field() }} -->
                                                             <button class="btn btn-white"><em
                                                                     class="icon ni ni-signout"></em><span>Sign
                                                                     out</span></button>
@@ -202,20 +203,19 @@
     <!-- JavaScript -->
     <script src="{{ asset('theme/assets/js/bundle.js?ver=2.9.0') }}"></script>
     <script src="{{ asset('theme/assets/js/scripts.js?ver=2.9.0') }}"></script>
-
+    {{-- 
     <script>
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
-        var pusher = new Pusher('82c8b769dcdfd6b0f95f', {
-            cluster: 'ap2'
-        });
-
-        var channel = pusher.subscribe('calendar');
-        channel.bind('update', function(data) {
-            alert(JSON.stringify(data));
-        });
+       
     </script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+      
+    </script> --}}
 
 
 
@@ -316,7 +316,6 @@
         var hours = new Date().getHours();
         var username = <?= json_encode(Auth::user()->name) ?>;
 
-        console.log(hours)
         if (hours < 12) {
             var channel = pusher.subscribe('apply');
             channel.bind('leave', (data) => {
@@ -361,8 +360,6 @@
                 });
             });
         }
-
-        //calendar calls
     </script>
 
     @yield('scripts')

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Apply;
 use App\Models\Event;
 use Illuminate\Http\Request;
-use App\Events\CalendarUpdatedEvent;
+use Illuminate\Support\Facades\Auth;
 
 class FullCalenderController extends Controller
 {
@@ -28,6 +29,10 @@ class FullCalenderController extends Controller
      */
     public function ajax(Request $request)
     {
+        $transactionName=Auth::user()->name;
+
+        Apply::dispatch("{$transactionName} Has Updated Events");
+
         switch ($request->type) {
             case 'add':
                 $event = Event::create([
@@ -37,7 +42,7 @@ class FullCalenderController extends Controller
                 ]);
 
                 return response()->json($event);
-            
+
                 break;
 
             case 'update':
@@ -48,18 +53,19 @@ class FullCalenderController extends Controller
                 ]);
 
                 return response()->json($event);
+
                 break;
 
             case 'delete':
                 $event = Event::find($request->id)->delete();
 
                 return response()->json($event);
+
                 break;
 
             default:
                 # code...
                 break;
-        }  
+        }
     }
-    
 }

@@ -119,11 +119,8 @@
                                     <div class="nk-tb-col"><a href="/demo2/ecommerce/customer-details.html">
                                             <div class="user-card">
                                                 <div class="user-avatar bg-primary"><span>
-                                                        <?php
-                                                        $name = $employee->user->name;
-                                                        preg_match_all('/\b\w/', $name, $name);
-                                                        echo strtoupper(join('', $name[0]));
-                                                        ?>
+                                                        <img src="https://ui-avatars.com/api/?name={{urlencode($employee->user->name)}}"
+                                                            alt="{{ $employee->user->name }}">
                                                     </span>
                                                 </div>
                                                 <div class="user-info"><span
