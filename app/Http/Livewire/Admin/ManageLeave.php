@@ -43,14 +43,14 @@ class ManageLeave extends Component
     {
         $leave=Leave::orderBy('id', 'DESC')->where('status', 'approved')->first();
 
-        Mail::to('versionaskari19@gmail.com')->queue(new ApprovedMail($leave));
+        Mail::to($leave->user->email)->queue(new ApprovedMail($leave));
     }
 
     public function declined()
     {
         $leave=Leave::orderBy('id', 'DESC')->where('status', 'declined')->first();
 
-        Mail::to('versionaskari19@gmail.com')->queue(new DeclinedMail($leave));
+        Mail::to($leave->user->email)->queue(new DeclinedMail($leave));
     }
 
     public function export()

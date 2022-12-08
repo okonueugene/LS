@@ -4,6 +4,7 @@ namespace App\Http\Livewire\GeneralManager;
 
 use Mail;
 use App\Models\User;
+use App\Events\Apply;
 use App\Models\Leave;
 use App\Mail\ApplyMail;
 use App\Models\Holiday;
@@ -114,6 +115,8 @@ class GmApplyLeave extends Component
         $this->clearInput();
         $this->mail();
         $this->emit('userStore');
+        $transactionName=Auth::user()->name;
+        Apply::dispatch("{$transactionName} Has Requested For Leave");
     }
 
     public function render()

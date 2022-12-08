@@ -15,13 +15,14 @@
     <!-- Page Title  -->
     <title>{{ $title }} | Askari </title>
     <!-- StyleSheets  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
     <link rel="stylesheet" href="{{ asset('theme/assets/css/dashlite.css?ver=2.9.0') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('theme/assets/css/skins/theme-red.css?ver=2.9.0') }}">
     @yield('header')
 
     <!-- Livewire Styles -->
     @livewireStyles
-    @stack('styles') 
+    @stack('styles')
 
     <style>
         .pac-container {
@@ -49,21 +50,20 @@
                             </div>
                             <div class="nk-header-brand d-xl-none">
                                 <a href="#" class="logo-link">
-                                    <img class="logo-light logo-img"
-                                        src="{{ asset('theme/images/logo.png') }}"
+                                    <img class="logo-light logo-img" src="{{ asset('theme/images/logo.png') }}"
                                         srcset="{{ asset('theme/images/logo.png') }} 2x" alt="logo">
-                                    <img class="logo-dark logo-img"
-                                        src="{{ asset('theme/images/logo.png') }}"
+                                    <img class="logo-dark logo-img" src="{{ asset('theme/images/logo.png') }}"
                                         srcset="{{ asset('theme/images/logo.png') }} 2x" alt="logo-dark">
                                 </a>
                             </div><!-- .nk-header-brand -->
                             <div class="nk-header-news d-none d-xl-block">
-                              
+
                             </div><!-- .nk-header-news -->
                             <div class="nk-header-tools">
                                 <ul class="nk-quick-nav">
                                     <li class="dropdown notification-dropdown mr-n1">
-                                        <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-toggle="dropdown">
+                                        <a href="#" class="dropdown-toggle nk-quick-nav-icon"
+                                            data-toggle="dropdown">
                                             <div class="icon-status icon-status-info"><em class="icon ni ni-bell"></em>
                                             </div>
                                         </a>
@@ -100,10 +100,10 @@
                                                 </div>
                                                 <div class="user-info d-none d-md-block">
                                                     <div class="user-status">
-                                                    <div class="user-name dropdown-indicator">
-                                                        {{ Auth::user()->name }}</div>
+                                                        <div class="user-name dropdown-indicator">
+                                                            {{ Auth::user()->name }}</div>
+                                                    </div>
                                                 </div>
-                                            </div>
                                         </a>
                                         <div
                                             class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
@@ -123,7 +123,7 @@
                                                     <li>
                                                         @livewire('toggle-dark-mode', [
                                                             'model' => Auth::user(),
-                                                            'field' => 'isDark'
+                                                            'field' => 'isDark',
                                                         ])
                                                     </li>
                                                 </ul>
@@ -132,9 +132,11 @@
                                                 <ul class="link-list">
                                                     <li>
                                                         <form method="POST" action="{{ route('logout') }}">
-                                                            @csrf <!-- {{ csrf_field() }} -->
-                                                            <button class="btn btn-white"><em class="icon ni ni-signout"></em><span>Sign
-                                                                out</span></button>
+                                                            @csrf
+                                                            <!-- {{ csrf_field() }} -->
+                                                            <button class="btn btn-white"><em
+                                                                    class="icon ni ni-signout"></em><span>Sign
+                                                                    out</span></button>
                                                         </form>
                                                     </li>
                                                 </ul>
@@ -178,16 +180,16 @@
     <script src="{{ asset('theme/assets/js/bundle.js?ver=2.9.0') }}"></script>
     <script src="{{ asset('theme/assets/js/scripts.js?ver=2.9.0') }}"></script>
     {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVASYM1HKkCHxWUaaeKbq6BEX5lgGBZLE"></script> --}}
-    
+
     <script
         src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize"
         async defer></script>
 
     @if (request()->routeIs(['org.site-overview', 'org.dashboard']))
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVASYM1HKkCHxWUaaeKbq6BEX5lgGBZLE"></script> 
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVASYM1HKkCHxWUaaeKbq6BEX5lgGBZLE"></script>
     @endif
 
-    
+
 
     <!-- Livewire Scripts -->
     @livewireScripts
@@ -234,39 +236,102 @@
                 icon: event.detail.type,
                 showCancelButton: true,
                 confirmButtonText: event.detail.confirmButtonText
-            }).then(function (result) {
+            }).then(function(result) {
                 if (result.value) {
                     window.livewire.emit('delete', event.detail.id);
-            }
-        });
-        e.preventDefault();
+                }
+            });
+            e.preventDefault();
         });
     </script>
 
     {{-- Normal alerts --}}
     <script>
         @if (Session::has('success'))
-            NioApp.Toast('<h5>Successful!</h5>{!! session('success') !!}', 'success', {position: 'top-right'})
+            NioApp.Toast('<h5>Successful!</h5>{!! session('success') !!}', 'success', {
+                position: 'top-right'
+            })
         @endif
 
         @if (Session::has('warning'))
-            NioApp.Toast('<h5>Warning!</h5>{!! session('warning') !!}', 'warning', {position: 'top-right'})
+            NioApp.Toast('<h5>Warning!</h5>{!! session('warning') !!}', 'warning', {
+                position: 'top-right'
+            })
         @endif
 
         @if (Session::has('error'))
-            NioApp.Toast('<h5>Error!</h5>{!! session('error') !!}', 'error', {position: 'top-right'})
+            NioApp.Toast('<h5>Error!</h5>{!! session('error') !!}', 'error', {
+                position: 'top-right'
+            })
         @endif
     </script>
     <script>
         @if ($errors->any())
             @foreach ($errors->all() as $error)
-                NioApp.Toast('{{ $error }}', 'error', {position: 'top-right'})
+                NioApp.Toast('{{ $error }}', 'error', {
+                    position: 'top-right'
+                })
             @endforeach
         @endif
     </script>
 
 
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        // Pusher.logToConsole = true;
+        var pusher = new Pusher('31e3b02ae0fa6d5f5a00', {
+            cluster: 'us2'
+        });
+        var hours = new Date().getHours();
+        var username = <?= json_encode(Auth::user()->name) ?>;
 
+        if (hours < 12) {
+            var channel = pusher.subscribe('apply');
+            channel.bind('leave', (data) => {
+                iziToast.show({
+                    title: ` Goodmorning ${username} ! `,
+                    message: data.message,
+                    theme: 'dark',
+                    color: 'green'
+                });
+            });
+        } else if (hours == 12) {
+            var channel = pusher.subscribe('apply');
+            var name = <?= json_encode(Auth::user()->name) ?>;
+            channel.bind('leave', (data) => {
+                iziToast.show({
+                    title: ` Howdy ${username} ! `,
+                    message: data.message,
+                    theme: 'dark',
+                    color: 'green'
+                });
+            });
+        } else if (hours > 13) {
+            var channel = pusher.subscribe('apply');
+            var name = <?= json_encode(Auth::user()->name) ?>;
+            channel.bind('leave', (data) => {
+                iziToast.show({
+                    title: ` Goodafternoon ${username} ! `,
+                    message: data.message,
+                    theme: 'dark',
+                    color: 'green'
+                });
+            });
+        } else {
+            var channel = pusher.subscribe('apply');
+            var name = <?= json_encode(Auth::user()->name) ?>;
+            channel.bind('leave', (data) => {
+                iziToast.show({
+                    title: ` Goodevening ${username} ! `,
+                    message: data.message,
+                    theme: 'dark',
+                    color: 'green'
+                });
+            });
+        }
+    </script>
     @yield('scripts')
     @stack('scripts')
 </body>

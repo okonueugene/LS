@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Manager;
 
+use App\Events\Apply;
 use App\Models\Holiday;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class ManagerHolidays extends Component
 {
@@ -40,6 +42,8 @@ class ManagerHolidays extends Component
 
         $this->clearInput();
         $this->emit('userStore');
+        $transactionName=Auth::user()->name;
+        Apply::dispatch("{$transactionName} Has Added a Holiday");
     }
 
     public function delete(Holiday $holiday)

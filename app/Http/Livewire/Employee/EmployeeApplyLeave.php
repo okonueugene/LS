@@ -3,9 +3,10 @@
 namespace App\Http\Livewire\Employee;
 
 use Mail;
-use App\Mail\ApplyMail;
 use App\Models\User;
+use App\Events\Apply;
 use App\Models\Leave;
+use App\Mail\ApplyMail;
 use App\Models\Holiday;
 use Livewire\Component;
 use App\Models\Employee;
@@ -114,6 +115,8 @@ class EmployeeApplyLeave extends Component
         $this->clearInput();
         $this->mail();
         $this->emit('userStore');
+        $transactionName=Auth::user()->name;
+        Apply::dispatch("{$transactionName} Has Requested For Leave");
     }
 
 

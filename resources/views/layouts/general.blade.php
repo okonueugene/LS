@@ -15,6 +15,7 @@
     <!-- Page Title  -->
     <title>{{ $title }} | LS </title>
     <!-- StyleSheets  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
     <link rel="stylesheet" href="{{ asset('theme/assets/css/dashlite.css?ver=2.9.0') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('theme/assets/css/skins/theme-red.css?ver=2.9.0') }}">
     @yield('header')
@@ -289,6 +290,63 @@
     </script>
 
 
+
+<script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+<script>
+    // Enable pusher logging - don't include this in production
+    // Pusher.logToConsole = true;
+    var pusher = new Pusher('31e3b02ae0fa6d5f5a00', {
+        cluster: 'us2'
+    });
+    var hours = new Date().getHours();
+    var username = <?= json_encode(Auth::user()->name) ?>;
+
+    if (hours < 12) {
+        var channel = pusher.subscribe('apply');
+        channel.bind('leave', (data) => {
+            iziToast.show({
+                title: ` Goodmorning ${username} ! `,
+                message: data.message,
+                theme: 'dark',
+                color: 'green'
+            });
+        });
+    } else if (hours == 12) {
+        var channel = pusher.subscribe('apply');
+        var name = <?= json_encode(Auth::user()->name) ?>;
+        channel.bind('leave', (data) => {
+            iziToast.show({
+                title: ` Howdy ${username} ! `,
+                message: data.message,
+                theme: 'dark',
+                color: 'green'
+            });
+        });
+    } else if (hours > 13) {
+        var channel = pusher.subscribe('apply');
+        var name = <?= json_encode(Auth::user()->name) ?>;
+        channel.bind('leave', (data) => {
+            iziToast.show({
+                title: ` Goodafternoon ${username} ! `,
+                message: data.message,
+                theme: 'dark',
+                color: 'green'
+            });
+        });
+    } else {
+        var channel = pusher.subscribe('apply');
+        var name = <?= json_encode(Auth::user()->name) ?>;
+        channel.bind('leave', (data) => {
+            iziToast.show({
+                title: ` Goodevening ${username} ! `,
+                message: data.message,
+                theme: 'dark',
+                color: 'green'
+            });
+        });
+    }
+</script>
 
     @yield('scripts')
     @stack('scripts')
