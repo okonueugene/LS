@@ -22,8 +22,9 @@
                                                                 <div class="form-icon form-icon-right">
                                                                     <em class="icon ni ni-search"></em>
                                                                 </div>
-                                                                <input wire:model="search" type="text" class="form-control"
-                                                                    id="default-04" placeholder="Quick search by id">
+                                                                <input wire:model="search" type="text"
+                                                                    class="form-control" id="default-04"
+                                                                    placeholder="Quick search by id">
                                                             </div>
                                                         </li>
                                                         <div class="card-tools">
@@ -70,51 +71,53 @@
                                                 </ul>
                                             </div>
                                         </div><!-- .nk-tb-item -->
-                                        @foreach($departments as $department)
-                                        <div class="nk-tb-item">
-                                            <div class="nk-tb-col nk-tb-col-check">
-                                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                                    <input type="checkbox" class="custom-control-input" id="oid01">
-                                                    <label class="custom-control-label" for="oid01"></label>
-                                                </div>
-                                            </div>
-                                            <div class="nk-tb-col">
-                                                <div class="user-card">
-                                                    <div class="user-avatar sm bg-purple">
-                                                        <span>
-                                                            <?php
-                                                            $name= $department->name;
-                                                            preg_match_all('/\b\w/',$name, $name);
-                                                            echo strtoupper(join('', $name[0]));
-                                                            ?></span>
-                                                    </div>
-                                                    <div class="user-name">
-                                                        <span class="tb-lead"><a href="#">{{$department->name}}</a></span>
+                                        @foreach ($departments as $department)
+                                            <div class="nk-tb-item">
+                                                <div class="nk-tb-col nk-tb-col-check">
+                                                    <div
+                                                        class="custom-control custom-control-sm custom-checkbox notext">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="oid01">
+                                                        <label class="custom-control-label" for="oid01"></label>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="nk-tb-col tb-col-md">
-                                                <span class="tb-sub text-primary">{{$department->description}}</span>
-                                            </div>
-                                            <div class="nk-tb-col nk-tb-col-tools">
-                                                <ul class="nk-tb-actions gx-1">
-                                                    <div class="drodown mr-n1">
-                                                        <a href="#"
-                                                            class="dropdown-toggle btn btn-icon btn-trigger"
-                                                            data-toggle="dropdown"><em
-                                                                class="icon ni ni-more-h"></em></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <ul class="link-list-opt no-bdr">
-                                                                <li><a href="#deleteDepartment"
-                                                                        wire:click.prevent="deleteDepartment({{ $department->id }})">Delete</a>
-                                                                </li>
-                                                            </ul>
+                                                <div class="nk-tb-col">
+                                                    <div class="user-card">
+                                                        <div class="user-avatar sm bg-purple">
+                                                            <span>
+                                                                <img src="https://ui-avatars.com/api/?name={{ urlencode($department->name) }}"
+                                                                    alt="{{ $department->name }}">
+                                                            </span>
+                                                        </div>
+                                                        <div class="user-name">
+                                                            <span class="tb-lead">
+                                                                {{ $department->name }}</a></span>
                                                         </div>
                                                     </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div><!-- .nk-tb-item -->
+                                                </div>
+                                                <div class="nk-tb-col tb-col-md">
+                                                    <span
+                                                        class="tb-sub text-success">{{ $department->description }}</span>
+                                                </div>
+                                                <div class="nk-tb-col nk-tb-col-tools">
+                                                    <ul class="nk-tb-actions gx-1">
+                                                        <div class="drodown mr-n1">
+                                                            <a href="#"
+                                                                class="dropdown-toggle btn btn-icon btn-trigger"
+                                                                data-toggle="dropdown"><em
+                                                                    class="icon ni ni-more-h"></em></a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <ul class="link-list-opt no-bdr">
+                                                                    <li><a href="#deleteDepartment"
+                                                                            wire:click.prevent="deleteDepartment({{ $department->id }})">Delete</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div><!-- .nk-tb-item -->
                                         @endforeach
                                     </div><!-- .nk-tb-list -->
                                 </div><!-- .nk-block -->
@@ -165,8 +168,8 @@
                                 <div class="form-group">
                                     <label class="form-label" for="order-id">Description</label>
                                     <div class="form-control-wrap">
-                                        <input wire:model="description" type="text" class="form-control" id="order-id"
-                                            placeholder="Enter Description">
+                                        <input wire:model="description" type="text" class="form-control"
+                                            id="order-id" placeholder="Enter Description">
                                     </div>
                                     @error('description')
                                         <div class="form-note text-danger mt-1">{{ $message }}</div>

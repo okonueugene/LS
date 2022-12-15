@@ -5,7 +5,7 @@
                 <div class="nk-block-head-content">
                     <h3 class="nk-block-title page-title">Approved Leave Requests</h3>
                     <div class="nk-block-des text-soft">
-                        <p>You have total of {{count($leaves)}} Approved Requests.</p>
+                        <p>You have total of {{ count($leaves) }} Approved Requests.</p>
                     </div>
                 </div>
             </div>
@@ -46,14 +46,28 @@
                                                                 class="dropdown-menu dropdown-menu-xs dropdown-menu-right">
                                                                 <ul class="link-check">
                                                                     <li><span>Show</span></li>
-                                                                    <li class="{{($pages==10) ? 'active' : ''}}"><a href="#" wire:click.prevent="$set('pages', 10)">10</a></li>
-                                                                    <li class="{{($pages==20) ? 'active' : ''}}"><a href="#" wire:click.prevent="$set('pages', 20)">20</a></li>
-                                                                    <li class="{{($pages==50) ? 'active' : ''}}"><a href="#"wire:click.prevent="$set('pages', 50)">50</a></li>
+                                                                    <li class="{{ $pages == 10 ? 'active' : '' }}"><a
+                                                                            href="#"
+                                                                            wire:click.prevent="$set('pages', 10)">10</a>
+                                                                    </li>
+                                                                    <li class="{{ $pages == 20 ? 'active' : '' }}"><a
+                                                                            href="#"
+                                                                            wire:click.prevent="$set('pages', 20)">20</a>
+                                                                    </li>
+                                                                    <li class="{{ $pages == 50 ? 'active' : '' }}"><a
+                                                                            href="#"wire:click.prevent="$set('pages', 50)">50</a>
+                                                                    </li>
                                                                 </ul>
                                                                 <ul class="link-check">
                                                                     <li><span>Order</span></li>
-                                                                    <li class="{{($order=='DESC') ? 'active' : ''}}"><a href="#" wire:click.prevent="$set('order', 'DESC')">DESC</a></li>
-                                                                    <li class="{{($order=='ASC') ? 'active' : ''}}"><a href="#" wire:click.prevent="$set('order', 'ASC')">ASC</a></li>
+                                                                    <li class="{{ $order == 'DESC' ? 'active' : '' }}">
+                                                                        <a href="#"
+                                                                            wire:click.prevent="$set('order', 'DESC')">DESC</a>
+                                                                    </li>
+                                                                    <li class="{{ $order == 'ASC' ? 'active' : '' }}"><a
+                                                                            href="#"
+                                                                            wire:click.prevent="$set('order', 'ASC')">ASC</a>
+                                                                    </li>
                                                                 </ul>
                                                             </div>
                                                         </div><!-- .dropdown -->
@@ -70,7 +84,8 @@
                                 <div class="search-content">
                                     <a href="#" class="search-back btn btn-icon toggle-search"
                                         data-target="search"><em class="icon ni ni-arrow-left"></em></a>
-                                    <input wire:model="search" type="text" class="form-control border-transparent form-focus-none"
+                                    <input wire:model="search" type="text"
+                                        class="form-control border-transparent form-focus-none"
                                         placeholder="Search by user or email">
                                     <button class="search-submit btn btn-icon"><em
                                             class="icon ni ni-search"></em></button>
@@ -89,71 +104,69 @@
                                 </div>
                                 <div class="nk-tb-col"><span class="sub-text">Name</span></div>
                                 <div class="nk-tb-col tb-col-md"><span class="sub-text">Date From</span></div>
-                                        <div class="nk-tb-col tb-col-sm"><span class="sub-text">Date To</span></div>
-                                        <div class="nk-tb-col tb-col-sm"><span class="sub-text">Applied Days</span>
-                                        </div>
-                                        <div class="nk-tb-col tb-col-lg"><span class="sub-text">Department</span></div>
-                                        <div class="nk-tb-col tb-col-lg"><span class="sub-text">Type</span></div>
-                                        <div class="nk-tb-col tb-col-lg"><span class="sub-text">Status</span></div>
-                                        <div class="nk-tb-col tb-col-lg"><span class="sub-text">Date Approved</span>
-                                        </div>
+                                <div class="nk-tb-col tb-col-sm"><span class="sub-text">Date To</span></div>
+                                <div class="nk-tb-col tb-col-sm"><span class="sub-text">Applied Days</span>
+                                </div>
+                                <div class="nk-tb-col tb-col-lg"><span class="sub-text">Department</span></div>
+                                <div class="nk-tb-col tb-col-lg"><span class="sub-text">Type</span></div>
+                                <div class="nk-tb-col tb-col-lg"><span class="sub-text">Status</span></div>
+                                <div class="nk-tb-col tb-col-lg"><span class="sub-text">Date Approved</span>
+                                </div>
                             </div><!-- .nk-tb-item -->
-                            @foreach($leaves as $leave)
+                            @foreach ($leaves as $leave)
+                                <div class="nk-tb-item">
+                                    <div class="nk-tb-col nk-tb-col-check">
+                                        <div class="custom-control custom-control-sm custom-checkbox notext">
+                                            <input type="checkbox" class="custom-control-input" id="uid1">
+                                            <label class="custom-control-label" for="uid1"></label>
+                                        </div>
+                                    </div>
+                                    <div class="nk-tb-col">
+                                        <div class="user-card">
+                                            <div class="user-avatar xs bg-primary">
+                                                <span> <img
+                                                        src="https://ui-avatars.com/api/?name={{ urlencode($leave->user->name) }}"
+                                                        alt="{{ $leave->user->name }}"></span>
+                                            </div>
+                                            <div class="user-name">
+                                                <span class="tb-lead">{{ $leave->user->name }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="nk-tb-col">
+                                        <span>{{ $leave->date_start }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span>{{ $leave->date_end }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-sm">
+                                        <span>{{ $leave->nodays }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span>{{ $leave->dept->name }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span>{{ $leave->type->name }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span
+                                            class="badge tb-status text-success">{{ ucfirst($leave->status) }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span>{{ date('Y/m/d') }}</span>
+                                    </div>
 
-                            <div class="nk-tb-item">
-                                <div class="nk-tb-col nk-tb-col-check">
-                                    <div class="custom-control custom-control-sm custom-checkbox notext">
-                                        <input type="checkbox" class="custom-control-input" id="uid1">
-                                        <label class="custom-control-label" for="uid1"></label>
-                                    </div>
                                 </div>
-                                <div class="nk-tb-col">
-                                    <div class="user-card">
-                                        <div class="user-avatar xs bg-primary">
-                                            <span> <?php
-                                                $name = $leave->user->name;
-                                                preg_match_all('/\b\w/', $name, $name);
-                                                echo strtoupper(join('', $name[0]));
-                                                ?></span>
-                                        </div>
-                                        <div class="user-name">
-                                            <span class="tb-lead">{{$leave->user->name}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="nk-tb-col">
-                                    <span>{{$leave->date_start}}</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-md">
-                                    <span>{{$leave->date_end}}</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-sm">
-                                    <span>{{$leave->nodays}}</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-md">
-                                    <span>{{ $leave->dept->name }}</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-md">
-                                    <span>{{ $leave->type->name }}</span>
-                                </div>
-                                <div class="nk-tb-col tb-col-md">
-                                    <span class="badge tb-status text-success">{{ucfirst($leave->status)}}</span> 
-                                </div>
-                                <div class="nk-tb-col tb-col-md">
-                                    <span>{{date('Y/m/d')}}</span>
-                                </div>
-                                
-                            </div>
                             @endforeach
-                    </div><!-- .nk-tb-list -->
-                </div><!-- .card-inner -->
-                <div class="card-inner">
-                    <ul class="pagination justify-content-center justify-content-md-start">
-                        {{$leaves->links()}}
-                    </ul><!-- .pagination -->
-                </div><!-- .card-inner -->
-            </div><!-- .card-inner-group -->
-        </div><!-- .card -->
-    </div><!-- .nk-block -->
-</div>
+                        </div><!-- .nk-tb-list -->
+                    </div><!-- .card-inner -->
+                    <div class="card-inner">
+                        <ul class="pagination justify-content-center justify-content-md-start">
+                            {{ $leaves->links() }}
+                        </ul><!-- .pagination -->
+                    </div><!-- .card-inner -->
+                </div><!-- .card-inner-group -->
+            </div><!-- .card -->
+        </div><!-- .nk-block -->
+    </div>
 </div>

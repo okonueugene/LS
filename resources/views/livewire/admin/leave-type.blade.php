@@ -83,11 +83,9 @@
                                                 <div class="user-card">
                                                     <div class="user-avatar sm bg-purple">
                                                         <span>
-                                                            <?php
-                                                            $name= $leavetype->name;
-                                                            preg_match_all('/\b\w/',$name, $name);
-                                                            echo strtoupper(join('', $name[0]));
-                                                            ?></span>
+                                                            <img src="https://ui-avatars.com/api/?name={{ urlencode( $leavetype->name ) }}"
+                                                                alt="{{  $leavetype->name  }}">
+                                                        </span>
                                                     </div>
                                                     <div class="user-name">
                                                         <span class="tb-lead"><a href="#">{{$leavetype->name}}</a></span>
@@ -95,7 +93,7 @@
                                                 </div>
                                             </div>
                                             <div class="nk-tb-col tb-col-md">
-                                                <span class="tb-sub text-primary">{{$leavetype->description}}</span>
+                                                <span class="tb-sub text-success">{{$leavetype->description}}</span>
                                             </div><div class="nk-tb-col tb-col-md">
                                                 <span class="tb-sub text-secondary">{{$leavetype->duration}} Days</span>
                                             </div>

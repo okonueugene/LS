@@ -176,8 +176,8 @@
                                         <div class="project-details">
                                             <ul class="list-group">
                                                 <ul class="list-group">
-                                                    @if (count($leastdays) > 0)
-                                                        @foreach ($leastdays as $member)
+                                                    @if (count($onleave) > 0)
+                                                        @foreach ($onleave as $member)
                                                             <li
                                                                 class="list-group-item d-flex justify-content-between align-items-center">
                                                                 {{ $member->user->name }}

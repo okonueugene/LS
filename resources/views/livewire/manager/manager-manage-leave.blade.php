@@ -166,12 +166,12 @@
                                                 </div>
                                                 <div class="nk-tb-col">
                                                     <div class="user-card">
-                                                        <div class="user-avatar xs bg-primary"><span>
-                                                                <?php
-                                                                $name = $leave->user->name;
-                                                                preg_match_all('/\b\w/', $name, $name);
-                                                                echo strtoupper(join('', $name[0]));
-                                                                ?></span></div>
+                                                        <div class="user-avatar xs bg-primary">
+                                                            <span>
+                                                                <img src="https://ui-avatars.com/api/?name={{ urlencode($leave->user->name) }}"
+                                                                    alt="{{ $leave->user->name }}">
+                                                            </span>
+                                                        </div>
                                                         <div class="user-name"><span
                                                                 class="tb-lead">{{ $leave->user->name }}</span>
                                                         </div>
@@ -255,7 +255,7 @@
                                         <label class="form-label" for="oder-id">Employee Name</label>
                                         <div class="form-control-wrap">
                                             <input type="text" class="form-control" id="oder-id"
-                                                value="{{ $leave->user->name }}"readonly>
+                                                value="{{ $user_name }}"readonly>
                                         </div>
                                         @error('name')
                                             <div class="form-note text-danger mt-1">{{ $message }}</div>

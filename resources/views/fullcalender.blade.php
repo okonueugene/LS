@@ -35,13 +35,38 @@
             font-style: italic;
             font-size: 50px;
         }
-        .fc th, .fc td{
+
+        .fc th,
+        .fc td {
             border-color: black;
         }
-     
-      
+
+        #back {
+            font-family: 'Times New Roman', Times, serif;
+            font-style: bold;
+            font-size: 20px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            top: 15px;
+            left: 7px;
+
+        }
+
+        #back{
+            transition-duration: 0.4s;
+        }
+
+        #back:hover {
+            background-color: #0981D1;
+            /* Green */
+            color: white;
+        }
     </style>
 </head>
+<button id="back" onclick="window.location.href='{{ url()->previous() }}'">Back</button>
 
 <body>
 

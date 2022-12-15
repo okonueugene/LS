@@ -141,7 +141,7 @@
                                                 <ul class="link-list">
                                                     <li><a href="{{ route('activity') }}">
                                                             <em class="icon ni ni-activity-alt">
-                                                            </em><span>Login
+                                                    </em><span>Login
                                                                 Activity</span></a>
                                                     </li>
                                                     <li>

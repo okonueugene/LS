@@ -25,6 +25,7 @@ class GmManageLeave extends Component
     public $search='';
 
     public $user_id;
+    public $user_name;
     public $employee_id;
     public $date_start;
     public $date_end;
@@ -97,6 +98,7 @@ class GmManageLeave extends Component
     {
         $leave = Leave::where('id', $id)->first();
         $this->user_id = $leave->user_id;
+        $this->user_name = $leave->user->name;
         $this->employee_id = $leave->employee_id;
         $this->date_start = $leave->date_start;
         $this->date_end = $leave->date_end;

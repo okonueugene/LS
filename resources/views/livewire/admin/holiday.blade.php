@@ -82,11 +82,9 @@
                                                 <div class="user-card">
                                                     <div class="user-avatar sm bg-purple">
                                                         <span>
-                                                            <?php
-                                                            $name= $holiday->name;
-                                                            preg_match_all('/\b\w/',$name, $name);
-                                                            echo strtoupper(join('', $name[0]));
-                                                            ?></span>
+                                                            <img src="https://ui-avatars.com/api/?name={{ urlencode($holiday->name) }}"
+                                                                alt="{{$holiday->name}}">
+                                                        </span>
                                                     </div>
                                                     <div class="user-name">
                                                         <span class="tb-lead">{{$holiday->name}}<a href="#"></a></span>
@@ -94,7 +92,7 @@
                                                 </div>
                                             </div>
                                             <div class="nk-tb-col tb-col-md">
-                                                <span class="tb-sub text-primary">{{$holiday->date}}</span>
+                                                <span class="tb-sub text-success">{{$holiday->date}}</span>
                                             </div>
                                             <div class="nk-tb-col nk-tb-col-tools">
                                                 <ul class="nk-tb-actions gx-1">
@@ -105,8 +103,8 @@
                                                                 class="icon ni ni-more-h"></em></a>
                                                         <div class="dropdown-menu dropdown-menu-right">
                                                             <ul class="link-list-opt no-bdr">
-                                                                <li><a href="#deleteHoliday"
-                                                                        wire:click.prevent="delete({{ $holiday->id }})">Delete</a>
+                                                                <li>
+                                                                    <a href="#deleteHoliday" wire:click.prevent="delete({{ $holiday->id }})">Delete</a>
                                                                 </li>
                                                             </ul>
                                                         </div>

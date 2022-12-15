@@ -75,12 +75,10 @@
                                     </div>
                                     <div class="nk-tb-col"><a href="/demo2/ecommerce/customer-details.html">
                                             <div class="user-card">
-                                                <div class="user-avatar bg-primary"><span>
-                                                        <?php
-                                                        $name = $employee->user->name;
-                                                        preg_match_all('/\b\w/', $name, $name);
-                                                        echo strtoupper(join('', $name[0]));
-                                                        ?>
+                                                <div class="user-avatar bg-primary">
+                                                    <span>
+                                                        <img src="https://ui-avatars.com/api/?name={{ urlencode($employee->user->name) }}"
+                                                            alt="{{ $employee->user->name }}">
                                                     </span>
                                                 </div>
                                                 <div class="user-info"><span class="tb-lead">{{ $employee->user->name }}
@@ -197,9 +195,10 @@
                                     <div class="form-control-wrap">
                                         <select wire:model="user_type" class="form-control" data-search="on">
                                             <option>Select Position</option>
-                                            @if(Auth::user()->user_type == 'admin' || 'general_manager')                                            <option value="manager">Manager</option>
-                                            <option value="general_manager">General Manager</option>
-                                            <option value="admin">Administrator</option>
+                                            @if (Auth::user()->user_type == 'admin' || 'general_manager')
+                                                <option value="manager">Manager</option>
+                                                <option value="general_manager">General Manager</option>
+                                                <option value="admin">Administrator</option>
                                             @endif
                                             <option value="employee">Employee</option>
                                         </select>

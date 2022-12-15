@@ -19,6 +19,6 @@
             </div>
         </div>
     </div>
-    <button onclick="window.location.href='{{url()->previous()}}'">Back</button>
+    <button onclick="window.location.href=''">Back</button>
 </div>
 @endsection

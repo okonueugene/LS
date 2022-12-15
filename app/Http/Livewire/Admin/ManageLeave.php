@@ -3,14 +3,15 @@
 namespace App\Http\Livewire\Admin;
 
 use Mail;
-use App\Mail\ApprovedMail;
-use App\Mail\DeclinedMail;
-
 use Carbon\Carbon;
+use App\Events\Apply;
+
 use App\Models\Leave;
 use Livewire\Component;
 use App\Models\Employee;
 use App\Models\LeaveType;
+use App\Mail\ApprovedMail;
+use App\Mail\DeclinedMail;
 use App\Models\Department;
 use Livewire\WithPagination;
 use App\Exports\ManageLeavesExport;
@@ -27,11 +28,14 @@ class ManageLeave extends Component
     public $search='';
 
     public $user_id;
+    public $leave_id;
+    public $user_name;
     public $employee_id;
     public $date_start;
     public $date_end;
     public $nodays;
     public $leave_type_id;
+    public $leave_type;
     public $reason;
     public $status;
     public $remarks;
@@ -43,14 +47,14 @@ class ManageLeave extends Component
     {
         $leave=Leave::orderBy('id', 'DESC')->where('status', 'approved')->first();
 
-        Mail::to($leave->user->email)->queue(new ApprovedMail($leave));
+        Mail::to("versionaskari19@gmail.com")->queue(new ApprovedMail($leave));
     }
 
     public function declined()
     {
         $leave=Leave::orderBy('id', 'DESC')->where('status', 'declined')->first();
 
-        Mail::to($leave->user->email)->queue(new DeclinedMail($leave));
+        Mail::to("versionaskari19@gmail.com")->queue(new DeclinedMail($leave));
     }
 
     public function export()
@@ -62,55 +66,68 @@ class ManageLeave extends Component
            $this->status = "";
            $this->remarks = "";
        }
-       public function updateLeave($id)
-       {
-           $leave = Leave::findOrFail($id);
 
-           $this->validate([
 
-               'remarks' => 'required',
-               'status' => 'required',
-           ]);
+    public function showLeave($id)
+    {
+        $leave = Leave::where('id', $id)->first();
 
-           $leave->update([
-               'status' => $this->status,
-               'remarks' => $this->remarks,
-               'action_date' => Carbon::now()->format('Y/m/d'),
-           ]);
-           $old=Employee::where('user_id', $leave->user_id)->pluck('days')->toArray();
+        $this->user_id = $leave->user_id;
+        $this->leave_id = $leave->id;
+        $this->user_name = $leave->user->name;
+        $this->employee_id = $leave->employee_id;
+        $this->date_start = $leave->date_start;
+        $this->date_end = $leave->date_end;
+        $this->nodays = $leave->nodays;
+        $this->leave_type_id = $leave->leave_type_id;
+        $this->leave_type = $leave->type->name;
+        $this->reason = $leave->reason;
+        $this->date_posted = $leave->date_posted;
+    }
 
-           if ($this->status == 'approved' && $leave->leave_type_id==1) {
-               Employee::where('user_id', $leave->user_id)->update(['leave_taken' => $leave->nodays,'available_days' =>  implode('', $old)-$leave->nodays]);
-           }
-           if ($this->status == 'approved') {
-               $this->approved();
-               Apply::dispatch("{$transactionName} Has Approved Your Leave");
+ public function updateLeave($id)
+ {
+     $leave = Leave::findOrFail($id);
 
-           } else {
-               $this->declined();
-               Apply::dispatch("{$transactionName} Has Declined a Your Leave");
 
-           }
+     $this->validate([
+         'status' => 'required',
+         'remarks' => 'required',
+     ]);
 
-           $this->dispatchBrowserEvent('success', [
-               'message' => 'Leave Updated successfully',
-           ]);
+     $leave->update([
+         'status' => $this->status,
+         'remarks' => $this->remarks,
+         'action_date' => Carbon::now()->format('Y/m/d'),
+     ]);
 
-           $this->clearInput();
-           $this->emit('userStore');
-       }
-       public function showLeave($id)
-       {
-           $leave = Leave::where('id', $id)->first();
-           $this->user_id = $leave->user_id;
-           $this->employee_id = $leave->employee_id;
-           $this->date_start = $leave->date_start;
-           $this->date_end = $leave->date_end;
-           $this->nodays = $leave->nodays;
-           $this->leave_type_id = $leave->leave_type_id;
-           $this->reason = $leave->reason;
-           $this->date_posted = $leave->date_posted;
-       }
+     $old=Employee::where('user_id', $leave->user_id)->pluck('days')->toArray();
+
+     if ($this->status == 'approved' && $leave->leave_type_id==1) {
+         Employee::where('user_id', $leave->user_id)->update(['leave_taken' => $leave->nodays,'available_days' =>  (implode('', $old))-($leave->nodays)]);
+     }
+
+     if ($this->status == 'approved') {
+         $this->approved();
+         $transactionName = Auth::user()->name;
+         Apply::dispatch("{$transactionName} Has Approved Your Leave");
+     } else {
+         $this->declined();
+         $transactionName = Auth::user()->name;
+         Apply::dispatch("{$transactionName} Has Declined a Your Leave");
+     }
+
+     $this->dispatchBrowserEvent('success', [
+         'message' => 'Leave Updated successfully',
+         ]);
+
+     $this->clearInput();
+     $this->emit('userStore');
+ }
+
+
+
+
        public function render()
        {
            $title="Manage Leave";
