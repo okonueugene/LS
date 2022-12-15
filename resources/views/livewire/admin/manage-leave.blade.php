@@ -336,7 +336,7 @@
                     </a>
                     <div class="modal-body modal-body-md">
                         <h5 class="modal-title">Update Leave</h5>
-                        <form wire:submit="updateLeave({{ $leave->id }})" class="mt-2">
+                        <form wire:submit="updateLeave({{$leave->id}})" class="mt-2">
                             <div class="row g-gs">
                                 <div class="col-md-7">
                                     <div class="form-group">
@@ -367,7 +367,7 @@
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-secondary">
-                                        <div wire:loading wire:target='updateLeave'>
+                                        <div wire:click="updateLeave({{$leave->id}})">
                                         </div>Update
                                     </button>
                                 </div>

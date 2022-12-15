@@ -176,8 +176,8 @@
                                         <div class="project-details">
                                             <ul class="list-group">
                                                 <ul class="list-group">
-                                                    @if (count($leastdays) > 0)
-                                                        @foreach ($leastdays as $member)
+                                                    @if (count($onleave) > 0)
+                                                        @foreach ($onleave as $member)
                                                             <li
                                                                 class="list-group-item d-flex justify-content-between align-items-center">
                                                                 {{ $member->user->name }}
@@ -364,13 +364,13 @@
 
         // };
 
-        // patrols
+        // //patrols
         // const myChart = new Chart(
         //     document.getElementById('myChart').getContext('2d'),
         //     config
         // );
 
-        // 
+        // //
 
         // var stuff = [];
 
@@ -418,3 +418,14 @@
         //another graph
     </script>
 @endsection
+
+
+{{-- code for days in month remining --}}
+{{-- $days = cal_days_in_month(CAL_GREGORIAN, idate('m'), date('Y'));
+$day = date('d');
+$d = $days - $day;
+if ($d > 1) {
+    echo "$d Days Left";
+} else {
+    echo "$d Day Left";
+} --}}
