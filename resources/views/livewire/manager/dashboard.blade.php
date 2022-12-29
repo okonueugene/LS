@@ -283,7 +283,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @section('scripts')
     <script>
-        var totalleavedays = <?= json_encode($taken) ?>;
+        var totalleavedays = <?= json_encode($annual) ?>;
         var employees = <?= json_encode(count($employees)) ?>;
         var days=totalleavedays.reduce((a, b) => a + b, 0)/employees;
 
@@ -420,12 +420,12 @@
 @endsection
 
 
-{{-- code for days in month remining --}}
-{{-- $days = cal_days_in_month(CAL_GREGORIAN, idate('m'), date('Y'));
-$day = date('d');
-$d = $days - $day;
-if ($d > 1) {
-    echo "$d Days Left";
-} else {
-    echo "$d Day Left";
-} --}}
+// {{-- code for days in month remining --}}
+// {{-- $days = cal_days_in_month(CAL_GREGORIAN, idate('m'), date('Y'));
+// $day = date('d');
+// $d = $days - $day;
+// if ($d > 1) {
+//     echo "$d Days Left";
+// } else {
+//     echo "$d Day Left";
+// } --}}

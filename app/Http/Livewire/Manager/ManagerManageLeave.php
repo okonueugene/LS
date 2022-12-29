@@ -3,15 +3,16 @@
 namespace App\Http\Livewire\Manager;
 
 use Mail;
-use App\Mail\ApprovedMail;
-use App\Mail\DeclinedMail;
-
 use Carbon\Carbon;
 use App\Models\User;
+
+use App\Events\Apply;
 use App\Models\Leave;
 use Livewire\Component;
 use App\Models\Employee;
 use App\Models\LeaveType;
+use App\Mail\ApprovedMail;
+use App\Mail\DeclinedMail;
 use App\Models\Department;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
@@ -75,17 +76,19 @@ class ManagerManageLeave extends Component
             'action_date' => Carbon::now()->format('Y/m/d'),
 
         ]);
-        $old=Employee::where('user_id', $leave->user_id)->pluck('available_days')->toArray();
-
-        if ($this->status == 'approved' && $leave->leave_type_id==1) {
-            Employee::where('user_id', $leave->user_id)->update(['leave_taken' => $leave->nodays,'available_days' =>  implode('', $old)-$leave->nodays]);
+        if ($this->status == 'approved' && $leave->type->name =='Annual Leave') {
+            $totalTaken=Leave::where('user_id', $leave->user_id)->where('status', 'approved')->where('leave_type_id', 1)->sum('nodays');
+            Employee::where('user_id', $leave->user_id)->update(['leave_taken' => $totalTaken,'available_days' => round(date('L') == 1 ? (21 / 366) * (date('z') + 1) : (21 / 365) * (date('z') + 1), 2)-$totalTaken]);
         }
 
         if ($this->status == 'approved') {
             $this->approved();
-        }
-         else {
+            $transactionName = Auth::user()->name;
+            Apply::dispatch("{$transactionName} Has Approved Your Leave");
+        } else {
             $this->declined();
+            $transactionName = Auth::user()->name;
+            Apply::dispatch("{$transactionName} Has Declined a Your Leave");
         }
 
         $this->dispatchBrowserEvent('success', [

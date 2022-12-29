@@ -29,6 +29,7 @@ class ApprovedLeave extends Component
     public function render()
     {
         $title="Approved Leaves";
+        
         $searchString=$this->search;
 
         $leaves =Leave::orderBy('id', $this->order)->where('status', 'approved')->whereHas('user', function ($query) use ($searchString) {
@@ -37,7 +38,9 @@ class ApprovedLeave extends Component
         ->with(['user' => function ($query) use ($searchString) {
             $query->where('name', 'like', '%'.$searchString.'%');
         }])->paginate($this->pages);
+        
         $departments = Department::orderBy('id', 'ASC')->get();
+
         $types=LeaveType::orderBy('id', 'ASC')->get();
 
         return view('livewire.admin.approved-leave', compact('leaves', 'departments', 'types'))

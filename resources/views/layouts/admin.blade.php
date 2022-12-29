@@ -308,8 +308,7 @@
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
     <script>
-        // Enable pusher logging - don't include this in production
-        // Pusher.logToConsole = true;
+
         var pusher = new Pusher('31e3b02ae0fa6d5f5a00', {
             cluster: 'us2'
         });
@@ -353,7 +352,7 @@
             var name = <?= json_encode(Auth::user()->name) ?>;
             channel.bind('leave', (data) => {
                 iziToast.show({
-                    title: ` Goodevening ${username} ! `,
+                    title: ` Good Evening ${username} ! `,
                     message: data.message,
                     theme: 'dark',
                     color: 'green'

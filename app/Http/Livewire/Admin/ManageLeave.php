@@ -14,6 +14,7 @@ use App\Mail\ApprovedMail;
 use App\Mail\DeclinedMail;
 use App\Models\Department;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 use App\Exports\ManageLeavesExport;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -101,10 +102,9 @@ class ManageLeave extends Component
          'action_date' => Carbon::now()->format('Y/m/d'),
      ]);
 
-     $old=Employee::where('user_id', $leave->user_id)->pluck('days')->toArray();
-
-     if ($this->status == 'approved' && $leave->leave_type_id==1) {
-         Employee::where('user_id', $leave->user_id)->update(['leave_taken' => $leave->nodays,'available_days' =>  (implode('', $old))-($leave->nodays)]);
+     if ($this->status == 'approved' && $leave->type->name =='Annual Leave') {
+        $totalTaken=Leave::where('user_id', $leave->user_id)->where('status', 'approved')->where('leave_type_id', 1)->sum('nodays');
+         Employee::where('user_id', $leave->user_id)->update(['leave_taken' => $totalTaken,'available_days' => round(date('L') == 1 ? (21 / 366) * (date('z') + 1) : (21 / 365) * (date('z') + 1), 2)-$totalTaken]);
      }
 
      if ($this->status == 'approved') {
@@ -125,25 +125,27 @@ class ManageLeave extends Component
      $this->emit('userStore');
  }
 
+   public function leaveEvents()
+   {
+   }
+
+     public function render()
+     {
+         $title="Manage Leave";
+
+         $searchString=$this->search;
+
+         $leaves =Leave::orderBy('id', $this->order)->where('status', 'pending')->whereHas('user', function ($query) use ($searchString) {
+             $query->where('name', 'like', '%'.$searchString.'%');
+         })
+         ->with(['user' => function ($query) use ($searchString) {
+             $query->where('name', 'like', '%'.$searchString.'%');
+         }])->paginate($this->pages);
 
 
-
-       public function render()
-       {
-           $title="Manage Leave";
-
-           $searchString=$this->search;
-
-           $leaves =Leave::orderBy('id', $this->order)->where('status', 'pending')->whereHas('user', function ($query) use ($searchString) {
-               $query->where('name', 'like', '%'.$searchString.'%');
-           })
-           ->with(['user' => function ($query) use ($searchString) {
-               $query->where('name', 'like', '%'.$searchString.'%');
-           }])->paginate($this->pages);
-
-           return view('livewire.admin.manage-leave', compact('leaves'))
-            ->extends('layouts.admin', ['title'=> $title])
-            ->section('content')
-           ;
-       }
+         return view('livewire.admin.manage-leave', compact('leaves'))
+          ->extends('layouts.admin', ['title'=> $title])
+          ->section('content')
+         ;
+     }
 }
