@@ -4,6 +4,15 @@ All Notable changes to `laravel-modules` will be documented in this file.
 
 ## Next
 
+## 9.0.6 - 2022-10-28
+
+## Added
+
+- [@wikigods](https://github.com/wikigods) added vite compatibility [#1455](https://github.com/nWidart/laravel-modules/pull/1455)
+- [@WMOH-DEV](https://github.com/WMOH-DEV) Adding migrate fresh command [#1483](https://github.com/nWidart/laravel-modules/pull/1483)
+
+## 9.0.5 - 2022-08-31
+
 ## Added
 
 - [@alissn](https://github.com/alissn) add command show model information [#1429](https://github.com/nWidart/laravel-modules/pull/1429) 
