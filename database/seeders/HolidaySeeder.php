@@ -16,47 +16,15 @@ class HolidaySeeder extends Seeder
      */
     public function run()
     {
-        $year=date("Y");
-
-        $holiday= Holiday::create([
-            'name'=>'New Years Day',
-            'date'=>Carbon::parse($year.'-01-01')
-         ]);
-        $holiday1= Holiday::create([
-           'name'=>'Good Friday',
-           'date'=>Carbon::parse($year.'-04-07')
-        ]);
-        $holiday2= Holiday::create([
-           'name'=>'Easter Monday',
-           'date'=>Carbon::parse($year.'-04-10')
-        ]);
-        $holiday3= Holiday::create([
-           'name'=>'Labour Day',
-           'date'=>Carbon::parse($year.'-05-01')
-        ]);
-        $holiday4= Holiday::create([
-           'name'=>'Madaraka Day',
-           'date'=>Carbon::parse($year.'-06-01')
-        ]);
-        $holiday5= Holiday::create([
-           'name'=>'Huduma Day',
-           'date'=>Carbon::parse($year.'-10-10')
-        ]);
-        $holiday6= Holiday::create([
-           'name'=>'Mashujaa Day',
-           'date'=>Carbon::parse($year.'-10-20')
-        ]);
-        $holiday7= Holiday::create([
-           'name'=>'Jamhuri Day',
-           'date'=>Carbon::parse($year.'-12-12')
-        ]);
-        $holiday8= Holiday::create([
-           'name'=>'Christmas Day',
-           'date'=>Carbon::parse($year.'-12-25')
-        ]);
-        $holiday9= Holiday::create([
-           'name'=>'Utamaduni Day',
-           'date'=>Carbon::parse($year.'-12-26')
-        ]);
+        $url = "https://www.googleapis.com/calendar/v3/calendars/en.ke%23holiday%40group.v.calendar.google.com/events?key=" . env('GOOGLE_API_KEY');
+        $holidays = json_decode(file_get_contents($url), true)['items'];
+        foreach ($holidays as $holiday) {
+            Holiday::create([
+              'summary' => $holiday['summary'],
+              'description' => $holiday['description'],
+              'start_date' => Carbon::parse($holiday['start']['date']),
+              'end_date' => Carbon::parse($holiday['end']['date']),
+            ]);
+        }
     }
 }

@@ -1,3 +1,24 @@
+@push('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+    <style>
+        /* Add CSS styles for different event types */
+        .observance-event {
+            background-color: orange;
+            text-align: center;
+            font-family: Arial;
+            font-style: italic;
+            color: white;
+        }
+
+        .public-event {
+            background-color: green;
+            text-align: center;
+            font-family: Arial;
+            color: white;
+        }
+    </style>
+@endpush
+
 <div class="nk-content ">
     <div class="container-fluid">
         <div class="nk-content-inner">
@@ -17,15 +38,16 @@
                                                     data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
                                                 <div class="toggle-expand-content" data-content="pageMenu">
                                                     <ul class="nk-block-tools g-3">
-                                                        <li>
+                                                        {{-- <li>
                                                             <div class="form-control-wrap">
                                                                 <div class="form-icon form-icon-right">
                                                                     <em class="icon ni ni-search"></em>
                                                                 </div>
-                                                                <input wire:model="search" type="text" class="form-control"
-                                                                    id="default-04" placeholder="Quick search by id">
+                                                                <input wire:model="search" type="text"
+                                                                    class="form-control" id="default-04"
+                                                                    placeholder="Quick search by id">
                                                             </div>
-                                                        </li>
+                                                        </li> --}}
                                                         <div class="card-tools">
                                                             <a href="#" class="btn btn-md btn-primary"
                                                                 data-toggle="modal" data-target="#addModal"><em
@@ -40,93 +62,7 @@
                                     </div><!-- .nk-block-between -->
                                 </div><!-- .nk-block-head -->
                                 <div class="nk-block">
-                                    <div class="nk-tb-list is-separate is-medium mb-3">
-                                        <div class="nk-tb-item nk-tb-head">
-                                            <div class="nk-tb-col nk-tb-col-check">
-                                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                                    <input type="checkbox" class="custom-control-input" id="oid">
-                                                    <label class="custom-control-label" for="oid"></label>
-                                                </div>
-                                            </div>
-                                            <div class="nk-tb-col"><span>Holiday Name</span></div>
-                                            <div class="nk-tb-col tb-col-md"><span>Date</span></div>
-                                            <div class="nk-tb-col nk-tb-col-tools">
-                                                <ul class="nk-tb-actions gx-1 my-n1">
-                                                    <li>
-                                                        <div class="drodown">
-                                                            <a href="#"
-                                                                class="dropdown-toggle btn btn-icon btn-trigger mr-n1"
-                                                                data-toggle="dropdown"><em
-                                                                    class="icon ni ni-more-h"></em></a>
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <ul class="link-list-opt no-bdr">
-                                                                    <li><a href="#"><em
-                                                                                class="icon ni ni-trash"></em><span>Bulk
-                                                                                Delete</span></a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div><!-- .nk-tb-item -->
-                                        @foreach($holidays as $holiday)
-                                        <div class="nk-tb-item">
-                                            <div class="nk-tb-col nk-tb-col-check">
-                                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                                    <input type="checkbox" class="custom-control-input" id="oid01">
-                                                    <label class="custom-control-label" for="oid01"></label>
-                                                </div>
-                                            </div>
-                                            <div class="nk-tb-col">
-                                                <div class="user-card">
-                                                    <div class="user-avatar sm bg-purple">
-                                                        <span>
-                                                            <img src="https://ui-avatars.com/api/?name={{ urlencode($holiday->name) }}"
-                                                                alt="{{$holiday->name}}">
-                                                        </span>
-                                                    </div>
-                                                    <div class="user-name">
-                                                        <span class="tb-lead">{{$holiday->name}}<a href="#"></a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="nk-tb-col tb-col-md">
-                                                <span class="tb-sub text-success">{{$holiday->date}}</span>
-                                            </div>
-                                            <div class="nk-tb-col nk-tb-col-tools">
-                                                <ul class="nk-tb-actions gx-1">
-                                                    <div class="drodown mr-n1">
-                                                        <a href="#"
-                                                            class="dropdown-toggle btn btn-icon btn-trigger"
-                                                            data-toggle="dropdown"><em
-                                                                class="icon ni ni-more-h"></em></a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <ul class="link-list-opt no-bdr">
-                                                                <li>
-                                                                    <a href="#deleteHoliday" wire:click.prevent="delete({{ $holiday->id }})">Delete</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div><!-- .nk-tb-item -->
-                                        @endforeach
-                                    </div><!-- .nk-tb-list -->
-                                    <div class="card">
-                                        <div class="card-inner">
-                                            <div class="nk-block-between-md g-3">
-                                                <div class="g">
-                                                    <ul>
-                                                        {{ $holidays->links() }}
-
-                                                    </ul><!-- .pagination -->
-                                                </div>
-                                            </div><!-- .nk-block-between -->
-                                        </div>
-                                    </div>
+                                    <div id="calendar"></div>
                                 </div><!-- .nk-block -->
 
                             </div>
@@ -152,26 +88,49 @@
                                 <div class="form-group">
                                     <label class="form-label" for="oder-id">Holiday Name</label>
                                     <div class="form-control-wrap">
-                                        <input wire:model="name" type="text" class="form-control" id="oder-id"
+                                        <input wire:model="summary" type="text" class="form-control" id="oder-id"
                                             placeholder="Enter Holiday Name">
                                     </div>
-                                    @error('name')
+                                    @error('summary')
+                                        <div class="form-note text-danger mt-1">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label" for="oder-id">Holiday Type</label>
+                                <div class="form-group">
+                                    <input wire:model="description" type="text" class="form-control" id="oder-id"
+                                        placeholder="Enter Holiday Description">
+                                </div>
+                                @error('description')
+                                    <div class="form-note text-danger mt-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="order-id">Start Date</label>
+                                    <div class="form-control-wrap">
+                                        <input wire:model="start_date" type="date" class="form-control"
+                                            id="order-id" placeholder="Enter Start Date">
+                                    </div>
+                                    @error('start_date')
                                         <div class="form-note text-danger mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-label" for="order-id">Date</label>
+                                    <label class="form-label" for="order-id">End Date</label>
                                     <div class="form-control-wrap">
-                                        <input wire:model="date" type="date" class="form-control" id="order-id"
-                                            placeholder="Enter Police Ref">
+                                        <input wire:model="end_date" type="date" class="form-control" id="order-id"
+                                            placeholder="Enter End Date">
                                     </div>
-                                    @error('date')
+                                    @error('end_date')
                                         <div class="form-note text-danger mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <button type="submit" class="btn btn-secondary">
                                     <div wire:loading wire:target='addHoliday'>
@@ -189,4 +148,38 @@
 </div>
 
 @push('scripts')
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Retrieve holidays
+            let holidays = <?php echo json_encode($holidays); ?>;
+            console.log(holidays);
+
+            // Map holidays to FullCalendar events with different classes
+            let holidayEvents = holidays.map(holiday => {
+                // Determine the event class based on the description
+                let eventClass = holiday.description.toLowerCase().includes("observance") ?
+                    "observance-event" :
+                    "public-event";
+
+                // Return the event object
+                return {
+                    title: holiday.summary,
+                    start: holiday.start_date,
+                    end: holiday.end_date,
+                    className: eventClass,
+                };
+            });
+
+            // Initialize FullCalendar
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: holidayEvents,
+            });
+
+            // Render the calendar
+            calendar.render();
+        });
+    </script>
 @endpush

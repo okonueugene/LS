@@ -141,7 +141,7 @@
                                                 <ul class="link-list">
                                                     <li><a href="{{ route('activity') }}">
                                                             <em class="icon ni ni-activity-alt">
-                                                    </em><span>Login
+                                                            </em><span>Login
                                                                 Activity</span></a>
                                                     </li>
                                                     <li>
@@ -308,7 +308,6 @@
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
     <script>
-
         var pusher = new Pusher('31e3b02ae0fa6d5f5a00', {
             cluster: 'us2'
         });

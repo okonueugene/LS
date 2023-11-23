@@ -13,25 +13,34 @@ class Holidays extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $name;
-    public $date;
-    public $search = '';
+    public $summary;
+    public $description;
+    public $start_date;
+    public $end_date;
+
+
 
     public function clearInput()
     {
-        $this->name = "";
-        $this->date = "";
+        $this->summary = null;
+        $this->description = null;
+        $this->start_date = null;
+        $this->end_date = null;
     }
     public function addHoliday()
     {
         $this->validate([
-            'name' => 'required',
-            'date' => 'required'
+            'summary' => 'required',
+            'description' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
         ]);
 
         Holiday::create([
-            'name' => $this->name,
-            'date' => $this->date
+            'summary' => $this->summary,
+            'description' => $this->description,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
         ]);
 
         $this->dispatchBrowserEvent('success', [
@@ -41,23 +50,18 @@ class Holidays extends Component
 
         $this->clearInput();
         $this->emit('userStore');
-        $transactionName=Auth::user()->name;
+        $transactionName = Auth::user()->name;
         Apply::dispatch("{$transactionName} Has Added a Holiday");
     }
-    public function delete(Holiday $holiday)
-    {
-        $holiday->delete();
 
-        $this->dispatchBrowserEvent('success', [
-            'message' => 'Holiday deleted successfully',
-        ]);
-    }
     public function render()
     {
-        $title="Holidays";
-        $holidays=Holiday::orderBy('id', 'ASC')->where('name', 'like', '%'.$this->search.'%')->paginate(7);
+        $title = "Holidays";
+        $holidays = Holiday::all();
+
+
         return view('livewire.admin.holiday', compact('holidays'))
-        ->extends('layouts.admin', ['title'=> $title])
+        ->extends('layouts.admin', ['title' => $title])
         ->section('content');
     }
 }
