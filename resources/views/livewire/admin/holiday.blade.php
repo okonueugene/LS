@@ -38,16 +38,6 @@
                                                     data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
                                                 <div class="toggle-expand-content" data-content="pageMenu">
                                                     <ul class="nk-block-tools g-3">
-                                                        {{-- <li>
-                                                            <div class="form-control-wrap">
-                                                                <div class="form-icon form-icon-right">
-                                                                    <em class="icon ni ni-search"></em>
-                                                                </div>
-                                                                <input wire:model="search" type="text"
-                                                                    class="form-control" id="default-04"
-                                                                    placeholder="Quick search by id">
-                                                            </div>
-                                                        </li> --}}
                                                         <div class="card-tools">
                                                             <a href="#" class="btn btn-md btn-primary"
                                                                 data-toggle="modal" data-target="#addModal"><em
