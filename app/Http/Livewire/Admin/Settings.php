@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Company;
+use App\Models\Site;
 use Livewire\Component;
 
 class Settings extends Component
@@ -19,29 +19,29 @@ class Settings extends Component
     }
     public function showCompany()
     {
-        $company = Company::first()->get();
-        $this->name = $company->company_name;
-        $this->email = $company->email;
-        $this->logo = $company->logo;
-        $this->company_id = $company->id;
+        $site = Site::first()->get();
+        $this->name = $site->company_name;
+        $this->email = $site->email;
+        $this->logo = $site->logo;
+        $this->company_id = $site->id;
     }
 
     public function updateCompany()
     {
-        $company = Company::first()->get();
+        $site = Site::first()->get();
 
         $this->validate([
             'name' => 'required',
-            'email' => 'required|email|string|unique:companies,company_email,'.$company->id
+            'email' => 'required|email|string|unique:sites,company_email,' . $site->id
         ]);
 
-        $company->update([
+        $site->update([
             'company_name' => $this->name,
             'company_email' => $this->email,
         ]);
 
         $this->dispatchBrowserEvent('success', [
-            'message' => 'Company updated successfully',
+            'message' => 'Site updated successfully',
         ]);
 
         $this->emit('userStore');
@@ -52,8 +52,8 @@ class Settings extends Component
     public function render()
     {
         $title = "Settings";
-        $companies=Company::orderBy('id', 'ASC')->first()->get();
-        return view('livewire.admin.settings' ,compact('companies')) ->extends('layouts.admin', ['title'=> $title])
+        $sites = Site::orderBy('id', 'ASC')->first()->get();
+        return view('livewire.admin.settings', compact('sites')) ->extends('layouts.admin', ['title' => $title])
         ->section('content');
     }
 }

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\Admin\Holidays;
 use App\Http\Livewire\Admin\Settings;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Admin\Companies;
+use App\Http\Livewire\Admin\Sites;
 use App\Http\Livewire\Admin\Dashboard;
 use App\Http\Livewire\Admin\Employees;
 use App\Http\Livewire\Admin\ApplyLeave;
@@ -65,21 +65,21 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/activity', function () {
-    return view('livewire.admin.loginactivity', with(['title'=> 'Login Activity']));
+    return view('livewire.admin.loginactivity', with(['title' => 'Login Activity']));
 })->name('activity');
 Route::get('/activities', function () {
-    return view('livewire.general-manager.loginactivity', with(['title'=> 'Login Activity']));
+    return view('livewire.general-manager.loginactivity', with(['title' => 'Login Activity']));
 })->name('activities');
-Route::group(['middleware'=> 'auth'], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::group(
         [
-        'prefix'=>'admin',
-        'middleware'=>'admin',
-        'as'=>'admin.'
+        'prefix' => 'admin',
+        'middleware' => 'admin',
+        'as' => 'admin.'
     ],
         function () {
             Route::get('/dashboard', Dashboard::class)->name('admin-dashboard');
-            Route::get('/companies', Companies::class)->name('admin-company');
+            Route::get('/sites', Sites::class)->name('admin-site');
             Route::get('/holidays', Holidays::class)->name('admin-holidays');
             Route::get('/depatments', Departments::class)->name('admin-departments');
             Route::get('/leave-types', LeaveTypes::class)->name('admin-leavetypes');
@@ -94,9 +94,9 @@ Route::group(['middleware'=> 'auth'], function () {
     );
     Route::group(
         [
-        'prefix'=>'employee',
-        'middleware'=>'employee',
-        'as'=>'employee.'
+        'prefix' => 'employee',
+        'middleware' => 'employee',
+        'as' => 'employee.'
 
     ],
         function () {
@@ -110,9 +110,9 @@ Route::group(['middleware'=> 'auth'], function () {
     );
     Route::group(
         [
-        'prefix'=>'manager',
-        'middleware'=>'manager',
-        'as'=>'manager.'
+        'prefix' => 'manager',
+        'middleware' => 'manager',
+        'as' => 'manager.'
 
     ],
         function () {
@@ -130,9 +130,9 @@ Route::group(['middleware'=> 'auth'], function () {
     );
     Route::group(
         [
-        'prefix'=>'general',
-        'middleware'=>'general manager',
-        'as'=>'gm.'
+        'prefix' => 'general',
+        'middleware' => 'general manager',
+        'as' => 'gm.'
 
     ],
         function () {

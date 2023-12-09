@@ -29,7 +29,7 @@
                         {{ date_format(date_create($leave->date_end), 'Y') }}.
                     </p>
                     <p>
-                        I'll be away for {{ $leave->nodays }} working days, which is in accordance with the company's
+                        I'll be away for {{ $leave->nodays }} working days, which is in accordance with the site's
                         {{ $leave->type->name }} policy.
                     </p>
                     <p>

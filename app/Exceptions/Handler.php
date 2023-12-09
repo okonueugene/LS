@@ -75,7 +75,21 @@ class Handler extends ExceptionHandler
                 return redirect()->route('dashboard')->withErrors(['message' => 'You are not authorized to access this page.']);
             });
         }
-
+        // Add handling for TransportException here
+        if ($exception instanceof \Symfony\Component\Mailer\Exception\TransportException) {
+            $user_type = auth()->user()->user_type;
+            if($user_type == 'admin') {
+                return redirect()->route('admin.admin-dashboard')->withErrors(['message' => 'Email not sent.']);
+            } elseif($user_type == 'employee') {
+                return redirect()->route('employee.employee-dashboard')->withErrors(['message' => 'Email not sent.']);
+            } elseif($user_type == 'gm') {
+                return redirect()->route('gm.gm-dashboard')->withErrors(['message' => 'Email not sent.']);
+            } elseif($user_type == 'manager') {
+                return redirect()->route('manager.manager-dashboard')->withErrors(['message' => 'Email not sent.']);
+            } else {
+                return redirect()->route('login')->withErrors(['message' => 'Email not sent.']);
+            }
+        }
 
         return parent::render($request, $exception);
     }

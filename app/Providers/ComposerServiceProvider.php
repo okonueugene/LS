@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Providers;
+
 use App\Models\User;
-use App\Models\Company;
+use App\Models\SiteSettings;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -27,15 +28,15 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('*',function($view){
-            $view->with('company_name', Company::pluck('company_name')->toArray());
+        View::composer('*', function ($view) {
+            $view->with('company_name', SiteSettings::pluck('name')->toArray());
         });
-        View::composer('livewire.general-manager.loginactivity',function($new){
+        View::composer('livewire.general-manager.loginactivity', function ($new) {
             $new->with('activities', User::find(Auth::user()->id)->authentications);
         });
-        View::composer('livewire.admin.loginactivity',function($new){
+        View::composer('livewire.admin.loginactivity', function ($new) {
             $new->with('activities', User::find(Auth::user()->id)->authentications);
         });
-        
+
     }
 }

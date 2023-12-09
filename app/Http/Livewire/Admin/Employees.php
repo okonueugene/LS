@@ -12,14 +12,13 @@ use Livewire\WithPagination;
 use App\Exports\EmployeesExport;
 use Maatwebsite\Excel\Facades\Excel;
 
-
 class Employees extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $pages=10;
-    public $order='DESC';
+    public $pages = 10;
+    public $order = 'DESC';
 
     public $name;
     public $email;
@@ -52,11 +51,11 @@ class Employees extends Component
         $this->validate([
             'name' => 'required',
             'email' => 'required|email|string|unique:users,email',
-            'password'=>'required|string|min:8',
-            'employee_id' =>'required|unique:employees,employee_id',
-            'gender'=> 'required',
-            'department'=>'required',
-            'user_type'=>'required'
+            'password' => 'required|string|min:8',
+            'employee_id' => 'required|unique:employees,employee_id',
+            'gender' => 'required',
+            'department' => 'required',
+            'user_type' => 'required'
 
         ]);
         $user = User::create([
@@ -67,22 +66,21 @@ class Employees extends Component
 
         ]);
 
-        $emp=User::orderBy('id', 'DESC')->first();
 
         $employee = Employee::create([
             'employee_id' => $this->employee_id,
             'gender' => $this->gender,
-            'department'=> $this->department,
-            'leave_taken'=> 0,
+            'department' => $this->department,
+            'leave_taken' => 0,
             'carry_over' => 0,
             'available_days' => 0,
             'days' => 0,
 
         ]);
-        
 
-     
-        Employee::where('employee_id', $this->employee_id)->update(['company_id' => $emp->company_id,'user_id' => $emp->id ]);
+
+
+        Employee::where('employee_id', $this->employee_id)->update(['company_id' => $emp->company_id,'user_id' => $user->id ]);
 
         $this->dispatchBrowserEvent('success', [
             'message' => 'Employee Added successfully',
@@ -94,18 +92,18 @@ class Employees extends Component
 
     public function render()
     {
-        $title="Employee Details";
+        $title = "Employee Details";
 
-        $departments = Department::orderBy('id','ASC')->get();
-        $searchString=$this->search;
-        $employees = Employee::orderBy('id', $this->order)->whereHas('user', function ($query) use ($searchString){
-            $query->where('name', 'like', '%'.$searchString.'%');
+        $departments = Department::orderBy('id', 'ASC')->get();
+        $searchString = $this->search;
+        $employees = Employee::orderBy('id', $this->order)->whereHas('user', function ($query) use ($searchString) {
+            $query->where('name', 'like', '%' . $searchString . '%');
         })
-        ->with(['user' => function($query) use ($searchString){
-            $query->where('name', 'like', '%'.$searchString.'%');
+        ->with(['user' => function ($query) use ($searchString) {
+            $query->where('name', 'like', '%' . $searchString . '%');
         }])->paginate($this->pages);
-        return view('livewire.admin.employee',compact('employees','departments' ))
-        ->extends('layouts.admin',['title'=> $title])
+        return view('livewire.admin.employee', compact('employees', 'departments'))
+        ->extends('layouts.admin', ['title' => $title])
         ->section('content');
     }
 }

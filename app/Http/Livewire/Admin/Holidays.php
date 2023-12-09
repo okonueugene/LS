@@ -36,13 +36,12 @@ class Holidays extends Component
             'end_date' => 'required',
         ]);
 
-        Holiday::create([
-            'summary' => $this->summary,
-            'description' => $this->description,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
-        ]);
-
+        $holiday = Holiday::create([
+             'summary' => $this->summary,
+             'description' => $this->description,
+             'start_date' => $this->start_date,
+             'end_date' => $this->end_date,
+         ]);
         $this->dispatchBrowserEvent('success', [
             'message' => 'Holiday Added successfully',
         ]);
@@ -58,7 +57,6 @@ class Holidays extends Component
     {
         $title = "Holidays";
         $holidays = Holiday::all();
-
 
         return view('livewire.admin.holiday', compact('holidays'))
         ->extends('layouts.admin', ['title' => $title])

@@ -34,39 +34,40 @@
                             <span class="nk-menu-text">Profile</span>
                         </a>
                     </li><!-- .nk-menu-item -->
-                    @if(Auth::user()->user_type != 'employee')
-                    <li class="nk-menu-item">
-                        <a href="{{ route('admin.admin-departments') }}" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-building"></em></span>
-                            <span class="nk-menu-text">Department</span>
-                        </a>
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item">
-                        <a href="{{ route('admin.admin-leavetypes') }}" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-todo-fill"></em></span>
-                            <span class="nk-menu-text">Leave Type</span>
-                        </a>
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item"></li><!-- .nk-menu-item -->
-                    
-                    <li class="nk-menu-item">
-                        <a href="{{ route('admin.admin-employees') }}" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-list"></em></span>
-                            <span class="nk-menu-text">Employees List</span>
-                        </a>
-                    </li>@endif
+                    @if (Auth::user()->user_type != 'employee')
                         <li class="nk-menu-item">
-                            <a href="{{ route('employee.employee-holidays') }}" class="nk-menu-link">
-                                <span class="nk-menu-icon"><em class="icon ni ni-calendar"></em></span>
-                                <span class="nk-menu-text">Holidays</span>
+                            <a href="{{ route('admin.admin-departments') }}" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-building"></em></span>
+                                <span class="nk-menu-text">Department</span>
                             </a>
                         </li><!-- .nk-menu-item -->
                         <li class="nk-menu-item">
-                            <a href="{{ route('fullcalender') }}" class="nk-menu-link">
-                                <span class="nk-menu-icon"><em class="icon ni ni-calendar"></em></span>
-                                <span class="nk-menu-text">Planner</span>
+                            <a href="{{ route('admin.admin-leavetypes') }}" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-todo-fill"></em></span>
+                                <span class="nk-menu-text">Leave Type</span>
                             </a>
                         </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item"></li><!-- .nk-menu-item -->
+
+                        <li class="nk-menu-item">
+                            <a href="{{ route('admin.admin-employees') }}" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-list"></em></span>
+                                <span class="nk-menu-text">Employees List</span>
+                            </a>
+                        </li>
+                    @endif
+                    <li class="nk-menu-item">
+                        <a href="{{ route('employee.employee-holidays') }}" class="nk-menu-link">
+                            <span class="nk-menu-icon"><em class="icon ni ni-calendar"></em></span>
+                            <span class="nk-menu-text">Holidays</span>
+                        </a>
+                    </li><!-- .nk-menu-item -->
+                    <li class="nk-menu-item">
+                        <a href="{{ route('fullcalender') }}" class="nk-menu-link">
+                            <span class="nk-menu-icon"><em class="icon ni ni-calendar"></em></span>
+                            <span class="nk-menu-text">Planner</span>
+                        </a>
+                    </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
                             <span class="nk-menu-icon"><em class="icon ni ni-tile-thumb"></em></span>
@@ -78,36 +79,39 @@
                                         class="nk-menu-text">Apply</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="{{ route('employee.employee-approved-leave') }}" class="nk-menu-link"><span class="nk-menu-text">Approved</span></a>
-                            </li> 
-                           @if(Auth::user()->user_type != 'employee')
-                            <li class="nk-menu-item">
-                                <a href="{{ route('employee.employee-manage-leave') }}" class="nk-menu-link"><span class="nk-menu-text">Manage</span></a>
+                                <a href="{{ route('employee.employee-approved-leave') }}" class="nk-menu-link"><span
+                                        class="nk-menu-text">Approved</span></a>
                             </li>
+                            @if (Auth::user()->user_type != 'employee')
+                                <li class="nk-menu-item">
+                                    <a href="{{ route('employee.employee-manage-leave') }}" class="nk-menu-link"><span
+                                            class="nk-menu-text">Manage</span></a>
+                                </li>
                             @endif
                             <li class="nk-menu-item">
-                                <a href="{{ route('employee.employee-rejected-leave') }}" class="nk-menu-link"><span class="nk-menu-text">Rejected</span></a>
+                                <a href="{{ route('employee.employee-rejected-leave') }}" class="nk-menu-link"><span
+                                        class="nk-menu-text">Rejected</span></a>
                             </li>
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->
-                    @if(Auth::user()->user_type == 'general_manager')
-                    <li class="nk-menu-item">
-                        <a href="{{ route('admin.admin-company') }}" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-circle"></em></span>
-                            <span class="nk-menu-text">Companies</span>
-                        </a>
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-heading">
-                        <h6 class="overline-title text-primary-alt">Settings</h6>
-                    </li><!-- .nk-menu-heading -->
-                    <li class="nk-menu-item">
-                        <a href="#" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-setting"></em></span>
-                            <span class="nk-menu-text">Company Settings</span>
-                        </a>
-                    </li><!-- .nk-menu-item -->
+                    @if (Auth::user()->user_type == 'general_manager')
+                        <li class="nk-menu-item">
+                            <a href="{{ route('admin.admin-site') }}" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-circle"></em></span>
+                                <span class="nk-menu-text">Companies</span>
+                            </a>
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-heading">
+                            <h6 class="overline-title text-primary-alt">Settings</h6>
+                        </li><!-- .nk-menu-heading -->
+                        <li class="nk-menu-item">
+                            <a href="#" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-setting"></em></span>
+                                <span class="nk-menu-text">Site Settings</span>
+                            </a>
+                        </li><!-- .nk-menu-item -->
                     @else
-                    <li></li>
+                        <li></li>
                     @endif
                 </ul><!-- .nk-menu -->
             </div><!-- .nk-sidebar-menu -->

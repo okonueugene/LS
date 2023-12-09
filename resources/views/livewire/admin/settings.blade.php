@@ -22,10 +22,9 @@
                                     <form action="#" class="gy-3 form-settings">
                                         <div class="row g-3 align-center">
                                             <div class="col-lg-5">
-                                                <div class="form-group"><label class="form-label"
-                                                        for="comp-name">Company Name</label><span
-                                                        class="form-note">Specify the name of your
-                                                        Company.</span></div>
+                                                <div class="form-group"><label class="form-label" for="comp-name">Site
+                                                        Name</label><span class="form-note">Specify the name of your
+                                                        Site.</span></div>
                                             </div>
                                             <div class="col-lg-7">
                                                 <div class="form-group">
@@ -33,7 +32,7 @@
                                                         <input wire:model="name" type="text"
                                                             class="form-control name" value="{{ $name }}"
                                                             name="name" id="default-04"
-                                                            placeholder="Enter company name">
+                                                            placeholder="Enter site name">
                                                     </div>
                                                     @error('name')
                                                         <div class="form-note text-danger mt-1">{{ $message }}</div>
@@ -43,30 +42,31 @@
                                         </div>
                                         <div class="row g-3 align-center">
                                             <div class="col-lg-5">
-                                                <div class="form-group"><label class="form-label"
-                                                        for="comp-email">Company Email</label><span
-                                                        class="form-note">Specify the email address of your
-                                                        Company.</span></div>
+                                                <div class="form-group"><label class="form-label" for="comp-email">Site
+                                                        Email</label><span class="form-note">Specify the email address
+                                                        of your
+                                                        Site.</span></div>
                                             </div>
                                             <div class="col-lg-7">
                                                 <div class="form-group">
                                                     <div class="form-control-wrap">
                                                         <input wire:model="email" type="email"
-                                                            class="form-control email" name="email" value="{{$email}}"
-                                                            placeholder="Enter company email address">
+                                                            class="form-control email" name="email"
+                                                            value="{{ $email }}"
+                                                            placeholder="Enter site email address">
                                                     </div>
                                                     @error('email')
-                                                    <div class="form-note text-danger mt-1">{{ $message }}</div>
-                                                @enderror
+                                                        <div class="form-note text-danger mt-1">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row g-3 align-center">
                                             <div class="col-lg-5">
                                                 <div class="form-group"><label class="form-label"
-                                                        for="comp-copyright">Company Copyright</label><span
+                                                        for="comp-copyright">Site Copyright</label><span
                                                         class="form-note">Copyright information of your
-                                                        Company.</span>
+                                                        Site.</span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-7">
@@ -112,7 +112,8 @@
                                         </div>
                                         <div class="row g-3">
                                             <div class="col-lg-7">
-                                                <div class="form-group mt-2"><button wire:submit.prevent='updateCompany'type="submit"
+                                                <div class="form-group mt-2"><button
+                                                        wire:submit.prevent='updateCompany'type="submit"
                                                         class="btn btn-lg btn-primary">Update</button>
                                                 </div>
                                             </div>
@@ -131,7 +132,7 @@
     <div class="modal-dialog modal-lg modal-dialog-top" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Update company details</h5>
+                <h5 class="modal-title">Update site details</h5>
                 <a href="#" class="close" data-dismiss="modal" aria-label="Close">
                     <em class="icon ni ni-cross"></em>
                 </a>
@@ -140,14 +141,14 @@
                 <div class="row gy-4">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label class="form-label">Company Name</label>
+                            <label class="form-label">Site Name</label>
                             <div class="form-control-wrap">
                                 <div class="form-icon form-icon-right">
                                     <em class="icon ni ni-mail"></em>
                                 </div>
                                 <input wire:model="name" type="text" class="form-control name"
                                     value="{{ $name }}" name="name" id="default-04"
-                                    placeholder="Enter company name">
+                                    placeholder="Enter site name">
                             </div>
                             @error('name')
                                 <div class="form-note text-danger mt-1">{{ $message }}</div>
@@ -156,13 +157,13 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label class="form-label">Company Email</label>
+                            <label class="form-label">Site Email</label>
                             <div class="form-control-wrap">
                                 <div class="form-icon form-icon-right">
                                     <em class="icon ni ni-mail"></em>
                                 </div>
                                 <input wire:model="email" type="email" class="form-control email" name="email"
-                                    value="{{$email}}" placeholder="Enter company email address">
+                                    value="{{ $email }}" placeholder="Enter site email address">
                             </div>
                             @error('email')
                                 <div class="form-note text-danger mt-1">{{ $message }}</div>
@@ -185,13 +186,13 @@
                         </div>
                     </div>
                     <div class="col-sm-12">
-                        <button wire:click='updateCompany'
-                            class="btn btn-warning inviteMember"><em class="icon ni ni-mail"></em><span>Update
-                                Company</span></button>
+                        <button wire:click='updateCompany' class="btn btn-warning inviteMember"><em
+                                class="icon ni ni-mail"></em><span>Update
+                                Site</span></button>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>

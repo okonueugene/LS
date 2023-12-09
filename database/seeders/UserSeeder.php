@@ -22,7 +22,6 @@ class UserSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => Hash::make('12345678'),
             'user_type' => 'admin',
-            'company_id' => 1,
 
         ]);
 
@@ -31,7 +30,6 @@ class UserSeeder extends Seeder
             'email' => 'employee@employee.com',
             'password' => Hash::make('12345678'),
             'user_type' => 'employee',
-            'company_id' => 1,
         ]);
 
         $user2 = User::create([

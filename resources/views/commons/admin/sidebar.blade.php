@@ -8,10 +8,17 @@
         </div>
         <div class="nk-sidebar-brand">
             <a href="{{ route('admin.admin-dashboard') }}" class="logo-link nk-sidebar-logo">
-                <img class="logo-light logo-img" src="{{ asset('theme/images/logo.png') }}"
-                    srcset="{{ asset('theme/images/logo.png') }} 2x" alt="logo">
-                <img class="logo-dark logo-img" src="{{ asset('theme/images/logo.png') }}"
-                    srcset="{{ asset('theme/images/logo.png') }} 2x" alt="logo-dark">
+                @if (Auth::user()->site)
+                    <img class="logo-light logo-img" src="{{ asset('storage/' . Auth::user()->site->logo) }}"
+                        srcset="{{ asset('storage/' . Auth::user()->site->logo) }} 2x" alt="logo">
+                    <img class="logo-dark logo-img" src="{{ asset('storage/' . Auth::user()->site->logo) }}"
+                        srcset="{{ asset('storage/' . Auth::user()->site->logo) }} 2x" alt="logo-dark">
+                @else
+                    <img class="logo-light logo-img" src="{{ asset('theme/images/logo.png') }}"
+                        srcset="{{ asset('theme/images/logo.png') }} 2x" alt="logo">
+                    <img class="logo-dark logo-img" src="{{ asset('theme/images/logo.png') }}"
+                        srcset="{{ asset('theme/images/logo.png') }} 2x" alt="logo-dark">
+                @endif
             </a>
         </div>
     </div><!-- .nk-sidebar-element -->
@@ -97,12 +104,12 @@
                         <h6 class="overline-title text-primary-alt">Settings</h6>
                     </li><!-- .nk-menu-heading -->
                     <li class="nk-menu-item">
-                        <a href="{{ route('admin.admin-company') }}" class="nk-menu-link">
+                        <a href="{{ route('admin.admin-site') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-setting"></em></span>
-                            <span class="nk-menu-text">Company Settings</span>
+                            <span class="nk-menu-text">Site Settings</span>
                         </a>
                     </li><!-- .nk-menu-item -->
-               </ul><!-- .nk-menu -->
+                </ul><!-- .nk-menu -->
             </div><!-- .nk-sidebar-menu -->
         </div><!-- .nk-sidebar-content -->
     </div><!-- .nk-sidebar-element -->
