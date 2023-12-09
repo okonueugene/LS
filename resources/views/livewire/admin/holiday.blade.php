@@ -50,7 +50,7 @@
                 </a>
                 <div class="modal-body modal-body-md">
                     <h5 class="modal-title">Add Holiday</h5>
-                    <form wire:submit.prevent="addHoliday" class="mt-2">
+                    <form wire:submit="addHoliday" class="mt-2">
                         <div class="row g-gs">
 
                             <div class="col-md-12">
@@ -102,7 +102,7 @@
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-secondary">
-                                    <div wire:loading wire:target='addHoliday'>
+                                    <div wire:submit='addHoliday'>
                                     </div>Add
                                 </button>
 

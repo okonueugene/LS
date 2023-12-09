@@ -11,17 +11,18 @@ class EmployeeHoliday extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $name;
-    public $date;
-    public $search = '';
+    public $summary;
+    public $description;
+    public $start_date;
+    public $end_date;
 
     public function render()
     {
-        $title="Holidays";
-        $holidays=Holiday::orderBy('id','ASC')->where('name', 'like', '%'.$this->search.'%')->paginate(6);
+        $title = "Holidays";
+        $holidays = Holiday::all();
 
-        return view('livewire.employee.employee-holiday',compact('holidays'))
-        ->extends('layouts.employee',['title'=> $title])
+        return view('livewire.employee.employee-holiday', compact('holidays'))
+        ->extends('layouts.employee', ['title' => $title])
         ->section('content')
         ;
     }

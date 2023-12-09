@@ -11,7 +11,8 @@
                         </div>
                         <div class="nk-block-head-content">
                             <div class="toggle-wrap nk-block-tools-toggle"><span
-                                    class="badge rounded-pill bg-warning text-dark">{{ date_format(date_create(), 'F') }}</span> <span
+                                    class="badge rounded-pill bg-warning text-dark">{{ date_format(date_create(), 'F') }}</span>
+                                <span
                                     class="badge rounded-pill bg-warning text-dark">{{ date('L') == 1 ? 366 - (date('z') + 1) : 365 - (date('z') + 1) }}
                                     Days Left </span>
                             </div>
@@ -28,7 +29,7 @@
                                             <h6 class="title">Leave Days</h6>
                                         </div><br>
                                         <div class="project-details text-center" style="text-size:15px;">
-                                            <span>{{implode('',$remaining) }}</span>
+                                            <span>{{ implode('', $remaining) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -42,7 +43,7 @@
                                             <h6 class="title">Leave Days Accumulated</h6>
                                         </div><br>
                                         <div class="project-details text-center" style="text-size:15px;">
-                                            <span>{{ round(date('L') == 1 ? (21/366)*(date('z') + 1) : (21/365)*(date('z') + 1),2) }}</span>
+                                            <span>{{ round(date('L') == 1 ? (21 / 366) * (date('z') + 1) : (21 / 365) * (date('z') + 1), 2) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +57,7 @@
                                             <h6 class="title">Leave Taken</h6>
                                         </div><br>
                                         <div class="project-details text-center" style="text-size:15px;">
-                                            <span>{{implode('',$taken) }}</span>
+                                            <span>{{ implode('', $taken) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -170,8 +171,8 @@
                                                         @foreach ($upcoming as $member)
                                                             <li
                                                                 class="list-group-item d-flex justify-content-between align-items-center">
-                                                                {{ $member->name }}
-                                                                <span>{{ $member->date }}</span>
+                                                                {{ $member->summary }}
+                                                                <span>{{ $member->start_date }}</span>
                                                             </li>
                                                         @endforeach
                                                     @else

@@ -57,7 +57,7 @@
                                             <h6 class="title">Average Leave Taken</h6>
                                         </div><br>
                                         <div class="project-details text-center" style="text-size:15px;">
-                                            <span>{{ round(array_sum($taken)/count($employees),2) }}</span>
+                                            <span>{{ round(array_sum($taken) / count($employees), 2) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -226,8 +226,8 @@
                                                         @foreach ($upcoming as $member)
                                                             <li
                                                                 class="list-group-item d-flex justify-content-between align-items-center">
-                                                                {{ $member->name }}
-                                                                <span>{{ $member->date }}</span>
+                                                                {{ $member->summary }}
+                                                                <span>{{ $member->start_date }}</span>
                                                             </li>
                                                         @endforeach
                                                     @else
@@ -285,17 +285,17 @@
     <script>
         var totalleavedays = <?= json_encode($annual) ?>;
         var employees = <?= json_encode(count($employees)) ?>;
-        var days=totalleavedays.reduce((a, b) => a + b, 0)/employees;
+        var days = totalleavedays.reduce((a, b) => a + b, 0) / employees;
 
         const data = {
             labels: [
                 'Taken',
                 'Remaining',
-                
+
             ],
             datasets: [{
                 label: 'My First Dataset',
-            data: [Math.round(days*100/21),Math.round((21-days)*100/21)],
+                data: [Math.round(days * 100 / 21), Math.round((21 - days) * 100 / 21)],
                 backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',
