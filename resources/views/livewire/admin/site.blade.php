@@ -192,12 +192,19 @@
                                                     <div class="form-group">
                                                         <div class="form-control-wrap">
                                                             <div class="custom-file">
+
                                                                 <input type="file" wire:model='logo'
                                                                     class="custom-file-input" id="customFile">
                                                                 <label class="custom-file-label" for="customFile">Choose
                                                                     file</label>
                                                             </div>
+                                                            @if ($logo)
+                                                                Photo Preview:
+                                                                <img src="{{ $logo->temporaryUrl() }}">
+                                                            @endif
                                                         </div>
+                                                        <div wire:loading wire:target="photo">Uploading...</div>
+
                                                         @error('logo')
                                                             <div class="form-note text-danger mt-1">{{ $message }}
                                                             </div>
@@ -208,23 +215,25 @@
                                         </div>
                                         <div class="row g-3 align-center">
                                             <div class="col-lg-5">
-                                                <div class="form-group"><label class="form-label"
-                                                        for="site-off">Maintanance Mode</label><span
-                                                        class="form-note">Enable to make website make
-                                                        offline.</span>
+                                                <div class="form-group">
+                                                    <label class="form-label" for="site-off">Maintenance Mode</label>
+                                                    <span class="form-note">Enable to make the website offline.</span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-7">
                                                 <div class="form-group">
-                                                    <div class="custom-control custom-switch"><input
-                                                            wire:model="maintenance_mode" type="checkbox"
+                                                    <div class="custom-control custom-switch">
+                                                        <input wire:model="maintenance_mode" type="checkbox"
                                                             class="custom-control-input" name="reg-public"
-                                                            id="site-off"><label class="custom-control-label"
-                                                            for="site-off" value="site-on">Offline</label>
+                                                            id="site-off"
+                                                            @if ($maintenance_mode) checked @endif>
+                                                        <label class="custom-control-label"
+                                                            for="site-off">Offline</label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                 </div>
                             </div>
                         </div>
@@ -239,78 +248,6 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div wire:ignore.self class="modal fade" tabindex="-1" id="updateCompany">
-    <div class="modal-dialog modal-lg modal-dialog-top" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Update site details</h5>
-                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
-                    <em class="icon ni ni-cross"></em>
-                </a>
-            </div>
-            <div class="modal-body">
-                <div class="row gy-4">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="form-label">Site Name</label>
-                            <div class="form-control-wrap">
-                                <div class="form-icon form-icon-right">
-                                    <em class="icon ni ni-mail"></em>
-                                </div>
-                                <input wire:model="name" type="text" class="form-control name"
-                                    value="{{ $name }}" name="name" id="default-04"
-                                    placeholder="Enter site name">
-                            </div>
-                            @error('name')
-                                <div class="form-note text-danger mt-1">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="form-label">Site Email</label>
-                            <div class="form-control-wrap">
-                                <div class="form-icon form-icon-right">
-                                    <em class="icon ni ni-mail"></em>
-                                </div>
-                                <input wire:model="email" type="email" class="form-control email" name="email"
-                                    value="{{ $email }}" placeholder="Enter site email address">
-                            </div>
-                            @error('email')
-                                <div class="form-note text-danger mt-1">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label class="form-label" for="customFileLabel">Select Logo</label>
-                            <div class="form-control-wrap">
-                                <div class="custom-file">
-                                    <input type="file" wire:model='logo' class="custom-file-input"
-                                        id="customFile">
-                                    <label class="custom-file-label" for="customFile">Choose file</label>
-                                </div>
-                                @error('logo')
-                                    <div class="form-note text-danger mt-1">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <button wire:click='updateCompany' class="btn btn-warning inviteMember"><em
-                                class="icon ni ni-mail"></em><span>Update
-                                Site</span></button>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>

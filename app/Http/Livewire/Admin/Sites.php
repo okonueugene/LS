@@ -14,13 +14,6 @@ class Sites extends Component
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
 
-    // $table->id();
-    // $table->string('name');
-    // $table->string('logo')->nullable();
-    // $table->string('email')->nullable();
-    // $table->string('copyright')->nullable();
-    // $table->string('maintenance_mode')->nullable();
-    // $table->timestamps();
 
     public $name;
     public $email;
@@ -40,13 +33,15 @@ class Sites extends Component
         ]);
 
         $site = SiteSettings::find(1);
-        $site->name = $this->name;
-        $site->email = $this->email;
-        $site->maintenance_mode = $this->maintenance_mode;
-        $site->copyright = $this->copyright;
+        $site->name = $this->name ?? $site->name;
+        $site->email = $this->email ?? $site->email;
+        $site->maintenance_mode = $this->maintenance_mode ?? $site->maintenance_mode;
+        $site->copyright = $this->copyright ?? date('Y');
         if ($this->logo) {
-            $this->logo->storeAs('public', 'logo.png');
-            $site->logo = 'logo.png';
+            $this->logo->storeAs('public', time() . '.' . $this->logo->extension());
+            $site->logo = time() . '.' . $this->logo->extension();
+
+
         }
         $site->save();
         return redirect()->back()->with('success', 'Site Settings Updated Successfully');

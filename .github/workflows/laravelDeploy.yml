@@ -25,7 +25,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
 
-      - name: Run Migration & Seed
-        run: php artisan migrate:fresh --seed --force
-      - name: Clear cache
-        run: php artisan optimize:clear && composer dump-autoload
+      - name: Run Migration, Seed and Cache Clear
+        run: php artisan optimize:clear && composer dump-autoload && php artisan migrate:fresh --seed
