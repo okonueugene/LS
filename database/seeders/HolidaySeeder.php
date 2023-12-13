@@ -17,7 +17,13 @@ class HolidaySeeder extends Seeder
     public function run()
     {
         $url = "https://www.googleapis.com/calendar/v3/calendars/en.ke%23holiday%40group.v.calendar.google.com/events?key=" . env('GOOGLE_API_KEY');
-        $holidays = json_decode(file_get_contents($url), true)['items'];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        $holidays = json_decode($response, true)['items'];
         foreach ($holidays as $holiday) {
             Holiday::create([
               'summary' => $holiday['summary'],
