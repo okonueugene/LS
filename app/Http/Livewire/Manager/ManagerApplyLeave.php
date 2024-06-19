@@ -82,7 +82,7 @@ class ManagerApplyLeave extends Component
         if ($no_remaining_days > 0) {
             $workingDays += $no_remaining_days;
         }
-        $holidays=Holiday::pluck('date');
+        $holidays=Holiday::pluck('start_date');
 
         foreach ($holidays as $holiday) {
             $time_stamp=strtotime($holiday);

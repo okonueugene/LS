@@ -317,9 +317,10 @@
         if (hours < 12) {
             var channel = pusher.subscribe('apply');
             channel.bind('leave', (data) => {
+                console.log(data);
                 iziToast.show({
                     title: ` Goodmorning ${username} ! `,
-                    message: data.message,
+                    message: data,
                     theme: 'dark',
                     color: 'green'
                 });
@@ -330,7 +331,7 @@
             channel.bind('leave', (data) => {
                 iziToast.show({
                     title: ` Howdy ${username} ! `,
-                    message: data.message,
+                    message: data,
                     theme: 'dark',
                     color: 'green'
                 });
@@ -341,7 +342,7 @@
             channel.bind('leave', (data) => {
                 iziToast.show({
                     title: ` Goodafternoon ${username} ! `,
-                    message: data.message,
+                    message: data,
                     theme: 'dark',
                     color: 'green'
                 });
@@ -352,7 +353,7 @@
             channel.bind('leave', (data) => {
                 iziToast.show({
                     title: ` Good Evening ${username} ! `,
-                    message: data.message,
+                    message: data,
                     theme: 'dark',
                     color: 'green'
                 });

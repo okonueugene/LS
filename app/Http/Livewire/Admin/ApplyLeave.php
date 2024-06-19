@@ -38,7 +38,7 @@ class ApplyLeave extends Component
       
     }
 
-    public function applyLeave()
+    public function applyLeave(Request $request)
     {
 
         $this->validate([
@@ -47,6 +47,7 @@ class ApplyLeave extends Component
             'reason' => 'required',
             'leave_type_id' => 'required'
         ]);
+
 
         $endDate = strtotime($this->date_end);
         $startDate = strtotime($this->date_start);
@@ -81,7 +82,7 @@ class ApplyLeave extends Component
         if ($no_remaining_days > 0) {
             $workingDays += $no_remaining_days;
         }
-        $holidays=Holiday::pluck('date');
+        $holidays=Holiday::pluck('start_date');
 
         foreach ($holidays as $holiday) {
             $time_stamp=strtotime($holiday);
